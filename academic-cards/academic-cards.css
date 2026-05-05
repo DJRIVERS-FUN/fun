@@ -5,6 +5,9 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 .rivers-academic-controls{display:grid;grid-template-columns:1fr;gap:8px;margin:0 0 16px 0}
 .rivers-academic-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
 
+/* RIGHT ALIGN SEARCH ROW */
+.rivers-academic-row:first-child{justify-content:flex-end}
+
 .rivers-academic-count,
 .rivers-academic-label,
 .rivers-academic-button,
