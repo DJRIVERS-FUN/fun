@@ -201,7 +201,7 @@ function renderAcademic(containerId, data, options = {}) {
     return `
       <p class="rivers-academic-ref rivers-funding-ref">
         <span class="rivers-project-title">${highlight(parsed.title)}</span>
-        ${parsed.funder ? `<br><span class="rivers-funder">${highlight(parsed.funder)}</span>` : ''}
+        ${parsed.funder ? `<span class="rivers-funder">${highlight(parsed.funder)}</span>` : ''}
       </p>
     `;
   }
