@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../academic-cards/academic-cards.css">
 <script src="../academic-cards/academic-renderer.js"></script>
 </head>
@@ -8,8 +10,16 @@
 <div id="app" class="rivers-academic-wrap"></div>
 <script>
 fetch('../data/presentations.json')
-  .then(r=>r.json())
-  .then(data=>renderAcademic('app',data,{source:'rivers-presentations',itemLabel:'presentation'}));
+  .then(function(response) { return response.json(); })
+  .then(function(data) {
+    renderAcademic('app', data, {
+      source: 'rivers-presentations',
+      itemLabel: 'presentation',
+      itemLabelPlural: 'presentations',
+      searchLabel: 'presentations',
+      stripAuthorPrefix: false
+    });
+  });
 </script>
 </body>
 </html>
