@@ -10,13 +10,16 @@
 <div id="app" class="rivers-academic-wrap"></div>
 <script>
 fetch('../data/service.json')
-  .then(r=>r.json())
-  .then(data=>renderAcademic('app',data,{
-    source:'rivers-service',
-    itemLabel:'service entry',
-    itemLabelPlural:'service entries',
-    searchLabel:'service'
-  }));
+  .then(function(response) { return response.json(); })
+  .then(function(data) {
+    renderAcademic('app', data, {
+      source: 'rivers-service',
+      itemLabel: 'service entry',
+      itemLabelPlural: 'service entries',
+      searchLabel: 'service',
+      stripAuthorPrefix: false
+    });
+  });
 </script>
 </body>
 </html>
