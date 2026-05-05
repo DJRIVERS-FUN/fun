@@ -2,10 +2,13 @@ function renderAcademic(containerId, data, options = {}) {
   const source = options.source || 'rivers-academic';
   const itemLabel = options.itemLabel || 'item';
   const wrap = document.getElementById(containerId);
-  const state = { decade: 'All', type: 'All', domain: 'All' };
+  const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
 
   wrap.innerHTML = `
     <div class="rivers-academic-controls">
+      <div class="rivers-academic-row">
+        <input class="rivers-academic-search" placeholder="Search publications, venues, topics..." data-search />
+      </div>
       <div class="rivers-academic-row"><span class="rivers-academic-count" data-count></span></div>
       <div class="rivers-academic-row" data-filter="decade"><span class="rivers-academic-label">Decade</span></div>
       <div class="rivers-academic-row" data-filter="type"><span class="rivers-academic-label">Type</span></div>
@@ -16,6 +19,7 @@ function renderAcademic(containerId, data, options = {}) {
 
   const count = wrap.querySelector('[data-count]');
   const grid = wrap.querySelector('[data-grid]');
+  const searchInput = wrap.querySelector('[data-search]');
 
   data.sort((a, b) => {
     const yearDiff = Number(b.year) - Number(a.year);
@@ -37,8 +41,20 @@ function renderAcademic(containerId, data, options = {}) {
     return ['All', ...Array.from(new Set(data.map(item => key === 'decade' ? decadeOf(item.year) : item[key]).filter(Boolean))).sort()];
   }
 
+  function matchesSearch(item) {
+    if (!state.query) return true;
+    const q = state.query.toLowerCase();
+    return (
+      (item.ref && item.ref.toLowerCase().includes(q)) ||
+      (item.domain && item.domain.toLowerCase().includes(q)) ||
+      (item.type && item.type.toLowerCase().includes(q)) ||
+      (item.year && String(item.year).includes(q))
+    );
+  }
+
   function visibleItems() {
     return data.filter(item =>
+      matchesSearch(item) &&
       (state.decade === 'All' || decadeOf(item.year) === state.decade) &&
       (state.type === 'All' || item.type === state.type) &&
       (state.domain === 'All' || item.domain === state.domain)
@@ -84,6 +100,11 @@ function renderAcademic(containerId, data, options = {}) {
 
     requestAnimationFrame(sendHeight);
   }
+
+  searchInput.addEventListener('input', (e) => {
+    state.query = e.target.value.trim();
+    renderCards();
+  });
 
   window.addEventListener('load', sendHeight);
   window.addEventListener('resize', sendHeight);
