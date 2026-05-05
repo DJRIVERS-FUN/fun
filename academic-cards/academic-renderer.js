@@ -14,6 +14,16 @@ function renderAcademic(containerId, data, options = {}) {
     return parts.length > 1 ? parts.slice(1).join(',').trim() : ref;
   }
 
+  function splitFunding(ref) {
+    if (!ref) return { main: '', funder: '' };
+    const parts = ref.split('. ');
+    if (parts.length < 2) return { main: ref, funder: '' };
+    return {
+      main: parts.slice(0, 2).join('. ') + '.',
+      funder: parts.slice(2).join('. ')
+    };
+  }
+
   function normalizeDomain(v) {
     if (!v) return v;
     return v.toLowerCase() === 'peer review' ? 'Peer-review' : v;
@@ -171,16 +181,23 @@ function renderAcademic(containerId, data, options = {}) {
       const card = document.createElement('article');
       card.className = `rivers-academic-card ${hasImage ? 'has-image' : ''}`;
       const display = extractAward(item);
+      const split = splitFunding(display.ref);
 
       card.innerHTML = hasImage ? `
         <img src="${escapeHtml(item.image)}" data-fallback="${escapeHtml(item.fallbackImage || '')}" class="rivers-academic-cover" alt="Book cover" />
         <div class="rivers-academic-content">
           ${renderBadges(item)}
-          <p class="rivers-academic-ref">${highlight(display.ref)}</p>
+          <p class="rivers-academic-ref">
+            ${highlight(split.main)}
+            ${split.funder ? `<br><span class="rivers-funder">${highlight(split.funder)}</span>` : ''}
+          </p>
         </div>
       ` : `
         ${renderBadges(item)}
-        <p class="rivers-academic-ref">${highlight(display.ref)}</p>
+        <p class="rivers-academic-ref">
+          ${highlight(split.main)}
+          ${split.funder ? `<br><span class="rivers-funder">${highlight(split.funder)}</span>` : ''}
+        </p>
       `;
 
       grid.appendChild(card);
