@@ -1,13 +1,15 @@
 function renderAcademic(containerId, data, options = {}) {
   const source = options.source || 'rivers-academic';
   const itemLabel = options.itemLabel || 'item';
+  const itemLabelPlural = options.itemLabelPlural || `${itemLabel}s`;
+  const searchLabel = options.searchLabel || itemLabelPlural;
   const wrap = document.getElementById(containerId);
   const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
 
   wrap.innerHTML = `
     <div class="rivers-academic-controls">
       <div class="rivers-academic-row">
-        <input class="rivers-academic-search" placeholder="Search ${itemLabel}s, venues, topics..." data-search />
+        <input class="rivers-academic-search" placeholder="Search ${searchLabel}, venues, topics..." data-search />
       </div>
       <div class="rivers-academic-row"><span class="rivers-academic-count" data-count></span></div>
       <div class="rivers-academic-row" data-filter="decade"><span class="rivers-academic-label">Decade</span></div>
@@ -53,8 +55,13 @@ function renderAcademic(containerId, data, options = {}) {
     return safe.replace(pattern, '<strong class="rivers-academic-match">$1</strong>');
   }
 
+  function typeClass(value) {
+    return 'rivers-academic-type-' + String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+
   function decadeOf(year) {
-    const y = Number(year);
+    const match = String(year || '').match(/\d{4}/);
+    const y = match ? Number(match[0]) : 0;
     return y >= 2020 ? '2020s' : y >= 2010 ? '2010s' : '2000s';
   }
 
@@ -103,11 +110,11 @@ function renderAcademic(containerId, data, options = {}) {
   function renderCards() {
     const items = visibleItems();
     grid.innerHTML = '';
-    count.textContent = `${items.length} ${itemLabel}${items.length === 1 ? '' : 's'} shown`;
+    count.textContent = `${items.length} ${items.length === 1 ? itemLabel : itemLabelPlural} shown`;
 
     items.forEach(item => {
       const card = document.createElement('article');
-      card.className = 'rivers-academic-card';
+      card.className = `rivers-academic-card ${typeClass(item.type)}`;
       card.innerHTML = `
         <div class="rivers-academic-badges">
           <span class="rivers-academic-badge">${highlight(item.year)}</span>
