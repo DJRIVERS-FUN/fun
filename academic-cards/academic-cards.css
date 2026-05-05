@@ -31,8 +31,8 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 .rivers-academic-card{box-sizing:border-box;border:1px solid #e6e2de;border-radius:8px;background:#ffffff;padding:14px 16px 13px 16px;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
 .rivers-academic-card:hover{border-color:#520671;transform:translateY(-1px);box-shadow:0 6px 16px rgba(82,6,113,.06)}
 
-.rivers-academic-card.has-image{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:start}
-.rivers-academic-cover{width:74px;height:auto;border:1px solid #e6e2de;border-radius:4px;background:#ffffff;display:block}
+.rivers-academic-card.has-image{display:grid;grid-template-columns:82px 1fr;gap:14px;align-items:start}
+.rivers-academic-cover{width:82px;height:auto;border:1px solid #e6e2de;border-radius:4px;background:#ffffff;display:block}
 .rivers-academic-content{min-width:0}
 
 .rivers-academic-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}
@@ -41,6 +41,6 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 .rivers-academic-ref{font-size:15px;line-height:1.42;color:#56534f;margin:0;max-width:900px;white-space:pre-line}
 
 @media(max-width:560px){
-  .rivers-academic-card.has-image{grid-template-columns:58px 1fr;gap:12px}
-  .rivers-academic-cover{width:58px}
+  .rivers-academic-card.has-image{grid-template-columns:64px 1fr;gap:12px}
+  .rivers-academic-cover{width:64px}
 }
