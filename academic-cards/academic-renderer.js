@@ -3,6 +3,7 @@ function renderAcademic(containerId, data, options = {}) {
   const itemLabel = options.itemLabel || 'item';
   const itemLabelPlural = options.itemLabelPlural || `${itemLabel}s`;
   const searchLabel = options.searchLabel || itemLabelPlural;
+  const awardInHeader = !!options.awardInHeader;
   const wrap = document.getElementById(containerId);
   const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
 
@@ -39,12 +40,24 @@ function renderAcademic(containerId, data, options = {}) {
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
+      .replace(/\"/g, '&quot;')
       .replace(/'/g, '&#039;');
   }
 
   function escapeRegExp(value) {
     return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function extractAward(item) {
+    if (!awardInHeader) return { ref: item.ref || '', award: item.award || '' };
+
+    const ref = item.ref || '';
+    const match = ref.match(/\s*Award:\s*([^.]*(?:\.[0-9]+)?[^.]*)\.?\s*$/i);
+
+    return {
+      ref: match ? ref.slice(0, match.index).trim() : ref,
+      award: item.award || (match ? match[1].trim() : '')
+    };
   }
 
   function highlight(value) {
@@ -68,8 +81,10 @@ function renderAcademic(containerId, data, options = {}) {
   function matchesSearch(item) {
     if (!state.query) return true;
     const q = state.query.toLowerCase();
+    const award = extractAward(item).award;
     return (
       (item.ref && item.ref.toLowerCase().includes(q)) ||
+      (award && award.toLowerCase().includes(q)) ||
       (item.domain && item.domain.toLowerCase().includes(q)) ||
       (item.type && item.type.toLowerCase().includes(q)) ||
       (item.year && String(item.year).includes(q))
@@ -103,6 +118,18 @@ function renderAcademic(containerId, data, options = {}) {
     });
   }
 
+  function renderBadges(item) {
+    const award = extractAward(item).award;
+    return `
+      <div class="rivers-academic-badges">
+        <span class="rivers-academic-badge">${highlight(item.year)}</span>
+        <span class="rivers-academic-badge">${highlight(item.type)}</span>
+        <span class="rivers-academic-badge">${highlight(item.domain)}</span>
+        ${award ? `<span class="rivers-academic-badge rivers-academic-award">${highlight(award)}</span>` : ''}
+      </div>
+    `;
+  }
+
   function attachImageHandlers(card) {
     const img = card.querySelector('img.rivers-academic-cover');
     if (!img) return;
@@ -129,24 +156,17 @@ function renderAcademic(containerId, data, options = {}) {
       const hasImage = !!item.image;
       const card = document.createElement('article');
       card.className = `rivers-academic-card ${hasImage ? 'has-image' : ''}`;
+      const display = extractAward(item);
 
       card.innerHTML = hasImage ? `
         <img src="${escapeHtml(item.image)}" data-fallback="${escapeHtml(item.fallbackImage || '')}" class="rivers-academic-cover" alt="Book cover" />
         <div class="rivers-academic-content">
-          <div class="rivers-academic-badges">
-            <span class="rivers-academic-badge">${highlight(item.year)}</span>
-            <span class="rivers-academic-badge">${highlight(item.type)}</span>
-            <span class="rivers-academic-badge">${highlight(item.domain)}</span>
-          </div>
-          <p class="rivers-academic-ref">${highlight(item.ref)}</p>
+          ${renderBadges(item)}
+          <p class="rivers-academic-ref">${highlight(display.ref)}</p>
         </div>
       ` : `
-        <div class="rivers-academic-badges">
-          <span class="rivers-academic-badge">${highlight(item.year)}</span>
-          <span class="rivers-academic-badge">${highlight(item.type)}</span>
-          <span class="rivers-academic-badge">${highlight(item.domain)}</span>
-        </div>
-        <p class="rivers-academic-ref">${highlight(item.ref)}</p>
+        ${renderBadges(item)}
+        <p class="rivers-academic-ref">${highlight(display.ref)}</p>
       `;
 
       grid.appendChild(card);
