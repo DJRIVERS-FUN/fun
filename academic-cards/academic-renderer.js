@@ -5,6 +5,7 @@ function renderAcademic(containerId, data, options = {}) {
   const searchLabel = options.searchLabel || itemLabelPlural;
   const awardInHeader = !!options.awardInHeader;
   const fundingLayout = !!options.fundingLayout;
+  const bookLayout = !!options.bookLayout;
   const stripAuthorPrefix = options.stripAuthorPrefix !== false;
   const wrap = document.getElementById(containerId);
   const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
@@ -50,6 +51,22 @@ function renderAcademic(containerId, data, options = {}) {
       title: shortenTitle(cleanTrailingPeriod(parts[0])),
       funder: cleanTrailingPeriod(parts.slice(1).join('. ')),
       role
+    };
+  }
+
+  function parseBookRef(ref) {
+    const lines = String(ref || '').split('\n').map(line => line.trim()).filter(Boolean);
+    const title = lines[0] || '';
+    const authors = (lines.find(line => line.toLowerCase().startsWith('author:')) || '').replace(/^Author:\s*/i, '');
+    const isbnPages = lines.find(line => line.toLowerCase().startsWith('isbn:')) || '';
+    const publisherLine = lines.find(line => !line.toLowerCase().startsWith('author:') && !line.toLowerCase().startsWith('isbn:') && line !== title) || '';
+    const publisherMatch = publisherLine.match(/^(.*)\s+\((\d{4})\)$/);
+    return {
+      title,
+      authors,
+      isbnPages,
+      publisher: publisherMatch ? publisherMatch[1] : publisherLine,
+      date: publisherMatch ? publisherMatch[2] : ''
     };
   }
 
@@ -134,7 +151,7 @@ function renderAcademic(containerId, data, options = {}) {
     const q = state.query.toLowerCase();
     const display = extractAward(item);
     const parsed = fundingLayout ? parseFundingRef(display.ref) : null;
-    const searchableRef = fundingLayout ? `${parsed.title} ${parsed.funder} ${parsed.role}` : display.ref;
+    const searchableRef = fundingLayout ? `${parsed.title} ${parsed.funder} ${parsed.role}` : item.ref;
     const award = display.award;
     const domain = normalizeDomain(item.domain);
     return (
@@ -205,6 +222,19 @@ function renderAcademic(containerId, data, options = {}) {
   }
 
   function renderRef(display) {
+    if (bookLayout) {
+      const book = parseBookRef(display.ref);
+      return `
+        <p class="rivers-academic-ref rivers-book-ref">
+          <span class="rivers-book-title">${highlight(book.title)}</span>
+          ${book.authors ? `<span class="rivers-book-authors">${highlight(book.authors)}</span>` : ''}
+          ${book.isbnPages ? `<span class="rivers-book-isbn">${highlight(book.isbnPages)}</span>` : ''}
+          ${book.publisher ? `<span class="rivers-book-publisher">${highlight(book.publisher)}</span>` : ''}
+          ${book.date ? `<span class="rivers-book-date">${highlight(book.date)}</span>` : ''}
+        </p>
+      `;
+    }
+
     if (!fundingLayout) {
       return `<p class="rivers-academic-ref">${highlight(stripPrefix(display.ref))}</p>`;
     }
