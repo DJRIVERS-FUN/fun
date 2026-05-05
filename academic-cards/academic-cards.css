@@ -42,7 +42,14 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 
 .rivers-academic-ref{font-size:15px;line-height:1.3;color:#56534f;margin:0;max-width:900px}
 
-/* NEW: tighten title + funder spacing */
+/* BOOK LAYOUT (restored structured lines) */
+.rivers-book-title{display:block}
+.rivers-book-authors{display:block;color:#6e6c66}
+.rivers-book-isbn{display:block;color:#9a9890}
+.rivers-book-publisher{display:block;color:#6e6c66}
+.rivers-book-date{display:block;color:#9a9890}
+
+/* FUNDING LAYOUT */
 .rivers-project-title{
   display:block;
   margin:0;
