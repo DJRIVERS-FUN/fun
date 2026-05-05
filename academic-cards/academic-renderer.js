@@ -7,7 +7,7 @@ function renderAcademic(containerId, data, options = {}) {
   wrap.innerHTML = `
     <div class="rivers-academic-controls">
       <div class="rivers-academic-row">
-        <input class="rivers-academic-search" placeholder="Search publications, venues, topics..." data-search />
+        <input class="rivers-academic-search" placeholder="Search ${itemLabel}s, venues, topics..." data-search />
       </div>
       <div class="rivers-academic-row"><span class="rivers-academic-count" data-count></span></div>
       <div class="rivers-academic-row" data-filter="decade"><span class="rivers-academic-label">Decade</span></div>
