@@ -24,7 +24,7 @@ function renderAcademic(containerId, data, options = {}) {
   const searchInput = wrap.querySelector('[data-search]');
 
   data.sort((a, b) => {
-    const yearDiff = Number(b.year) - Number(a.year);
+    const yearDiff = Number((b.year||'').slice(0,4)) - Number((a.year||'').slice(0,4));
     if (yearDiff !== 0) return yearDiff;
     return (a.ref || '').localeCompare(b.ref || '');
   });
@@ -53,10 +53,6 @@ function renderAcademic(containerId, data, options = {}) {
     if (!q) return safe;
     const pattern = new RegExp(`(${escapeRegExp(q)})`, 'gi');
     return safe.replace(pattern, '<strong class="rivers-academic-match">$1</strong>');
-  }
-
-  function typeClass(value) {
-    return 'rivers-academic-type-' + String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   }
 
   function decadeOf(year) {
@@ -113,9 +109,21 @@ function renderAcademic(containerId, data, options = {}) {
     count.textContent = `${items.length} ${items.length === 1 ? itemLabel : itemLabelPlural} shown`;
 
     items.forEach(item => {
+      const hasImage = !!item.image;
       const card = document.createElement('article');
-      card.className = `rivers-academic-card ${typeClass(item.type)}`;
-      card.innerHTML = `
+      card.className = `rivers-academic-card ${hasImage ? 'has-image' : ''}`;
+
+      card.innerHTML = hasImage ? `
+        <img src="${item.image}" class="rivers-academic-cover" />
+        <div class="rivers-academic-content">
+          <div class="rivers-academic-badges">
+            <span class="rivers-academic-badge">${highlight(item.year)}</span>
+            <span class="rivers-academic-badge">${highlight(item.type)}</span>
+            <span class="rivers-academic-badge">${highlight(item.domain)}</span>
+          </div>
+          <p class="rivers-academic-ref">${highlight(item.ref)}</p>
+        </div>
+      ` : `
         <div class="rivers-academic-badges">
           <span class="rivers-academic-badge">${highlight(item.year)}</span>
           <span class="rivers-academic-badge">${highlight(item.type)}</span>
@@ -123,6 +131,7 @@ function renderAcademic(containerId, data, options = {}) {
         </div>
         <p class="rivers-academic-ref">${highlight(item.ref)}</p>
       `;
+
       grid.appendChild(card);
     });
 
