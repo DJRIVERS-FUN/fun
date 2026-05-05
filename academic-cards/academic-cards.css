@@ -2,10 +2,12 @@ html,body{margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:#6e6c66}
 
 .rivers-academic-wrap{max-width:1000px;margin:0 auto;padding:4px 0 4px 0}
+
+/* FUNDING SUMMARY BAR */
+.rivers-funding-summary{font-family:'DM Mono',monospace;font-size:12px;color:#520671;margin-bottom:14px;padding:6px 10px;border:1px solid #e6d9ec;border-radius:6px;background:#fbf8fc;display:inline-block}
+
 .rivers-academic-controls{display:grid;grid-template-columns:1fr;gap:8px;margin:0 0 16px 0}
 .rivers-academic-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-
-/* RIGHT ALIGN SEARCH ROW */
 .rivers-academic-row:first-child{justify-content:flex-end}
 
 .rivers-academic-count,
@@ -17,7 +19,7 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 .rivers-academic-count{font-size:12px;color:#9a9890;margin-right:6px}
 .rivers-academic-label{font-size:11px;color:#9a9890;margin-right:2px}
 
-.rivers-academic-search{box-sizing:border-box;width:100%;max-width:420px;border:1px solid #e6e2de;border-radius:999px;background:#ffffff;color:#56534f;font-size:12px;padding:7px 12px;outline:none}
+.rivers-academic-search{box-sizing:border-box;width:360px;max-width:100%;border:1px solid #e6e2de;border-radius:999px;background:#ffffff;color:#56534f;font-size:12px;padding:7px 12px;outline:none}
 .rivers-academic-search:focus{border-color:#520671;background:#fbf8fc}
 .rivers-academic-search::placeholder{color:#aaa69f}
 
@@ -26,10 +28,14 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 
 .rivers-academic-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
 
-.rivers-academic-card{box-sizing:border-box;border:1px solid #e6e2de;border-radius:8px;background:#ffffff;padding:14px 16px 13px 16px;height:auto;min-height:0;overflow:visible;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+.rivers-academic-card{box-sizing:border-box;border:1px solid #e6e2de;border-radius:8px;background:#ffffff;padding:14px 16px 13px 16px;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
 .rivers-academic-card:hover{border-color:#520671;transform:translateY(-1px);box-shadow:0 6px 16px rgba(82,6,113,.06)}
 
-.rivers-academic-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+/* SUBTLE TYPE TINTS */
+.rivers-academic-type-external{border-left:3px solid #520671}
+.rivers-academic-type-internal{border-left:3px solid #cbb6d9}
+
+.rivers-academic-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}
 .rivers-academic-badge{font-size:11px;color:#520671;border:1px solid #e6d9ec;background:#fbf8fc;border-radius:999px;padding:2px 8px;line-height:1.4}
 
 .rivers-academic-ref{font-size:15px;line-height:1.42;color:#56534f;margin:0;max-width:900px}
