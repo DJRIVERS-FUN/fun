@@ -4,11 +4,12 @@ function renderAcademic(containerId, data, options = {}) {
   const itemLabelPlural = options.itemLabelPlural || `${itemLabel}s`;
   const searchLabel = options.searchLabel || itemLabelPlural;
   const awardInHeader = !!options.awardInHeader;
+  const stripAuthorPrefix = options.stripAuthorPrefix !== false;
   const wrap = document.getElementById(containerId);
   const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
 
   function stripPrefix(ref) {
-    if (!ref) return '';
+    if (!ref || !stripAuthorPrefix) return ref || '';
     const parts = ref.split(',');
     return parts.length > 1 ? parts.slice(1).join(',').trim() : ref;
   }
