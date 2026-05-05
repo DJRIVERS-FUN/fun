@@ -4,6 +4,7 @@ function renderAcademic(containerId, data, options = {}) {
   const itemLabelPlural = options.itemLabelPlural || `${itemLabel}s`;
   const searchLabel = options.searchLabel || itemLabelPlural;
   const awardInHeader = !!options.awardInHeader;
+  const fundingLayout = !!options.fundingLayout;
   const stripAuthorPrefix = options.stripAuthorPrefix !== false;
   const wrap = document.getElementById(containerId);
   const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
@@ -14,13 +15,29 @@ function renderAcademic(containerId, data, options = {}) {
     return parts.length > 1 ? parts.slice(1).join(',').trim() : ref;
   }
 
-  function splitFunding(ref) {
-    if (!ref) return { main: '', funder: '' };
-    const parts = ref.split('. ');
-    if (parts.length < 2) return { main: ref, funder: '' };
+  function parseFundingRef(ref) {
+    if (!ref) return { title: '', funder: '', role: '' };
+
+    const cleaned = ref.trim();
+    const roleMatch = cleaned.match(/^.*?\((PI|Co-I)\)\.\s*/i);
+    const roleCode = roleMatch ? roleMatch[1].toLowerCase() : '';
+    const role = roleCode === 'pi'
+      ? 'Principal Investigator'
+      : roleCode === 'co-i'
+        ? 'Co-Investigator'
+        : '';
+
+    const withoutAuthor = roleMatch ? cleaned.slice(roleMatch[0].length).trim() : stripPrefix(cleaned);
+    const parts = withoutAuthor.split('. ');
+
+    if (parts.length < 2) {
+      return { title: withoutAuthor, funder: '', role };
+    }
+
     return {
-      main: parts.slice(0, 2).join('. ') + '.',
-      funder: parts.slice(2).join('. ')
+      title: parts[0].replace(/\.$/, ''),
+      funder: parts.slice(1).join('. '),
+      role
     };
   }
 
@@ -77,7 +94,7 @@ function renderAcademic(containerId, data, options = {}) {
     const match = ref.match(/\s*Award:\s*([^.]*(?:\.[0-9]+)?[^.]*)\.?\s*$/i);
 
     return {
-      ref: stripPrefix(match ? ref.slice(0, match.index).trim() : ref),
+      ref: match ? ref.slice(0, match.index).trim() : ref,
       award: item.award || (match ? match[1].trim() : '')
     };
   }
@@ -103,10 +120,13 @@ function renderAcademic(containerId, data, options = {}) {
   function matchesSearch(item) {
     if (!state.query) return true;
     const q = state.query.toLowerCase();
-    const award = extractAward(item).award;
+    const display = extractAward(item);
+    const parsed = fundingLayout ? parseFundingRef(display.ref) : null;
+    const searchableRef = fundingLayout ? `${parsed.title} ${parsed.funder} ${parsed.role}` : display.ref;
+    const award = display.award;
     const domain = normalizeDomain(item.domain);
     return (
-      (item.ref && item.ref.toLowerCase().includes(q)) ||
+      (searchableRef && searchableRef.toLowerCase().includes(q)) ||
       (award && award.toLowerCase().includes(q)) ||
       (domain && domain.toLowerCase().includes(q)) ||
       (item.type && item.type.toLowerCase().includes(q)) ||
@@ -141,7 +161,7 @@ function renderAcademic(containerId, data, options = {}) {
     });
   }
 
-  function renderBadges(item) {
+  function renderBadges(item, role = '') {
     const award = extractAward(item).award;
     const domain = normalizeDomain(item.domain);
     return `
@@ -150,6 +170,7 @@ function renderAcademic(containerId, data, options = {}) {
         <span class="rivers-academic-badge">${highlight(item.type)}</span>
         <span class="rivers-academic-badge">${highlight(domain)}</span>
         ${award ? `<span class="rivers-academic-badge rivers-academic-award">${highlight(award)}</span>` : ''}
+        ${role ? `<span class="rivers-academic-badge rivers-academic-role">${highlight(role)}</span>` : ''}
       </div>
     `;
   }
@@ -171,6 +192,20 @@ function renderAcademic(containerId, data, options = {}) {
     });
   }
 
+  function renderRef(display) {
+    if (!fundingLayout) {
+      return `<p class="rivers-academic-ref">${highlight(stripPrefix(display.ref))}</p>`;
+    }
+
+    const parsed = parseFundingRef(display.ref);
+    return `
+      <p class="rivers-academic-ref rivers-funding-ref">
+        <span class="rivers-project-title">${highlight(parsed.title)}</span>
+        ${parsed.funder ? `<br><span class="rivers-funder">${highlight(parsed.funder)}</span>` : ''}
+      </p>
+    `;
+  }
+
   function renderCards() {
     const items = visibleItems();
     grid.innerHTML = '';
@@ -181,23 +216,17 @@ function renderAcademic(containerId, data, options = {}) {
       const card = document.createElement('article');
       card.className = `rivers-academic-card ${hasImage ? 'has-image' : ''}`;
       const display = extractAward(item);
-      const split = splitFunding(display.ref);
+      const parsed = fundingLayout ? parseFundingRef(display.ref) : { role: '' };
 
       card.innerHTML = hasImage ? `
         <img src="${escapeHtml(item.image)}" data-fallback="${escapeHtml(item.fallbackImage || '')}" class="rivers-academic-cover" alt="Book cover" />
         <div class="rivers-academic-content">
-          ${renderBadges(item)}
-          <p class="rivers-academic-ref">
-            ${highlight(split.main)}
-            ${split.funder ? `<br><span class="rivers-funder">${highlight(split.funder)}</span>` : ''}
-          </p>
+          ${renderBadges(item, parsed.role)}
+          ${renderRef(display)}
         </div>
       ` : `
-        ${renderBadges(item)}
-        <p class="rivers-academic-ref">
-          ${highlight(split.main)}
-          ${split.funder ? `<br><span class="rivers-funder">${highlight(split.funder)}</span>` : ''}
-        </p>
+        ${renderBadges(item, parsed.role)}
+        ${renderRef(display)}
       `;
 
       grid.appendChild(card);
