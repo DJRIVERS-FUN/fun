@@ -65,8 +65,7 @@ function renderAcademic(containerId, data, options = {}) {
       title,
       authors,
       isbnPages,
-      publisher: publisherMatch ? publisherMatch[1] : publisherLine,
-      date: publisherMatch ? publisherMatch[2] : ''
+      publisher: publisherMatch ? publisherMatch[1] : publisherLine
     };
   }
 
@@ -230,7 +229,6 @@ function renderAcademic(containerId, data, options = {}) {
           ${book.authors ? `<span class="rivers-book-authors">${highlight(book.authors)}</span>` : ''}
           ${book.isbnPages ? `<span class="rivers-book-isbn">${highlight(book.isbnPages)}</span>` : ''}
           ${book.publisher ? `<span class="rivers-book-publisher">${highlight(book.publisher)}</span>` : ''}
-          ${book.date ? `<span class="rivers-book-date">${highlight(book.date)}</span>` : ''}
         </p>
       `;
     }
