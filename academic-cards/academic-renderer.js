@@ -7,6 +7,17 @@ function renderAcademic(containerId, data, options = {}) {
   const wrap = document.getElementById(containerId);
   const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
 
+  function stripPrefix(ref) {
+    if (!ref) return '';
+    const parts = ref.split(',');
+    return parts.length > 1 ? parts.slice(1).join(',').trim() : ref;
+  }
+
+  function normalizeDomain(v) {
+    if (!v) return v;
+    return v.toLowerCase() === 'peer review' ? 'Peer-review' : v;
+  }
+
   wrap.innerHTML = `
     <div class="rivers-academic-controls">
       <div class="rivers-academic-row">
@@ -49,13 +60,13 @@ function renderAcademic(containerId, data, options = {}) {
   }
 
   function extractAward(item) {
-    if (!awardInHeader) return { ref: item.ref || '', award: item.award || '' };
+    if (!awardInHeader) return { ref: stripPrefix(item.ref || ''), award: item.award || '' };
 
     const ref = item.ref || '';
     const match = ref.match(/\s*Award:\s*([^.]*(?:\.[0-9]+)?[^.]*)\.?\s*$/i);
 
     return {
-      ref: match ? ref.slice(0, match.index).trim() : ref,
+      ref: stripPrefix(match ? ref.slice(0, match.index).trim() : ref),
       award: item.award || (match ? match[1].trim() : '')
     };
   }
@@ -75,17 +86,18 @@ function renderAcademic(containerId, data, options = {}) {
   }
 
   function valuesFor(key) {
-    return ['All', ...Array.from(new Set(data.map(item => key === 'decade' ? decadeOf(item.year) : item[key]).filter(Boolean))).sort()];
+    return ['All', ...Array.from(new Set(data.map(item => key === 'decade' ? decadeOf(item.year) : (key === 'domain' ? normalizeDomain(item[key]) : item[key])).filter(Boolean))).sort()];
   }
 
   function matchesSearch(item) {
     if (!state.query) return true;
     const q = state.query.toLowerCase();
     const award = extractAward(item).award;
+    const domain = normalizeDomain(item.domain);
     return (
       (item.ref && item.ref.toLowerCase().includes(q)) ||
       (award && award.toLowerCase().includes(q)) ||
-      (item.domain && item.domain.toLowerCase().includes(q)) ||
+      (domain && domain.toLowerCase().includes(q)) ||
       (item.type && item.type.toLowerCase().includes(q)) ||
       (item.year && String(item.year).includes(q))
     );
@@ -96,7 +108,7 @@ function renderAcademic(containerId, data, options = {}) {
       matchesSearch(item) &&
       (state.decade === 'All' || decadeOf(item.year) === state.decade) &&
       (state.type === 'All' || item.type === state.type) &&
-      (state.domain === 'All' || item.domain === state.domain)
+      (state.domain === 'All' || normalizeDomain(item.domain) === state.domain)
     );
   }
 
@@ -120,11 +132,12 @@ function renderAcademic(containerId, data, options = {}) {
 
   function renderBadges(item) {
     const award = extractAward(item).award;
+    const domain = normalizeDomain(item.domain);
     return `
       <div class="rivers-academic-badges">
         <span class="rivers-academic-badge">${highlight(item.year)}</span>
         <span class="rivers-academic-badge">${highlight(item.type)}</span>
-        <span class="rivers-academic-badge">${highlight(item.domain)}</span>
+        <span class="rivers-academic-badge">${highlight(domain)}</span>
         ${award ? `<span class="rivers-academic-badge rivers-academic-award">${highlight(award)}</span>` : ''}
       </div>
     `;
