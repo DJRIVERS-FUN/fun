@@ -38,7 +38,7 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 .rivers-academic-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}
 .rivers-academic-badge{font-size:11px;color:#520671;border:1px solid #e6d9ec;background:#fbf8fc;border-radius:999px;padding:2px 8px;line-height:1.4}
 
-.rivers-academic-ref{font-size:15px;line-height:1.42;color:#56534f;margin:0;max-width:900px}
+.rivers-academic-ref{font-size:15px;line-height:1.42;color:#56534f;margin:0;max-width:900px;white-space:pre-line}
 
 @media(max-width:560px){
   .rivers-academic-card.has-image{grid-template-columns:58px 1fr;gap:12px}
