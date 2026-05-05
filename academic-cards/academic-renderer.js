@@ -32,6 +32,27 @@ function renderAcademic(containerId, data, options = {}) {
     parent.postMessage({ type: 'resize', source, height: h }, '*');
   }
 
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(value) {
+    const safe = escapeHtml(value);
+    const q = state.query.trim();
+    if (!q) return safe;
+    const pattern = new RegExp(`(${escapeRegExp(q)})`, 'gi');
+    return safe.replace(pattern, '<strong class="rivers-academic-match">$1</strong>');
+  }
+
   function decadeOf(year) {
     const y = Number(year);
     return y >= 2020 ? '2020s' : y >= 2010 ? '2010s' : '2000s';
@@ -89,11 +110,11 @@ function renderAcademic(containerId, data, options = {}) {
       card.className = 'rivers-academic-card';
       card.innerHTML = `
         <div class="rivers-academic-badges">
-          <span class="rivers-academic-badge">${item.year}</span>
-          <span class="rivers-academic-badge">${item.type}</span>
-          <span class="rivers-academic-badge">${item.domain}</span>
+          <span class="rivers-academic-badge">${highlight(item.year)}</span>
+          <span class="rivers-academic-badge">${highlight(item.type)}</span>
+          <span class="rivers-academic-badge">${highlight(item.domain)}</span>
         </div>
-        <p class="rivers-academic-ref">${item.ref}</p>
+        <p class="rivers-academic-ref">${highlight(item.ref)}</p>
       `;
       grid.appendChild(card);
     });
