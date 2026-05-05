@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publication Cards Clean</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  background:#ffffff;
+  overflow:hidden;
+}
+
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  color:#6e6c66;
+}
+
+.rivers-pub-wrap{
+  max-width:1000px;
+  margin:0 auto;
+  padding:4px 0 24px 0;
+}
+
+.rivers-pub-controls{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  margin:0 0 16px 0;
+}
+
+.rivers-pub-row{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.rivers-pub-count,
+.rivers-pub-label,
+.rivers-pub-button,
+.rivers-pub-badge{
+  font-family:'DM Mono',monospace;
+}
+
+.rivers-pub-count{
+  font-size:12px;
+  color:#9a9890;
+  margin-right:6px;
+}
+
+.rivers-pub-label{
+  font-size:11px;
+  color:#9a9890;
+  margin-right:2px;
+}
+
+.rivers-pub-button{
+  border:1px solid #e6e2de;
+  background:#ffffff;
+  color:#6e6c66;
+  border-radius:999px;
+  padding:4px 9px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.rivers-pub-button.active,
+.rivers-pub-button:hover{
+  border-color:#520671;
+  color:#520671;
+  background:#f7f3fa;
+}
+
+.rivers-pub-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  align-items:start;
+}
+
+@media(min-width:780px){
+  .rivers-pub-grid{
+    grid-template-columns:1fr 1fr;
+    align-items:start;
+  }
+}
+
+.rivers-pub-card{
+  box-sizing:border-box;
+  border:1px solid #e6e2de;
+  border-radius:8px;
+  background:#ffffff;
+  padding:14px 16px 13px 16px;
+  height:auto;
+  min-height:0;
+  overflow:visible;
+  transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+
+.rivers-pub-card:hover{
+  border-color:#520671;
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(82,6,113,.06);
+}
+
+.rivers-pub-badges{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+
+.rivers-pub-badge{
+  font-size:11px;
+  color:#520671;
+  border:1px solid #e6d9ec;
+  background:#fbf8fc;
+  border-radius:999px;
+  padding:2px 8px;
+  line-height:1.4;
+}
+
+.rivers-pub-apa{
+  font-size:15px;
+  line-height:1.42;
+  color:#56534f;
+  margin:0;
+}
+</style>
+</head>
+<body>
+<div class="rivers-pub-wrap" id="pubWrap">
+  <div class="rivers-pub-controls">
+    <div class="rivers-pub-row"><span class="rivers-pub-count" id="pubCount"></span></div>
+    <div class="rivers-pub-row" id="decadeFilters"><span class="rivers-pub-label">Decade</span></div>
+    <div class="rivers-pub-row" id="typeFilters"><span class="rivers-pub-label">Type</span></div>
+    <div class="rivers-pub-row" id="domainFilters"><span class="rivers-pub-label">Domain</span></div>
+  </div>
+  <div class="rivers-pub-grid" id="pubGrid"></div>
+</div>
+
+<script>
+let publications=[];
+const state={decade:'All',type:'All',domain:'All'};
+const grid=document.getElementById('pubGrid');
+const count=document.getElementById('pubCount');
+
+function sendHeight(){
+  const h=Math.ceil(document.documentElement.scrollHeight);
+  parent.postMessage({type:'resize',source:'rivers-publications',height:h},'*');
+}
+
+function decadeOf(y){
+  y=Number(y);
+  return y>=2020?'2020s':y>=2010?'2010s':'2000s';
+}
+
+function vals(key){
+  return ['All',...Array.from(new Set(publications.map(p=>key==='decade'?decadeOf(p.year):p[key]).filter(Boolean))).sort()];
+}
+
+function makeFilters(id,key){
+  const el=document.getElementById(id);
+  el.querySelectorAll('button').forEach(b=>b.remove());
+  vals(key).forEach(v=>{
+    const b=document.createElement('button');
+    b.className='rivers-pub-button'+(state[key]===v?' active':'');
+    b.textContent=v;
+    b.onclick=()=>{state[key]=v;renderFilters();render();};
+    el.appendChild(b);
+  });
+}
+
+function renderFilters(){
+  makeFilters('decadeFilters','decade');
+  makeFilters('typeFilters','type');
+  makeFilters('domainFilters','domain');
+}
+
+function visible(){
+  return publications.filter(p=>
+    (state.decade==='All'||decadeOf(p.year)===state.decade)&&
+    (state.type==='All'||p.type===state.type)&&
+    (state.domain==='All'||p.domain===state.domain)
+  );
+}
+
+function render(){
+  const pubs=visible();
+  grid.innerHTML='';
+  count.textContent=`${pubs.length} publication${pubs.length===1?'':'s'} shown`;
+
+  pubs.forEach(p=>{
+    const card=document.createElement('article');
+    card.className='rivers-pub-card';
+    card.innerHTML=`
+      <div class="rivers-pub-badges">
+        <span class="rivers-pub-badge">${p.year}</span>
+        <span class="rivers-pub-badge">${p.type}</span>
+        <span class="rivers-pub-badge">${p.domain}</span>
+      </div>
+      <p class="rivers-pub-apa">${p.apa}</p>
+    `;
+    grid.appendChild(card);
+  });
+
+  requestAnimationFrame(sendHeight);
+}
+
+async function loadPublications(){
+  const response=await fetch('publication-cards.html?v=full');
+  const text=await response.text();
+  const match=text.match(/const publications\s*=\s*(\[[\s\S]*?\]);\s*\n\s*publications\.sort/);
+  if(!match){
+    throw new Error('Could not read publication data.');
+  }
+  publications=Function('return '+match[1])();
+  publications.sort((a,b)=>{
+    const y=Number(b.year)-Number(a.year);
+    if(y!==0)return y;
+    return (a.apa||'').localeCompare(b.apa||'');
+  });
+  renderFilters();
+  render();
+}
+
+window.addEventListener('load',sendHeight);
+window.addEventListener('resize',sendHeight);
+loadPublications().catch(err=>{
+  grid.innerHTML='<div class="rivers-pub-card"><p class="rivers-pub-apa">Publication data could not be loaded.</p></div>';
+  console.error(err);
+  sendHeight();
+});
+</script>
+</body>
+</html>
