@@ -6,6 +6,7 @@ function renderAcademic(containerId, data, options = {}) {
   const awardInHeader = !!options.awardInHeader;
   const fundingLayout = !!options.fundingLayout;
   const bookLayout = !!options.bookLayout;
+  const serviceLayout = !!options.serviceLayout;
   const stripAuthorPrefix = options.stripAuthorPrefix !== false;
   const wrap = document.getElementById(containerId);
   const state = { decade: 'All', type: 'All', domain: 'All', query: '' };
@@ -67,6 +68,13 @@ function renderAcademic(containerId, data, options = {}) {
       isbnPages,
       publisher: publisherMatch ? publisherMatch[1] : publisherLine
     };
+  }
+
+  function parseServiceRef(ref) {
+    return String(ref || '')
+      .replace(/^(Reviewer|Associate Editor|Guest Editor|Consulting Editor|PhD Examiner)\s*,\s*/i, '')
+      .replace(/^Editorial Board Member\s*(?:\([^)]*\))?\s*,\s*/i, '')
+      .trim();
   }
 
   function normalizeDomain(v) {
@@ -150,7 +158,7 @@ function renderAcademic(containerId, data, options = {}) {
     const q = state.query.toLowerCase();
     const display = extractAward(item);
     const parsed = fundingLayout ? parseFundingRef(display.ref) : null;
-    const searchableRef = fundingLayout ? `${parsed.title} ${parsed.funder} ${parsed.role}` : item.ref;
+    const searchableRef = fundingLayout ? `${parsed.title} ${parsed.funder} ${parsed.role}` : (serviceLayout ? parseServiceRef(item.ref) : item.ref);
     const award = display.award;
     const domain = normalizeDomain(item.domain);
     return (
@@ -231,6 +239,10 @@ function renderAcademic(containerId, data, options = {}) {
           ${book.publisher ? `<span class="rivers-book-publisher">${highlight(book.publisher)}</span>` : ''}
         </p>
       `;
+    }
+
+    if (serviceLayout) {
+      return `<p class="rivers-academic-ref rivers-service-ref">${highlight(parseServiceRef(display.ref))}</p>`;
     }
 
     if (!fundingLayout) {
