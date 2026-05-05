@@ -8,7 +8,7 @@
 <style>
 html,body{margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:#6e6c66}
-.rivers-pres-wrap{max-width:1000px;margin:0 auto;padding:4px 0 24px 0}
+.rivers-pres-wrap{max-width:1000px;margin:0 auto;padding:4px 0 4px 0}
 .rivers-pres-controls{display:grid;grid-template-columns:1fr;gap:8px;margin:0 0 16px 0}
 .rivers-pres-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
 .rivers-pres-count,.rivers-pres-label,.rivers-pres-button,.rivers-pres-badge{font-family:'DM Mono',monospace}
@@ -102,7 +102,7 @@ const presentations=[
 const state={decade:'All',type:'All',domain:'All'};
 const grid=document.getElementById('presGrid');
 const count=document.getElementById('presCount');
-function sendHeight(){const h=Math.ceil(document.documentElement.scrollHeight);parent.postMessage({type:'resize',source:'rivers-presentations',height:h},'*')}
+function sendHeight(){const wrap=document.getElementById('presWrap');const h=Math.ceil(wrap.getBoundingClientRect().height)+2;parent.postMessage({type:'resize',source:'rivers-presentations',height:h},'*')}
 function decadeOf(y){y=Number(y);return y>=2020?'2020s':y>=2010?'2010s':'2000s'}
 function vals(key){return ['All',...Array.from(new Set(presentations.map(p=>key==='decade'?decadeOf(p.year):p[key]).filter(Boolean))).sort()]}
 function makeFilters(id,key){const el=document.getElementById(id);el.querySelectorAll('button').forEach(b=>b.remove());vals(key).forEach(v=>{const b=document.createElement('button');b.className='rivers-pres-button'+(state[key]===v?' active':'');b.textContent=v;b.onclick=()=>{state[key]=v;renderFilters();render()};el.appendChild(b)})}
