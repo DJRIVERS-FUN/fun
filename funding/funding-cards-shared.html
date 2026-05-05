@@ -8,19 +8,49 @@
 </head>
 <body>
 <div id="app" class="rivers-academic-wrap">
-  <div class="rivers-funding-summary">¥20.8M total (¥16.6M external | ¥4.2M internal)</div>
+  <div id="fundingTotal" class="rivers-funding-total"></div>
 </div>
 <script>
+function extractYenAmount(ref) {
+  var match = String(ref || '').match(/Award:\s*¥([0-9,]+)/i);
+  return match ? Number(match[1].replace(/,/g, '')) : 0;
+}
+
+function formatMillions(value) {
+  return '¥' + (value / 1000000).toFixed(1) + ' million';
+}
+
+function renderFundingTotal(data) {
+  var external = data
+    .filter(function(item) { return item.type === 'External'; })
+    .reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
+
+  var internal = data
+    .filter(function(item) { return item.type === 'Internal'; })
+    .reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
+
+  var total = external + internal;
+  var target = document.getElementById('fundingTotal');
+
+  target.innerHTML = 'This research has been supported by approximately <span>' +
+    formatMillions(total) + '</span> in competitive funding (<span>' +
+    formatMillions(external) + '</span> external; <span>' +
+    formatMillions(internal) + '</span> internal), enabling the development of data-driven models and applied research across multiple domains.';
+}
+
 fetch('../data/funding.json')
-  .then(r=>r.json())
-  .then(data=>renderAcademic('app',data,{
-    source:'rivers-funding',
-    itemLabel:'project',
-    itemLabelPlural:'projects',
-    searchLabel:'funding',
-    awardInHeader:true,
-    fundingLayout:true
-  }));
+  .then(function(response) { return response.json(); })
+  .then(function(data) {
+    renderFundingTotal(data);
+    renderAcademic('app', data, {
+      source: 'rivers-funding',
+      itemLabel: 'project',
+      itemLabelPlural: 'projects',
+      searchLabel: 'funding',
+      awardInHeader: true,
+      fundingLayout: true
+    });
+  });
 </script>
 </body>
 </html>
