@@ -8,10 +8,15 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Ari
 .rivers-academic-count,
 .rivers-academic-label,
 .rivers-academic-button,
-.rivers-academic-badge{font-family:'DM Mono',monospace}
+.rivers-academic-badge,
+.rivers-academic-search{font-family:'DM Mono',monospace}
 
 .rivers-academic-count{font-size:12px;color:#9a9890;margin-right:6px}
 .rivers-academic-label{font-size:11px;color:#9a9890;margin-right:2px}
+
+.rivers-academic-search{box-sizing:border-box;width:100%;max-width:420px;border:1px solid #e6e2de;border-radius:999px;background:#ffffff;color:#56534f;font-size:12px;padding:7px 12px;outline:none}
+.rivers-academic-search:focus{border-color:#520671;background:#fbf8fc}
+.rivers-academic-search::placeholder{color:#aaa69f}
 
 .rivers-academic-button{border:1px solid #e6e2de;background:#ffffff;color:#6e6c66;border-radius:999px;padding:4px 9px;font-size:12px;cursor:pointer}
 .rivers-academic-button.active,.rivers-academic-button:hover{border-color:#520671;color:#520671;background:#f7f3fa}
