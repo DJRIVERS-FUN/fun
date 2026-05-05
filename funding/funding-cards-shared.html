@@ -20,6 +20,34 @@ function formatMillions(value) {
   return '¥' + (value / 1000000).toFixed(1) + ' million';
 }
 
+function animateMillions(element, finalValue, duration) {
+  var start = 0;
+  var startTime = null;
+  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) {
+    element.textContent = formatMillions(finalValue);
+    return;
+  }
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    var progress = Math.min((timestamp - startTime) / duration, 1);
+    var eased = 1 - Math.pow(1 - progress, 3);
+    var current = start + (finalValue - start) * eased;
+
+    element.textContent = formatMillions(current);
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      element.textContent = formatMillions(finalValue);
+    }
+  }
+
+  window.requestAnimationFrame(step);
+}
+
 function renderFundingTotal(data) {
   var external = data
     .filter(function(item) { return item.type === 'External'; })
@@ -32,10 +60,12 @@ function renderFundingTotal(data) {
   var total = external + internal;
   var target = document.getElementById('fundingTotal');
 
-  target.innerHTML = 'This research has been supported by approximately <span>' +
-    formatMillions(total) + '</span> in competitive funding (<span>' +
-    formatMillions(external) + '</span> external; <span>' +
-    formatMillions(internal) + '</span> internal), enabling the development of data-driven models and applied research across multiple domains.';
+  target.innerHTML = 'This research has been supported by approximately <span class="rivers-funding-number" data-value="' + total + '">¥0.0 million</span> in competitive funding (<span class="rivers-funding-number" data-value="' + external + '">¥0.0 million</span> external; <span class="rivers-funding-number" data-value="' + internal + '">¥0.0 million</span> internal), enabling the development of data-driven models and applied research across multiple domains.';
+
+  Array.prototype.forEach.call(target.querySelectorAll('.rivers-funding-number'), function(el, index) {
+    var value = Number(el.getAttribute('data-value')) || 0;
+    animateMillions(el, value, 900 + index * 120);
+  });
 }
 
 fetch('../data/funding.json')
