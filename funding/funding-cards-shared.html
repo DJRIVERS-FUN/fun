@@ -7,13 +7,17 @@
 <script src="../academic-cards/academic-renderer.js"></script>
 </head>
 <body>
-<div id="app" class="rivers-academic-wrap">
+<div class="rivers-academic-wrap">
   <div id="fundingTotal" class="rivers-funding-total"></div>
 </div>
+<div id="app" class="rivers-academic-wrap"></div>
 <script>
 function extractYenAmount(ref) {
-  var match = String(ref || '').match(/Award:\s*¥([0-9,]+)/i);
-  return match ? Number(match[1].replace(/,/g, '')) : 0;
+  var text = String(ref || '');
+  var marker = text.indexOf('Award: ¥');
+  if (marker < 0) return 0;
+  var amount = text.slice(marker + 8).split('.')[0].replace(/,/g, '').trim();
+  return Number(amount) || 0;
 }
 
 function formatMillions(value) {
@@ -21,50 +25,34 @@ function formatMillions(value) {
 }
 
 function animateMillions(element, finalValue, duration) {
-  var start = 0;
   var startTime = null;
-  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (prefersReducedMotion) {
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) {
     element.textContent = formatMillions(finalValue);
     return;
   }
-
   function step(timestamp) {
     if (!startTime) startTime = timestamp;
     var progress = Math.min((timestamp - startTime) / duration, 1);
     var eased = 1 - Math.pow(1 - progress, 3);
-    var current = start + (finalValue - start) * eased;
-
-    element.textContent = formatMillions(current);
-
+    element.textContent = formatMillions(finalValue * eased);
     if (progress < 1) {
       window.requestAnimationFrame(step);
     } else {
       element.textContent = formatMillions(finalValue);
     }
   }
-
   window.requestAnimationFrame(step);
 }
 
 function renderFundingTotal(data) {
-  var external = data
-    .filter(function(item) { return item.type === 'External'; })
-    .reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
-
-  var internal = data
-    .filter(function(item) { return item.type === 'Internal'; })
-    .reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
-
+  var external = data.filter(function(item) { return item.type === 'External'; }).reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
+  var internal = data.filter(function(item) { return item.type === 'Internal'; }).reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
   var total = external + internal;
   var target = document.getElementById('fundingTotal');
-
   target.innerHTML = 'This research has been supported by approximately <span class="rivers-funding-number" data-value="' + total + '">¥0.0 million</span> in competitive funding (<span class="rivers-funding-number" data-value="' + external + '">¥0.0 million</span> external; <span class="rivers-funding-number" data-value="' + internal + '">¥0.0 million</span> internal), enabling the development of data-driven models and applied research across multiple domains.';
-
   Array.prototype.forEach.call(target.querySelectorAll('.rivers-funding-number'), function(el, index) {
-    var value = Number(el.getAttribute('data-value')) || 0;
-    animateMillions(el, value, 900 + index * 120);
+    animateMillions(el, Number(el.getAttribute('data-value')) || 0, 900 + index * 120);
   });
 }
 
