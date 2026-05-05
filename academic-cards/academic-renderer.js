@@ -15,6 +15,18 @@ function renderAcademic(containerId, data, options = {}) {
     return parts.length > 1 ? parts.slice(1).join(',').trim() : ref;
   }
 
+  function cleanTrailingPeriod(text) {
+    return text ? text.replace(/\.$/, '') : '';
+  }
+
+  function shortenTitle(title) {
+    if (!title) return '';
+    if (title.startsWith('SARS-CoV-2 Attitudes and Behaviours')) {
+      return 'SARS-CoV-2 Attitudes and Behaviour in Japanese Youth';
+    }
+    return title;
+  }
+
   function parseFundingRef(ref) {
     if (!ref) return { title: '', funder: '', role: '' };
 
@@ -31,12 +43,12 @@ function renderAcademic(containerId, data, options = {}) {
     const parts = withoutAuthor.split('. ');
 
     if (parts.length < 2) {
-      return { title: withoutAuthor, funder: '', role };
+      return { title: shortenTitle(cleanTrailingPeriod(withoutAuthor)), funder: '', role };
     }
 
     return {
-      title: parts[0].replace(/\.$/, ''),
-      funder: parts.slice(1).join('. '),
+      title: shortenTitle(cleanTrailingPeriod(parts[0])),
+      funder: cleanTrailingPeriod(parts.slice(1).join('. ')),
       role
     };
   }
