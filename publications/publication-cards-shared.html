@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../academic-cards/academic-cards.css">
+<script src="../academic-cards/academic-renderer.js"></script>
+</head>
+<body>
+<div id="app" class="rivers-academic-wrap"></div>
+<script>
+fetch('../data/publications.json')
+  .then(r=>r.json())
+  .then(data=>renderAcademic('app',data,{source:'rivers-publications',itemLabel:'publication'}));
+</script>
+</body>
+</html>
