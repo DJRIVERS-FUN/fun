@@ -24,7 +24,7 @@ function renderAcademic(containerId, data, options = {}) {
   const searchInput = wrap.querySelector('[data-search]');
 
   data.sort((a, b) => {
-    const yearDiff = Number((b.year||'').slice(0,4)) - Number((a.year||'').slice(0,4));
+    const yearDiff = Number((b.year || '').slice(0, 4)) - Number((a.year || '').slice(0, 4));
     if (yearDiff !== 0) return yearDiff;
     return (a.ref || '').localeCompare(b.ref || '');
   });
@@ -103,6 +103,23 @@ function renderAcademic(containerId, data, options = {}) {
     });
   }
 
+  function attachImageHandlers(card) {
+    const img = card.querySelector('img.rivers-academic-cover');
+    if (!img) return;
+    img.addEventListener('load', sendHeight);
+    img.addEventListener('error', () => {
+      const fallback = img.getAttribute('data-fallback');
+      if (fallback && img.src !== fallback) {
+        img.src = fallback;
+      } else {
+        img.classList.add('missing-cover');
+        img.removeAttribute('src');
+        img.setAttribute('alt', 'Cover unavailable');
+      }
+      sendHeight();
+    });
+  }
+
   function renderCards() {
     const items = visibleItems();
     grid.innerHTML = '';
@@ -114,7 +131,7 @@ function renderAcademic(containerId, data, options = {}) {
       card.className = `rivers-academic-card ${hasImage ? 'has-image' : ''}`;
 
       card.innerHTML = hasImage ? `
-        <img src="${item.image}" class="rivers-academic-cover" />
+        <img src="${escapeHtml(item.image)}" data-fallback="${escapeHtml(item.fallbackImage || '')}" class="rivers-academic-cover" alt="Book cover" />
         <div class="rivers-academic-content">
           <div class="rivers-academic-badges">
             <span class="rivers-academic-badge">${highlight(item.year)}</span>
@@ -133,6 +150,7 @@ function renderAcademic(containerId, data, options = {}) {
       `;
 
       grid.appendChild(card);
+      attachImageHandlers(card);
     });
 
     requestAnimationFrame(sendHeight);
