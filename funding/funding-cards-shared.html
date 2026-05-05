@@ -24,25 +24,36 @@ function formatMillions(value) {
   return '¥' + (value / 1000000).toFixed(1) + ' million';
 }
 
-function animateMillions(element, finalValue, duration) {
+function animateMillions(element, finalValue, duration, delay) {
   var startTime = null;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  element.textContent = formatMillions(0);
+
   if (reduced) {
     element.textContent = formatMillions(finalValue);
     return;
   }
+
   function step(timestamp) {
     if (!startTime) startTime = timestamp;
     var progress = Math.min((timestamp - startTime) / duration, 1);
-    var eased = 1 - Math.pow(1 - progress, 3);
+    var eased = progress < 0.5
+      ? 4 * progress * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
     element.textContent = formatMillions(finalValue * eased);
+
     if (progress < 1) {
       window.requestAnimationFrame(step);
     } else {
       element.textContent = formatMillions(finalValue);
     }
   }
-  window.requestAnimationFrame(step);
+
+  window.setTimeout(function() {
+    window.requestAnimationFrame(step);
+  }, delay || 0);
 }
 
 function renderFundingTotal(data) {
@@ -50,16 +61,17 @@ function renderFundingTotal(data) {
   var internal = data.filter(function(item) { return item.type === 'Internal'; }).reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
   var total = external + internal;
   var target = document.getElementById('fundingTotal');
+
   target.innerHTML = 'This research has been supported by approximately <span class="rivers-funding-number" data-value="' + total + '">¥0.0 million</span> in competitive funding (<span class="rivers-funding-number" data-value="' + external + '">¥0.0 million</span> external; <span class="rivers-funding-number" data-value="' + internal + '">¥0.0 million</span> internal), enabling the development of data-driven models and applied research across multiple domains.';
+
   Array.prototype.forEach.call(target.querySelectorAll('.rivers-funding-number'), function(el, index) {
-    animateMillions(el, Number(el.getAttribute('data-value')) || 0, 900 + index * 120);
+    animateMillions(el, Number(el.getAttribute('data-value')) || 0, 2200, 450 + index * 180);
   });
 }
 
 fetch('../data/funding.json')
   .then(function(response) { return response.json(); })
   .then(function(data) {
-    renderFundingTotal(data);
     renderAcademic('app', data, {
       source: 'rivers-funding',
       itemLabel: 'project',
@@ -68,6 +80,7 @@ fetch('../data/funding.json')
       awardInHeader: true,
       fundingLayout: true
     });
+    renderFundingTotal(data);
   });
 </script>
 </body>
