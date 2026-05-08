@@ -18,13 +18,76 @@ html,body{margin:0;padding:0;background:#fff;font-family:'Roboto',sans-serif;col
 .num{font-family:'DM Mono','SFMono-Regular',Consolas,monospace;font-size:11px;letter-spacing:.08em;color:#9a9890;text-transform:uppercase;margin-bottom:10px}
 .title{font-family:'Roboto',sans-serif;font-size:17px;line-height:1.16;color:var(--p);font-weight:500;margin-bottom:10px}
 .desc{font-family:'Roboto',sans-serif;font-size:13.5px;line-height:1.45;color:var(--m)}
-.flow{height:22px;position:relative;margin:2px 0 9px}
-.flow-line{position:absolute;top:11px;left:0;width:100%;border-top:1px solid var(--l)}
-.pulse{position:absolute;top:7px;width:8px;height:8px;border-radius:50%;background:var(--p);opacity:.72;animation:pulse 5.2s linear infinite}
+.flow{
+  height:24px;
+  position:relative;
+  margin:4px 0 12px;
+  overflow:hidden;
+}
+
+.flow-line{
+  position:absolute;
+  top:12px;
+  left:0;
+  width:100%;
+  border-top:1px solid var(--l);
+  opacity:.75;
+}
+
+.pulse{
+  position:absolute;
+  top:8px;
+  left:0;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--p);
+  opacity:0;
+  transform:translateX(0);
+  animation:flowPulse 5.2s linear infinite;
+  box-shadow:0 0 10px rgba(82,6,113,.25);
+}
+
 .pulse.p2{animation-delay:1.7s}
 .pulse.p3{animation-delay:3.4s}
-@keyframes pulse{0%{left:0;opacity:0}8%{opacity:.72}92%{opacity:.72}100%{left:100%;opacity:0}}
-@media(max-width:760px){html,body{overflow:auto}.grid{grid-template-columns:1fr}.theme{min-height:auto}.flow{display:none}}
+
+@keyframes flowPulse{
+  0%{
+    transform:translateX(0);
+    opacity:0;
+  }
+  8%{
+    opacity:.75;
+  }
+  50%{
+    opacity:.9;
+  }
+  92%{
+    opacity:.75;
+  }
+  100%{
+    transform:translateX(100vw);
+    opacity:0;
+  }
+}
+
+@media(max-width:760px){
+  html,body{
+    overflow:auto;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .theme{
+    min-height:auto;
+  }
+
+  .flow{
+    display:none;
+  }
+}
 </style>
 </head>
 <body>
