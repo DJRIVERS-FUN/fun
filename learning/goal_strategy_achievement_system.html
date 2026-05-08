@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goal Strategy Achievement System</title>
+<style>
+:root{--accent:#520671;--text:#6e6c66;--muted:#9a9890;--line:#e6e2de;--soft:#faf8fb;--panel:#fff;--dark:#3d3a36}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--text);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;justify-content:center}
+button{appearance:none;border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 13px;border-radius:8px;font-size:13px;line-height:1;cursor:pointer;transition:all .2s ease;font-family:Inter,Arial,sans-serif}
+button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+button:hover{transform:translateY(-1px);border-color:var(--accent)}
+.canvas{height:470px;position:relative;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden;margin-bottom:14px}
+.system{display:block;width:100%;height:470px}
+.node{cursor:pointer}.node circle,.node rect{transition:all .2s ease;filter:drop-shadow(0 2px 8px rgba(82,6,113,.04))}
+.node:hover circle,.node:hover rect,.node.selected circle,.node.selected rect{stroke:var(--accent);stroke-width:3;filter:drop-shadow(0 4px 16px rgba(82,6,113,.18))}
+.node text{pointer-events:none;font-family:'DM Mono','Courier New',monospace;fill:var(--accent);font-size:12px;font-weight:700}
+.layer-label{font-family:'DM Mono','Courier New',monospace;font-size:11px;fill:var(--muted);letter-spacing:.02em}
+.path{fill:none;stroke:#d8d2dc;stroke-width:1.6;stroke-linecap:round;opacity:.52}
+.path.strong{stroke:var(--accent);stroke-width:3;opacity:.78;stroke-dasharray:8 10;animation:dash 7s linear infinite}
+.path.med{stroke:var(--accent);stroke-width:2.1;opacity:.45;stroke-dasharray:5 8;animation:dash 8s linear infinite}
+.path.weak{stroke:#ddd8d4;stroke-width:1.2;opacity:.25}
+@keyframes dash{to{stroke-dashoffset:-180}}
+.beta{font-family:'DM Mono','Courier New',monospace;font-size:11px;fill:var(--muted)}
+.beta.strong{fill:var(--accent);font-weight:700}
+.legend{position:absolute;left:14px;bottom:12px;display:flex;gap:8px;flex-wrap:wrap;font-family:'DM Mono','Courier New',monospace;font-size:11px;color:var(--muted)}.legend span{border:1px solid var(--line);border-radius:99px;padding:5px 8px;background:rgba(255,255,255,.92)}
+.info-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;align-items:stretch}
+.card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px;min-height:145px}
+.card.soft{background:var(--soft)}
+.small{font-size:11px;color:var(--muted);font-family:'DM Mono','Courier New',monospace;margin-bottom:7px;text-transform:uppercase;letter-spacing:.02em}
+.card-title{font-family:'DM Mono','Courier New',monospace;font-size:14px;font-weight:700;color:var(--accent);margin:0 0 8px;line-height:1.25}
+.card-text{font-size:14px;line-height:1.42;margin:0;color:var(--text)}
+.quote{font-size:13.5px;line-height:1.5;border-left:2px solid var(--accent);padding-left:11px;margin:8px 0 0;color:var(--text)}
+.metric{margin:0 0 9px}.metric-top{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin:0 0 5px;font-family:'DM Mono','Courier New',monospace}
+.bar{height:6px;border-radius:99px;background:#eee9e5;overflow:hidden}.bar span{display:block;height:100%;border-radius:99px;background:var(--accent);transition:width .35s ease}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.tag{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:4px 7px;background:#fff;font-family:'DM Mono','Courier New',monospace}
+@media(max-width:860px){.canvas{height:430px}.system{height:430px}.info-grid{grid-template-columns:1fr}.node text{font-size:10.5px}.controls{justify-content:flex-start}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="controls" aria-label="System mode controls"><button id="btn-master" class="active" type="button" onclick="setMode('master')">Mastery pathway</button><button id="btn-performance" type="button" onclick="setMode('performance')">Performance pathway</button><button id="btn-model" type="button" onclick="setMode('model')">Full model</button></div>
+<section class="canvas">
+<svg class="system" viewBox="0 0 1080 470" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Goal orientation strategy achievement system diagram">
+<text class="layer-label" x="78" y="42">GOAL ORIENTATIONS</text>
+<text class="layer-label" x="455" y="42">LEARNING STRATEGIES</text>
+<text class="layer-label" x="885" y="42">ACHIEVEMENT OUTCOME</text>
+
+<path id="p-pa-ach" class="path strong" d="M190 160 C450 70 740 80 890 210"/>
+<path id="p-pa-str" class="path med" d="M190 160 C315 210 355 245 475 245"/>
+<path id="p-m-str" class="path strong" d="M190 240 C310 245 355 245 475 245"/>
+<path id="p-m-deep" class="path med" d="M190 240 C300 105 350 100 475 100"/>
+<path id="p-deep-str" class="path strong" d="M590 100 C642 145 642 195 590 245"/>
+<path id="p-str-ach" class="path strong" d="M590 245 C700 245 780 235 890 220"/>
+<path id="p-pa-surface" class="path med" d="M190 160 C330 380 370 385 475 385"/>
+<path id="p-surface-ach" class="path weak" d="M590 385 C720 360 800 305 890 235"/>
+<path id="p-avoid" class="path weak" d="M190 320 C350 320 450 320 475 385"/>
+
+<text class="beta strong" x="618" y="232">β=.327**</text>
+<text class="beta strong" x="330" y="231">β=.326**</text>
+<text class="beta strong" x="690" y="110">β=.429**</text>
+<text class="beta strong" x="600" y="170">β=.321*</text>
+<text class="beta" x="300" y="372">β=-.394**</text>
+<text class="beta" x="904" y="260">R²=.285</text>
+<text class="beta" x="502" y="280">R²=.312</text>
+
+<g class="node selected" id="node-performance" onclick="selectNode('performance')"><circle cx="125" cy="160" r="62" fill="#fff" stroke="#d9d2dd"/><text x="125" y="154" text-anchor="middle">PERFORMANCE</text><text x="125" y="171" text-anchor="middle">APPROACH</text></g>
+<g class="node" id="node-mastery" onclick="selectNode('mastery')"><circle cx="125" cy="240" r="58" fill="#fff" stroke="#d9d2dd"/><text x="125" y="235" text-anchor="middle">MASTERY</text><text x="125" y="252" text-anchor="middle">ORIENTATION</text></g>
+<g class="node" id="node-avoidance" onclick="selectNode('avoidance')"><circle cx="125" cy="320" r="62" fill="#fff" stroke="#d9d2dd"/><text x="125" y="314" text-anchor="middle">PERFORMANCE</text><text x="125" y="331" text-anchor="middle">AVOIDANCE</text></g>
+
+<g class="node" id="node-deep" onclick="selectNode('deep')"><circle cx="535" cy="100" r="58" fill="#fff" stroke="#d9d2dd"/><text x="535" y="96" text-anchor="middle">DEEP</text><text x="535" y="113" text-anchor="middle">APPROACH</text></g>
+<g class="node" id="node-strategic" onclick="selectNode('strategic')"><circle cx="535" cy="245" r="64" fill="#fff" stroke="#d9d2dd"/><text x="535" y="241" text-anchor="middle">STRATEGIC</text><text x="535" y="258" text-anchor="middle">APPROACH</text></g>
+<g class="node" id="node-surface" onclick="selectNode('surface')"><circle cx="535" cy="385" r="58" fill="#fff" stroke="#d9d2dd"/><text x="535" y="381" text-anchor="middle">SURFACE</text><text x="535" y="398" text-anchor="middle">APPROACH</text></g>
+
+<g class="node" id="node-achievement" onclick="selectNode('achievement')"><circle cx="955" cy="220" r="66" fill="#fff" stroke="#d9d2dd"/><text x="955" y="214" text-anchor="middle">ACHIEVEMENT</text><text x="955" y="231" text-anchor="middle">OUTCOMES</text></g>
+</svg>
+<div class="legend"><span>click nodes</span><span>toggle pathways</span><span>β = standardized effect</span><span>R² = explained variance</span></div>
+</section>
+<section class="info-grid">
+<div class="card soft"><div class="small">SYSTEM PROFILE</div><div class="card-title" id="stateTitle">Mastery pathway</div><p class="card-text" id="stateText"></p></div>
+<div class="card"><div class="small">SELECTED COMPONENT</div><div class="card-title" id="nodeTitle">Performance approach</div><p class="card-text" id="nodeText"></p><p class="quote" id="nodeQuote"></p></div>
+<div class="card"><div class="small">MODEL SIGNALS</div><div id="metrics"></div><div class="tag-row"><span class="tag">serial mediation</span><span class="tag">CALL</span><span class="tag">achievement</span></div></div>
+</section>
+</main>
+<script>
+const nodes={performance:{title:'Performance-approach orientation',text:'A performance-approach orientation reflects externally referenced motivation organized around doing better than other learners and gaining positive comparative evaluation.',quote:'In the tested model, performance-approach had a direct positive effect on achievement.'},mastery:{title:'Mastery orientation',text:'A mastery orientation reflects interest, enjoyment and self-referenced competence development. Its effect on achievement was not direct, but mediated through strategic learning.',quote:'Mastery becomes productive when translated into strategic behaviour.'},avoidance:{title:'Performance-avoidance orientation',text:'Performance-avoidance reflects motivation to avoid embarrassment, negative judgement or exposure of lower competence. In this model it did not drive achievement directly.',quote:'Avoidance remained comparatively weak within the tested achievement system.'},deep:{title:'Deep approach',text:'A deep approach involves seeking meaning, relating ideas and understanding how ideas fit together. It contributed to achievement through the strategic approach pathway.',quote:'Deep learning becomes achievement-relevant when connected to strategic regulation.'},strategic:{title:'Strategic approach',text:'Strategic learning includes organized studying, time management and steady work through the term. It was the primary mediator and had a direct effect on achievement.',quote:'Strategic regulation was the strongest actionable pathway to achievement.'},surface:{title:'Surface approach',text:'A surface approach involves difficulty making sense of material, anxiety, panic and reliance on remembering rather than understanding.',quote:'Surface learning did not directly support achievement in the tested model.'},achievement:{title:'Achievement outcomes',text:'Achievement was represented by composite assessment grades awarded at multiple intervals over the 24-month computer-mediated English program.',quote:'The full model accounted for 28.5% of the achievement variance.'}};
+const modes={master:{title:'Mastery pathway',text:'This profile highlights how mastery motivation becomes achievement-relevant when it is converted into strategic regulation, including organized studying and time management.',metrics:[['Mastery → Strategic',33],['Deep → Strategic',32],['Strategic → Achievement',33],['Achievement variance',29]]},performance:{title:'Performance pathway',text:'This profile highlights the competitive route through which performance-approach motivation directly predicts achievement and also operates through strategic behaviour.',metrics:[['Performance → Achievement',43],['Performance → Strategic',26],['Strategic → Achievement',33],['Achievement variance',29]]},model:{title:'Full mediation model',text:'This system view treats achievement as an outcome of motivational architecture expressed through learning strategies. Strategic learning is the central mediator.',metrics:[['Strategic variance',31],['Achievement variance',29],['Deep variance',15],['Surface variance',18]]}};
+function selectNode(key){document.querySelectorAll('.node').forEach(n=>n.classList.remove('selected'));const el=document.getElementById('node-'+key);if(el)el.classList.add('selected');document.getElementById('nodeTitle').textContent=nodes[key].title;document.getElementById('nodeText').textContent=nodes[key].text;document.getElementById('nodeQuote').textContent=nodes[key].quote;sendHeight()}
+function setMode(mode){document.querySelectorAll('button').forEach(b=>b.classList.remove('active'));document.getElementById('btn-'+mode).classList.add('active');document.getElementById('stateTitle').textContent=modes[mode].title;document.getElementById('stateText').textContent=modes[mode].text;document.getElementById('metrics').innerHTML=modes[mode].metrics.map(([label,value])=>`<div class="metric"><div class="metric-top"><span>${label}</span><span>${value}%</span></div><div class="bar"><span style="width:${value}%"></span></div></div>`).join('');document.querySelectorAll('.path').forEach(p=>p.style.opacity='');if(mode==='master'){['p-m-str','p-m-deep','p-deep-str','p-str-ach'].forEach(id=>document.getElementById(id).style.opacity='.9')}if(mode==='performance'){['p-pa-ach','p-pa-str','p-str-ach','p-pa-surface'].forEach(id=>document.getElementById(id).style.opacity='.9')}sendHeight()}
+setMode('master');selectNode('performance');function sendHeight(){window.parent.postMessage({type:'resize',source:'rivers-goal-strategy-system',height:document.documentElement.scrollHeight},'*')}window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);setInterval(sendHeight,1200);
+</script>
+</body></html>
