@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Theme 2 Information Identity Model</title>
+<style>
+:root{
+  --purple:#520671;
+  --muted:#6e6c66;
+  --soft:#f7f3fa;
+  --line:#e6e2de;
+  --ink:#262323;
+  --bg:#ffffff;
+}
+html,body{margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink);overflow:hidden;}
+.rivers-model{box-sizing:border-box;width:100%;max-width:1000px;margin:0 auto;padding:10px 0 4px;background:#fff;}
+.rivers-title{font-family:'DM Mono','SFMono-Regular',Consolas,monospace;font-size:15px;color:var(--purple);letter-spacing:.01em;margin:0 0 4px;}
+.rivers-sub{font-family:'DM Mono','SFMono-Regular',Consolas,monospace;font-size:12px;color:#9a9890;margin:0 0 12px;}
+.stage-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative;}
+.stage{border:1px solid var(--line);border-radius:8px;background:#fff;min-height:245px;padding:10px 10px 12px;box-sizing:border-box;transition:all .18s ease;position:relative;overflow:hidden;}
+.stage:hover{border-color:var(--purple);background:#fbf8fd;transform:translateY(-2px);}
+.stage::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:var(--purple);opacity:.65;}
+.stage-label{font-family:'DM Mono','SFMono-Regular',Consolas,monospace;font-size:13px;font-weight:700;color:var(--purple);margin:0 0 7px;padding-left:2px;}
+.stage-text{font-size:12.5px;line-height:1.36;color:var(--muted);margin-bottom:8px;}
+.node{font-size:12px;line-height:1.2;color:var(--muted);background:var(--soft);border:1px solid #ece3f0;border-radius:6px;padding:6px 7px;margin:5px 0;transition:all .18s ease;}
+.node:hover{color:var(--purple);border-color:var(--purple);background:#fff;}
+.bridge{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;}
+.bridge-card{border:1px solid var(--line);border-radius:8px;background:#fff;padding:9px 10px;min-height:66px;box-sizing:border-box;transition:all .18s ease;}
+.bridge-card:hover{border-color:var(--purple);background:#fbf8fd;}
+.bridge-title{font-family:'DM Mono','SFMono-Regular',Consolas,monospace;font-size:12px;font-weight:700;color:var(--purple);margin-bottom:4px;}
+.bridge-text{font-size:12px;line-height:1.32;color:var(--muted);}
+.flow{position:relative;height:24px;margin:4px 0 6px;overflow:hidden;}
+.flow-line{position:absolute;top:12px;left:0;width:100%;border-top:1px solid var(--line);}
+.pulse{position:absolute;top:8px;width:8px;height:8px;border-radius:50%;background:var(--purple);opacity:.75;animation:movePulse 4.8s linear infinite;}
+.pulse.p2{animation-delay:1.2s}.pulse.p3{animation-delay:2.4s}.pulse.p4{animation-delay:3.6s}
+@keyframes movePulse{0%{left:0;opacity:0}8%{opacity:.75}92%{opacity:.75}100%{left:100%;opacity:0}}
+.footer-note{font-size:11px;color:#9a9890;line-height:1.32;margin-top:8px;}
+@media(max-width:760px){html,body{overflow:auto}.stage-wrap,.bridge{grid-template-columns:1fr}.stage{min-height:auto}.flow{display:none}.rivers-model{padding-right:2px}}
+</style>
+</head>
+<body>
+<div class="rivers-model">
+  <div class="rivers-title">Theme 2 · Information, Identity, and Behavioural Regulation</div>
+  <div class="rivers-sub">Constraint → Behaviour → Adaptation → Outcome</div>
+
+  <div class="flow"><div class="flow-line"></div><div class="pulse"></div><div class="pulse p2"></div><div class="pulse p3"></div><div class="pulse p4"></div></div>
+
+  <div class="stage-wrap">
+    <section class="stage">
+      <div class="stage-label">Constraint</div>
+      <div class="stage-text">Information environments impose social, cultural, and communicative pressures on interpretation.</div>
+      <div class="node">Social media ecosystems</div>
+      <div class="node">Crisis communication</div>
+      <div class="node">Cultural norms</div>
+      <div class="node">Political discourse</div>
+      <div class="node">Information overload</div>
+    </section>
+
+    <section class="stage">
+      <div class="stage-label">Behaviour</div>
+      <div class="stage-text">Individuals evaluate claims through attention, credibility judgement, identity attachment, and perceived risk.</div>
+      <div class="node">Credibility evaluation</div>
+      <div class="node">Risk perception</div>
+      <div class="node">Identity signalling</div>
+      <div class="node">Trust calibration</div>
+      <div class="node">Information sharing</div>
+    </section>
+
+    <section class="stage">
+      <div class="stage-label">Adaptation</div>
+      <div class="stage-text">Repeated exposure and social feedback stabilize beliefs, affiliations, and communicative stances.</div>
+      <div class="node">Claim acceptance/rejection</div>
+      <div class="node">Narrative reinforcement</div>
+      <div class="node">Community alignment</div>
+      <div class="node">Polarization or withdrawal</div>
+      <div class="node">Behavioural self-constraint</div>
+    </section>
+
+    <section class="stage">
+      <div class="stage-label">Outcome</div>
+      <div class="stage-text">Observable outcomes emerge as patterns of public-health judgement and collective cooperation.</div>
+      <div class="node">Misinformation susceptibility</div>
+      <div class="node">Vaccine hesitancy</div>
+      <div class="node">Public compliance</div>
+      <div class="node">Collective responsibility</div>
+      <div class="node">Identity consolidation</div>
+    </section>
+  </div>
+
+  <div class="bridge">
+    <div class="bridge-card">
+      <div class="bridge-title">Personality traits</div>
+      <div class="bridge-text">Extraversion, agreeableness, conscientiousness, emotional stability, and imagination shape response tendencies.</div>
+    </div>
+    <div class="bridge-card">
+      <div class="bridge-title">National identity</div>
+      <div class="bridge-text">Nationalism, patriotism, and commitment to national heritage mediate in-group threat interpretation.</div>
+    </div>
+    <div class="bridge-card">
+      <div class="bridge-title">Trust and ideology</div>
+      <div class="bridge-text">Trust in government response and political orientation condition public-health attitudes and cooperation.</div>
+    </div>
+  </div>
+
+  <div class="footer-note">Model derived from Rivers, Unser-Schutz, and Rudolph’s study of vaccine hesitancy and SARS-CoV-2 misinformation among Japanese youth.</div>
+</div>
+</body>
+</html>
