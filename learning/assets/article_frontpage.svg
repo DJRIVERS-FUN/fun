@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="980" viewBox="0 0 700 980">
+  <rect width="700" height="980" fill="#ffffff"/>
+  <rect x="28" y="28" width="644" height="924" rx="12" fill="#faf8fb" stroke="#e6e2de" stroke-width="2"/>
+
+  <text x="56" y="92" font-family="Georgia, serif" font-size="38" fill="#222" font-weight="600">
+    Metacognitive Knowledge
+  </text>
+  <text x="56" y="136" font-family="Georgia, serif" font-size="38" fill="#222" font-weight="600">
+    and the Self as Socially
+  </text>
+  <text x="56" y="180" font-family="Georgia, serif" font-size="38" fill="#222" font-weight="600">
+    Distanced Online Learner:
+  </text>
+  <text x="56" y="224" font-family="Georgia, serif" font-size="38" fill="#222" font-weight="600">
+    A Virtual Reality Assisted
+  </text>
+  <text x="56" y="268" font-family="Georgia, serif" font-size="38" fill="#222" font-weight="600">
+    Analysis of Academic
+  </text>
+  <text x="56" y="312" font-family="Georgia, serif" font-size="38" fill="#222" font-weight="600">
+    Self-Concept
+  </text>
+
+  <line x1="56" y1="350" x2="644" y2="350" stroke="#e6e2de" stroke-width="2"/>
+
+  <text x="56" y="398" font-family="Arial, sans-serif" font-size="24" fill="#520671" font-weight="700">
+    Damian J. Rivers · Michael Vallance · Michiko Nakamura
+  </text>
+
+  <text x="56" y="462" font-family="Arial, sans-serif" font-size="22" fill="#666" font-weight="700">
+    Abstract
+  </text>
+
+  <foreignObject x="56" y="490" width="588" height="280">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial,sans-serif;font-size:20px;line-height:1.55;color:#6e6c66;">
+      Research into learner metacognition provides a non-technocratic
+      framework through which online learning experience, academic
+      self-concept, self-regulation and adaptive behaviour can be
+      examined within socially distanced digital learning environments.
+    </div>
+  </foreignObject>
+
+  <rect x="56" y="790" width="250" height="84" rx="8" fill="#520671" opacity="0.08"/>
+
+  <text x="76" y="830" font-family="DM Mono, monospace" font-size="24" fill="#520671">
+    JOURNAL ARTICLE
+  </text>
+
+  <text x="76" y="860" font-family="DM Mono, monospace" font-size="18" fill="#9a9890">
+    Journal of Educational Technology Systems
+  </text>
+
+  <text x="56" y="925" font-family="Arial, sans-serif" font-size="16" fill="#9a9890">
+    DOI: 10.1177/0047239521999779
+  </text>
+</svg>
