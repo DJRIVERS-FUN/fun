@@ -8,62 +8,63 @@
 :root{--accent:#520671;--text:#6e6c66;--muted:#9a9890;--line:#e6e2de;--soft:#faf8fb}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#fff;color:var(--text);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
-.wrap{max-width:1180px;margin:0 auto;padding:0}
-.controls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.wrap{max-width:1080px;margin:0 auto;padding:0}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;justify-content:center}
 button{appearance:none;border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 13px;border-radius:8px;font-size:13px;line-height:1;cursor:pointer;transition:all .2s ease;font-family:Inter,Arial,sans-serif}
 button.active{background:var(--accent);border-color:var(--accent);color:#fff}
 button:hover{transform:translateY(-1px);border-color:var(--accent)}
-.grid{display:grid;grid-template-columns:1.45fr .85fr;gap:18px;align-items:stretch}
-.canvas,.panel{border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
-.canvas{height:590px;position:relative}
-.panel{padding:18px;height:590px;overflow:hidden}
-.system{display:block;width:100%;height:590px}
+.canvas{height:430px;position:relative;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden;margin-bottom:14px}
+.system{display:block;width:100%;height:430px}
 .node{cursor:pointer}.node circle{transition:all .2s ease;filter:drop-shadow(0 2px 8px rgba(82,6,113,.04))}
 .node:hover circle,.node.selected circle{stroke:var(--accent);stroke-width:3;filter:drop-shadow(0 4px 16px rgba(82,6,113,.18))}
-.node text{pointer-events:none;font-family:'DM Mono','Courier New',monospace;fill:var(--accent);font-size:13px;font-weight:700}
-.flow{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:7 10;opacity:.45;animation:dash 7s linear infinite}
+.node text{pointer-events:none;font-family:'DM Mono','Courier New',monospace;fill:var(--accent);font-size:12px;font-weight:700}
+.flow{fill:none;stroke:var(--accent);stroke-width:2.3;stroke-linecap:round;stroke-dasharray:7 10;opacity:.45;animation:dash 7s linear infinite}
 .flow.light{stroke-width:1.4;opacity:.22}
 @keyframes dash{to{stroke-dashoffset:-180}}
-.side-label{font-family:'DM Mono','Courier New',monospace;font-size:12px;fill:var(--muted)}
-.small{font-size:12px;color:var(--muted);font-family:'DM Mono','Courier New',monospace;margin-bottom:8px}
-.panel-title{font-family:'DM Mono','Courier New',monospace;font-size:15px;font-weight:700;color:var(--accent);margin:0 0 9px}
-.panel-text{font-size:14px;line-height:1.42;margin:0 0 13px}
-.quote{font-size:13.5px;line-height:1.5;border-left:2px solid var(--accent);padding-left:12px;margin:0 0 14px}
-.rule{height:1px;background:var(--line);margin:13px 0}
-.metric{margin:0 0 9px}.metric-top{display:flex;justify-content:space-between;gap:8px;font-size:12px;margin:0 0 5px;font-family:'DM Mono','Courier New',monospace}
-.bar{height:6px;border-radius:99px;background:#eee9e5;overflow:hidden}.bar span{display:block;height:100%;border-radius:99px;background:var(--accent);transition:width .35s ease}
-.method{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--soft)}
-.method-title{font-family:'DM Mono','Courier New',monospace;font-size:13px;font-weight:700;color:var(--accent);margin:0 0 7px}.method p{font-size:13px;line-height:1.38;margin:0}.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.tag{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:4px 7px;background:#fff;font-family:'DM Mono','Courier New',monospace}
+.side-label{font-family:'DM Mono','Courier New',monospace;font-size:11px;fill:var(--muted)}
 .legend{position:absolute;left:14px;bottom:12px;display:flex;gap:8px;flex-wrap:wrap;font-family:'DM Mono','Courier New',monospace;font-size:11px;color:var(--muted)}.legend span{border:1px solid var(--line);border-radius:99px;padding:5px 8px;background:rgba(255,255,255,.92)}
-@media(max-width:860px){.grid{grid-template-columns:1fr}.canvas{height:520px}.panel{height:auto;overflow:visible}.system{height:520px}.node text{font-size:12px}}
+.info-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;align-items:stretch}
+.card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px;min-height:150px}
+.card.soft{background:var(--soft)}
+.small{font-size:11px;color:var(--muted);font-family:'DM Mono','Courier New',monospace;margin-bottom:7px;text-transform:uppercase;letter-spacing:.02em}
+.card-title{font-family:'DM Mono','Courier New',monospace;font-size:14px;font-weight:700;color:var(--accent);margin:0 0 8px;line-height:1.25}
+.card-text{font-size:14px;line-height:1.42;margin:0;color:var(--text)}
+.quote{font-size:13.5px;line-height:1.5;border-left:2px solid var(--accent);padding-left:11px;margin:8px 0 0;color:var(--text)}
+.metric{margin:0 0 9px}.metric-top{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin:0 0 5px;font-family:'DM Mono','Courier New',monospace}
+.bar{height:6px;border-radius:99px;background:#eee9e5;overflow:hidden}.bar span{display:block;height:100%;border-radius:99px;background:var(--accent);transition:width .35s ease}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.tag{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:4px 7px;background:#fff;font-family:'DM Mono','Courier New',monospace}
+@media(max-width:860px){.canvas{height:390px}.system{height:390px}.info-grid{grid-template-columns:1fr}.node text{font-size:11px}.controls{justify-content:flex-start}}
 </style>
 </head>
 <body>
 <main class="wrap">
 <div class="controls" aria-label="Learner profile controls"><button id="btn-effective" class="active" type="button" onclick="setMode('effective')">Effective learners</button><button id="btn-ineffective" type="button" onclick="setMode('ineffective')">Ineffective learners</button><button id="btn-balanced" type="button" onclick="setMode('balanced')">System view</button></div>
-<section class="grid">
-<div class="canvas">
-<svg class="system" viewBox="0 0 760 590" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Metacognitive learning system diagram">
-<path class="flow" d="M380 73 C380 112 380 112 380 151"/><path class="flow" d="M380 205 C380 246 380 246 380 287"/><path class="flow" d="M380 343 C380 384 380 384 380 425"/><path class="flow" d="M380 479 C380 510 380 510 380 540"/>
-<path class="flow light" d="M446 545 C620 500 620 160 446 115"/><path class="flow light" d="M314 545 C140 500 140 160 314 115"/>
-<text class="side-label" x="72" y="105">constraint</text><text class="side-label" x="72" y="250">belief rationalization</text><text class="side-label" x="72" y="395">management strategy</text><text class="side-label" x="72" y="535">feedback cycle</text>
-<g class="node selected" id="node-environment" onclick="selectNode('environment')"><circle cx="380" cy="58" r="50" fill="#fff" stroke="#d9d2dd"/><text x="380" y="53" text-anchor="middle">ONLINE</text><text x="380" y="70" text-anchor="middle">CONSTRAINT</text></g>
-<g class="node" id="node-meta" onclick="selectNode('meta')"><circle cx="380" cy="180" r="60" fill="#fff" stroke="#d9d2dd"/><text x="380" y="174" text-anchor="middle">METACOGNITIVE</text><text x="380" y="192" text-anchor="middle">KNOWLEDGE</text></g>
-<g class="node" id="node-self" onclick="selectNode('self')"><circle cx="380" cy="315" r="64" fill="#fff" stroke="#d9d2dd"/><text x="380" y="309" text-anchor="middle">ACADEMIC</text><text x="380" y="327" text-anchor="middle">SELF-CONCEPT</text></g>
-<g class="node" id="node-regulation" onclick="selectNode('regulation')"><circle cx="380" cy="452" r="60" fill="#fff" stroke="#d9d2dd"/><text x="380" y="446" text-anchor="middle">SELF</text><text x="380" y="464" text-anchor="middle">REGULATION</text></g>
-<g class="node" id="node-adaptation" onclick="selectNode('adaptation')"><circle cx="380" cy="562" r="50" fill="#fff" stroke="#d9d2dd"/><text x="380" y="557" text-anchor="middle">ADAPTIVE</text><text x="380" y="574" text-anchor="middle">OUTCOMES</text></g>
-<g class="node" id="node-formal" onclick="selectNode('formal')"><circle cx="185" cy="245" r="43" fill="#fff" stroke="#d9d2dd"/><text x="185" y="241" text-anchor="middle">FORMAL</text><text x="185" y="258" text-anchor="middle">ASSESS.</text></g>
-<g class="node" id="node-affect" onclick="selectNode('affect')"><circle cx="575" cy="245" r="43" fill="#fff" stroke="#d9d2dd"/><text x="575" y="241" text-anchor="middle">AFFECT</text><text x="575" y="258" text-anchor="middle">EMOTION</text></g>
-<g class="node" id="node-transform" onclick="selectNode('transform')"><circle cx="575" cy="405" r="47" fill="#fff" stroke="#d9d2dd"/><text x="575" y="401" text-anchor="middle">TRANSFORM.</text><text x="575" y="418" text-anchor="middle">AWARENESS</text></g>
+<section class="canvas">
+<svg class="system" viewBox="0 0 980 430" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Metacognitive learning system diagram">
+<path class="flow" d="M165 215 C230 215 230 215 295 215"/><path class="flow" d="M365 215 C430 215 430 215 495 215"/><path class="flow" d="M565 215 C630 215 630 215 695 215"/><path class="flow" d="M765 215 C830 215 830 215 895 215"/>
+<path class="flow light" d="M900 245 C760 365 260 365 120 245"/><path class="flow light" d="M120 185 C260 65 760 65 900 185"/>
+<text class="side-label" x="120" y="112">constraint</text><text class="side-label" x="322" y="112">self-appraisal</text><text class="side-label" x="520" y="112">regulation</text><text class="side-label" x="720" y="112">adaptation</text><text class="side-label" x="462" y="355">recursive feedback</text>
+<g class="node selected" id="node-environment" onclick="selectNode('environment')"><circle cx="110" cy="215" r="56" fill="#fff" stroke="#d9d2dd"/><text x="110" y="209" text-anchor="middle">ONLINE</text><text x="110" y="226" text-anchor="middle">CONSTRAINT</text></g>
+<g class="node" id="node-meta" onclick="selectNode('meta')"><circle cx="330" cy="215" r="66" fill="#fff" stroke="#d9d2dd"/><text x="330" y="209" text-anchor="middle">METACOGNITIVE</text><text x="330" y="226" text-anchor="middle">KNOWLEDGE</text></g>
+<g class="node" id="node-self" onclick="selectNode('self')"><circle cx="530" cy="215" r="70" fill="#fff" stroke="#d9d2dd"/><text x="530" y="209" text-anchor="middle">ACADEMIC</text><text x="530" y="226" text-anchor="middle">SELF-CONCEPT</text></g>
+<g class="node" id="node-regulation" onclick="selectNode('regulation')"><circle cx="730" cy="215" r="66" fill="#fff" stroke="#d9d2dd"/><text x="730" y="209" text-anchor="middle">SELF</text><text x="730" y="226" text-anchor="middle">REGULATION</text></g>
+<g class="node" id="node-adaptation" onclick="selectNode('adaptation')"><circle cx="920" cy="215" r="56" fill="#fff" stroke="#d9d2dd"/><text x="920" y="209" text-anchor="middle">ADAPTIVE</text><text x="920" y="226" text-anchor="middle">OUTCOMES</text></g>
+<g class="node" id="node-formal" onclick="selectNode('formal')"><circle cx="430" cy="72" r="44" fill="#fff" stroke="#d9d2dd"/><text x="430" y="68" text-anchor="middle">FORMAL</text><text x="430" y="85" text-anchor="middle">ASSESS.</text></g>
+<g class="node" id="node-affect" onclick="selectNode('affect')"><circle cx="635" cy="72" r="44" fill="#fff" stroke="#d9d2dd"/><text x="635" y="68" text-anchor="middle">AFFECT</text><text x="635" y="85" text-anchor="middle">EMOTION</text></g>
+<g class="node" id="node-transform" onclick="selectNode('transform')"><circle cx="635" cy="355" r="48" fill="#fff" stroke="#d9d2dd"/><text x="635" y="351" text-anchor="middle">TRANSFORM.</text><text x="635" y="368" text-anchor="middle">AWARENESS</text></g>
 </svg><div class="legend"><span>click nodes</span><span>toggle learner profile</span><span>recursive feedback model</span></div>
-</div>
-<aside class="panel"><div class="small">SYSTEM STATE</div><h2 class="panel-title" id="stateTitle">Effective learner profile</h2><p class="panel-text" id="stateText"></p><div class="rule"></div><div class="small">SELECTED COMPONENT</div><h3 class="panel-title" id="nodeTitle">Online constraint</h3><p class="panel-text" id="nodeText"></p><p class="quote" id="nodeQuote"></p><div class="rule"></div><div class="small">THEMATIC DISTRIBUTION</div><div id="metrics"></div><div class="method"><div class="method-title">VR-assisted thematic analysis</div><p>The study used immersive VR as a collaborative analysis space during later stages of thematic coding.</p><div class="tag-row"><span class="tag">thematic analysis</span><span class="tag">VR collaboration</span><span class="tag">academic self-concept</span></div></div></aside>
-</section></main>
+</section>
+<section class="info-grid">
+<div class="card soft"><div class="small">SYSTEM STATE</div><div class="card-title" id="stateTitle">Effective learner profile</div><p class="card-text" id="stateText"></p></div>
+<div class="card"><div class="small">SELECTED COMPONENT</div><div class="card-title" id="nodeTitle">Online constraint</div><p class="card-text" id="nodeText"></p><p class="quote" id="nodeQuote"></p></div>
+<div class="card"><div class="small">THEMATIC DISTRIBUTION</div><div id="metrics"></div><div class="tag-row"><span class="tag">thematic analysis</span><span class="tag">VR collaboration</span><span class="tag">academic self-concept</span></div></div>
+</section>
+</main>
 <script>
 const nodeData={environment:{title:'Online constraint',text:'Socially distanced online learning changes the conditions under which learners must organize attention, motivation, time, communication and self-monitoring.',quote:'Learner discourse points to the home environment as both a resource and a source of difficulty.'},meta:{title:'Metacognitive knowledge',text:'Learners hold beliefs about themselves as cognitive processors. These beliefs shape how they interpret learning demands and explain success or difficulty.',quote:'Self-awareness functions as a feedback structure for future learning behaviour.'},self:{title:'Academic self-concept',text:'Academic self-concept refers to learner self-perception within an achievement context. In this system, it is shaped by grades, comparison, effort, emotion and perceived control.',quote:'Learners often explain the self through achievement indicators and personal routines.'},regulation:{title:'Self-regulation',text:'Self-regulation includes planning, goal setting, reviewing, time management, self-control and resource use. It is the most actionable point for pedagogical intervention.',quote:'Effective learning becomes visible as a sequence of managed behaviours.'},adaptation:{title:'Adaptive outcomes',text:'Adaptive outcomes emerge when learners use experience to revise strategies, reinterpret difficulty and act differently in future learning situations.',quote:'The system becomes developmental when reflection changes subsequent behaviour.'},formal:{title:'Formal assessment',text:'Grades, GPA and credits operate as powerful self-appraisal markers. The risk is that formal outcomes may be mistaken for the full meaning of learning.',quote:'Assessment indicators can validate or destabilize learner identity.'},affect:{title:'Affect and emotion',text:'Interest, motivation, fear, stress and mood shape the learner’s ability to sustain effort and regulate behaviour in online conditions.',quote:'Emotional attribution is especially visible when learners describe difficulty.'},transform:{title:'Transformative awareness',text:'Transformative awareness appears when learners recognize the need to change approach based on prior experience, deeper understanding or knowledge transfer.',quote:'Awareness becomes transformative only when it begins to guide action.'}};
 const modeData={effective:{title:'Effective learner profile',text:'This state emphasizes structured planning, active monitoring, strategic resource use and the use of learning experience as feedback for future adjustment.',metrics:[['Formal assessment',54],['Self-regulation',30],['Transformative awareness',8],['Affect and emotion',6]]},ineffective:{title:'Ineffective learner profile',text:'This state emphasizes fragile routines, dependence on mood or motivation, difficulty managing time and a tendency to interpret formal outcomes as evidence of learner status.',metrics:[['Formal assessment',35],['Self-regulation',35],['Affect and emotion',17],['Transformative awareness',14]]},balanced:{title:'System view',text:'This view treats learning as a recursive system: self-beliefs shape regulation, regulation shapes behaviour, behaviour generates outcomes and outcomes feed back into self-appraisal.',metrics:[['Self-appraisal cycle',76],['Regulatory pathway',65],['Assessment pressure',52],['Adaptive feedback',44]]}};
 function selectNode(key){document.querySelectorAll('.node').forEach(n=>n.classList.remove('selected'));const el=document.getElementById('node-'+key);if(el)el.classList.add('selected');document.getElementById('nodeTitle').textContent=nodeData[key].title;document.getElementById('nodeText').textContent=nodeData[key].text;document.getElementById('nodeQuote').textContent=nodeData[key].quote;sendHeight()}
 function setMode(mode){document.querySelectorAll('button').forEach(b=>b.classList.remove('active'));document.getElementById('btn-'+mode).classList.add('active');document.getElementById('stateTitle').textContent=modeData[mode].title;document.getElementById('stateText').textContent=modeData[mode].text;document.getElementById('metrics').innerHTML=modeData[mode].metrics.map(([label,value])=>`<div class="metric"><div class="metric-top"><span>${label}</span><span>${value}%</span></div><div class="bar"><span style="width:${value}%"></span></div></div>`).join('');sendHeight()}
-setMode('effective');selectNode('environment');function sendHeight(){window.parent.postMessage({type:'resize',source:'rivers-learning-system-tight',height:document.documentElement.scrollHeight},'*')}window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);setInterval(sendHeight,1200);
+setMode('effective');selectNode('environment');function sendHeight(){window.parent.postMessage({type:'resize',source:'rivers-learning-system-flow',height:document.documentElement.scrollHeight},'*')}window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);setInterval(sendHeight,1200);
 </script>
 </body></html>
