@@ -28,19 +28,11 @@ html,body{margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sa
 .bridge-card:hover{border-color:var(--purple);background:#fbf8fd;}
 .bridge-title{font-family:'DM Mono','SFMono-Regular',Consolas,monospace;font-size:12px;font-weight:700;color:var(--purple);margin-bottom:4px;}
 .bridge-text{font-size:12px;line-height:1.32;color:var(--muted);}
-.flow{position:relative;height:24px;margin:0 0 6px;overflow:hidden;}
-.flow-line{position:absolute;top:12px;left:0;width:100%;border-top:1px solid var(--line);}
-.pulse{position:absolute;top:8px;width:8px;height:8px;border-radius:50%;background:var(--purple);opacity:.75;animation:movePulse 4.8s linear infinite;}
-.pulse.p2{animation-delay:1.2s}.pulse.p3{animation-delay:2.4s}.pulse.p4{animation-delay:3.6s}
-@keyframes movePulse{0%{left:0;opacity:0}8%{opacity:.75}92%{opacity:.75}100%{left:100%;opacity:0}}
 @media(max-width:760px){html,body{overflow:auto}.stage-wrap,.bridge{grid-template-columns:1fr}.stage{min-height:auto}.flow{display:none}.rivers-model{padding-right:2px}}
 </style>
 </head>
 <body>
 <div class="rivers-model">
-
-  <div class="flow"><div class="flow-line"></div><div class="pulse"></div><div class="pulse p2"></div><div class="pulse p3"></div><div class="pulse p4"></div></div>
-
   <div class="stage-wrap">
     <section class="stage">
       <div class="stage-label">Constraint</div>
