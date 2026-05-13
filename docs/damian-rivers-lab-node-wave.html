@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Damian Rivers Lab</title>
+<style>
+html,body{margin:0;background:#fff;overflow:hidden}
+.wrap{width:min(520px,94vw);margin:0 auto;line-height:0}
+svg{width:100%;height:auto;display:block}
+.line{fill:none;stroke-linecap:round;stroke-linejoin:round}.lattice{stroke:#111827;stroke-width:1.6;opacity:.16}.wave{stroke:url(#waveGrad);stroke-width:8}.trace{stroke:url(#waveGrad);stroke-width:3;stroke-dasharray:60 440;animation:trace 5.5s ease-in-out infinite}.p{fill:#6D28D9}.o{fill:#F97316}.d{fill:#111827;opacity:.55}@keyframes trace{0%{stroke-dashoffset:500;opacity:0}18%{opacity:.9}58%{stroke-dashoffset:0;opacity:.9}100%{stroke-dashoffset:-500;opacity:0}} .pulse{animation:pulse 3.4s ease-in-out infinite;transform-origin:center}@keyframes pulse{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.18);opacity:1}}</style>
+</head>
+<body>
+<div class="wrap">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360">
+<defs>
+<linearGradient id="waveGrad" x1="110" y1="180" x2="610" y2="180" gradientUnits="userSpaceOnUse">
+<stop offset="0%" stop-color="#6D28D9"/>
+<stop offset="52%" stop-color="#7C3AED"/>
+<stop offset="53%" stop-color="#F97316"/>
+<stop offset="100%" stop-color="#FB923C"/>
+</linearGradient>
+</defs>
+<path class="line lattice" d="M130 214 L210 122 L310 160 L405 104 L510 154 L590 106"/>
+<path class="line lattice" d="M130 214 L250 236 L350 202 L455 250 L590 210"/>
+<path class="line lattice" d="M210 122 L250 236 L310 160 L350 202 L405 104 L455 250 L510 154"/>
+<path class="line wave" d="M110 190 C160 124, 206 248, 260 184 S355 128, 410 188 S510 246, 610 166"/>
+<path class="line trace" d="M110 190 C160 124, 206 248, 260 184 S355 128, 410 188 S510 246, 610 166"/>
+<circle cx="210" cy="122" r="8" class="p pulse"/>
+<circle cx="455" cy="250" r="7" class="o pulse"/>
+<circle cx="130" cy="214" r="7" class="p pulse"/>
+<circle cx="590" cy="210" r="8" class="o pulse"/>
+<circle cx="310" cy="160" r="6" class="d"/>
+<circle cx="405" cy="104" r="6" class="d"/>
+</svg>
+</div>
+</body>
+</html>
