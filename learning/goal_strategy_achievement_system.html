@@ -5,7 +5,44 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Goal Strategy Achievement System</title>
 <style>
-:root{--accent:#520671;--orange:#e05c2a;--text:#6e6c66;--muted:#9a9890;--line:#e6e2de;--soft:#faf8fb}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:var(--text);font-family:Inter,Arial,sans-serif;overflow-x:hidden}.wrap{max-width:1120px;margin:0 auto;padding:0 0 4px}.controls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;justify-content:center}button{appearance:none;border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 13px;border-radius:8px;font-size:13px;line-height:1;cursor:pointer;transition:all .2s ease;font-family:Inter,Arial,sans-serif}button.active{background:var(--accent);border-color:var(--accent);color:#fff}button:hover{transform:translateY(-1px);border-color:var(--accent)}.canvas{height:560px;position:relative;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden;margin-bottom:12px}.system{display:block;width:100%;height:560px}.node{cursor:pointer}.node circle{transition:all .2s ease;filter:drop-shadow(0 2px 8px rgba(82,6,113,.05))}.node:hover circle,.node.selected circle{stroke:var(--accent);stroke-width:3;filter:drop-shadow(0 4px 16px rgba(82,6,113,.18))}.node text{pointer-events:none;font-family:'DM Mono','Courier New',monospace;fill:var(--accent);font-size:12px;font-weight:700}.layer-label,.beta,.legend{font-family:'DM Mono','Courier New',monospace}.layer-label{font-size:14px;fill:#d97706;letter-spacing:.04em}.path{fill:none;stroke:#d8d2dc;stroke-width:1.6;opacity:.52}.strong{stroke:var(--accent);stroke-width:3;opacity:.78;stroke-dasharray:8 10;animation:dash 7s linear infinite}.med{stroke:var(--accent);stroke-width:2.1;opacity:.45;stroke-dasharray:5 8;animation:dash 8s linear infinite}.weak{stroke:#ddd8d4;stroke-width:1.2;opacity:.25}.mode-dim{opacity:.14}.mode-focus{opacity:.92}.beta{font-size:13px;fill:var(--muted)}.beta.em{fill:var(--accent);font-weight:700}@keyframes dash{to{stroke-dashoffset:-180}}.legend{position:absolute;left:14px;bottom:12px;display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:#fff}.legend span{border:1px solid #d96a3c;border-radius:99px;padding:5px 8px;background:var(--orange)}.info-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px}.card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px}.soft{background:var(--soft)}.small{font-size:11px;color:#d97706;font-family:'DM Mono','Courier New',monospace;margin-bottom:7px;letter-spacing:.03em;text-transform:uppercase}.card-title{font-family:'DM Mono','Courier New',monospace;font-size:14px;font-weight:700;color:var(--accent);margin:0 0 8px;line-height:1.25}.card-text{font-size:14px;line-height:1.42;margin:0}.quote{font-size:13px;line-height:1.5;border-left:2px solid var(--accent);padding-left:11px;margin:8px 0 0}.metric{margin-bottom:9px}.metric-top{display:flex;justify-content:space-between;font-size:11px;font-family:'DM Mono','Courier New',monospace}.bar{height:6px;border-radius:99px;background:#eee9e5;overflow:hidden}.bar span{display:block;height:100%;background:var(--accent);transition:width .35s ease}.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.tag{font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:4px 7px;font-family:'DM Mono','Courier New',monospace}@media(max-width:860px){.canvas{height:460px}.system{height:460px}.info-grid{grid-template-columns:1fr}.node text{font-size:11px}}
+:root{--accent:#520671;--orange:#e05c2a;--text:#6e6c66;--muted:#9a9890;--line:#e6e2de;--soft:#faf8fb}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--text);font-family:Inter,Arial,sans-serif;overflow-x:hidden;width:100%}
+.wrap{width:100%;max-width:none;margin:0;padding:0}
+.controls{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px;justify-content:center}
+button{appearance:none;border:1px solid var(--line);background:#fff;color:var(--text);padding:7px 11px;border-radius:8px;font-size:12px;line-height:1;cursor:pointer;transition:all .2s ease;font-family:Inter,Arial,sans-serif}
+button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+button:hover{transform:translateY(-1px);border-color:var(--accent)}
+.canvas{height:500px;position:relative;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden;margin-bottom:8px}
+.system{display:block;width:100%;height:500px}
+.node{cursor:pointer}
+.node circle{transition:all .2s ease;filter:drop-shadow(0 2px 8px rgba(82,6,113,.05))}
+.node:hover circle,.node.selected circle{stroke:var(--accent);stroke-width:3;filter:drop-shadow(0 4px 16px rgba(82,6,113,.18))}
+.node text{pointer-events:none;font-family:'DM Mono','Courier New',monospace;fill:var(--accent);font-size:12px;font-weight:700}
+.layer-label,.beta,.legend{font-family:'DM Mono','Courier New',monospace}
+.layer-label{font-size:14px;fill:#d97706;letter-spacing:.04em}
+.path{fill:none;stroke:#d8d2dc;stroke-width:1.6;opacity:.52}
+.strong{stroke:var(--accent);stroke-width:3;opacity:.78;stroke-dasharray:8 10;animation:dash 7s linear infinite}
+.med{stroke:var(--accent);stroke-width:2.1;opacity:.45;stroke-dasharray:5 8;animation:dash 8s linear infinite}
+.weak{stroke:#ddd8d4;stroke-width:1.2;opacity:.25}
+.mode-dim{opacity:.14}.mode-focus{opacity:.92}
+.beta{font-size:13px;fill:var(--muted)}.beta.em{fill:var(--accent);font-weight:700}
+@keyframes dash{to{stroke-dashoffset:-180}}
+.legend{position:absolute;left:12px;bottom:10px;display:flex;gap:6px;flex-wrap:wrap;font-size:10px;color:#fff}
+.legend span{border:1px solid #d96a3c;border-radius:99px;padding:4px 7px;background:var(--orange)}
+.info-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:8px}
+.card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px}
+.soft{background:var(--soft)}
+.small{font-size:10px;color:#d97706;font-family:'DM Mono','Courier New',monospace;margin-bottom:5px;letter-spacing:.03em;text-transform:uppercase}
+.card-title{font-family:'DM Mono','Courier New',monospace;font-size:13px;font-weight:700;color:var(--accent);margin:0 0 5px;line-height:1.2}
+.card-text{font-size:13px;line-height:1.36;margin:0}
+.quote{font-size:12px;line-height:1.38;border-left:2px solid var(--accent);padding-left:9px;margin:6px 0 0}
+.metric{margin-bottom:6px}
+.metric-top{display:flex;justify-content:space-between;font-size:10px;font-family:'DM Mono','Courier New',monospace}
+.bar{height:5px;border-radius:99px;background:#eee9e5;overflow:hidden}.bar span{display:block;height:100%;background:var(--accent);transition:width .35s ease}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.tag{font-size:9px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 6px;font-family:'DM Mono','Courier New',monospace}
+@media(max-width:860px){.canvas{height:440px}.system{height:440px}.info-grid{grid-template-columns:1fr}.node text{font-size:11px}.controls{justify-content:flex-start}}
+@media(max-width:560px){.canvas{height:400px}.system{height:400px}.controls button{font-size:11px;padding:7px 9px}}
 </style>
 </head>
 <body>
@@ -31,7 +68,7 @@ const nodeData={performance:{title:'Performance-approach orientation',text:'Perf
 const modeData={mastery:{title:'Mastery pathway',text:'This view emphasizes mastery orientation as a learning-focused route that becomes achievement-relevant through deep and strategic approaches.',metrics:[['Strategic variance',31],['Achievement variance',29],['Mastery → strategic',33],['Deep → strategic',32]],paths:['p-ma-str','p-ma-deep','p-deep-str','p-str-ach']},performance:{title:'Performance pathway',text:'This view emphasizes performance-approach motivation, which can operate directly on achievement and indirectly through strategy selection.',metrics:[['Direct achievement route',43],['Performance → strategic',24],['Performance → surface',39],['Achievement variance',29]],paths:['p-pa-ach','p-pa-str','p-pa-surf','p-str-ach']},full:{title:'Full model',text:'This view presents the complete motivational-strategy-achievement system, including stronger validated routes and weaker surface/avoidance pathways.',metrics:[['Strategic variance',31],['Achievement variance',29],['Strong pathways',4],['Weaker pathways',2]],paths:['p-pa-ach','p-pa-str','p-ma-str','p-ma-deep','p-deep-str','p-str-ach','p-pa-surf','p-surf-ach','p-av-surf']}};
 function selectNode(key){document.querySelectorAll('.node').forEach(n=>n.classList.remove('selected'));const el=document.getElementById('node-'+key);if(el)el.classList.add('selected');document.getElementById('nodeTitle').textContent=nodeData[key].title;document.getElementById('nodeText').textContent=nodeData[key].text;document.getElementById('nodeQuote').textContent=nodeData[key].quote;sendHeight()}
 function setMode(mode){document.querySelectorAll('button').forEach(b=>b.classList.remove('active'));document.getElementById('btn-'+mode).classList.add('active');document.getElementById('stateTitle').textContent=modeData[mode].title;document.getElementById('stateText').textContent=modeData[mode].text;document.querySelectorAll('.path').forEach(p=>{p.classList.remove('mode-focus','mode-dim');if(mode!=='full')p.classList.add(modeData[mode].paths.includes(p.id)?'mode-focus':'mode-dim')});document.getElementById('metrics').innerHTML=modeData[mode].metrics.map(([label,value])=>`<div class="metric"><div class="metric-top"><span>${label}</span><span>${value}%</span></div><div class="bar"><span style="width:${Math.min(value,100)}%"></span></div></div>`).join('');sendHeight()}
-function sendHeight(){var wrap=document.getElementById('wrap');if(!wrap||!window.parent){return}var h=Math.ceil(wrap.getBoundingClientRect().height)+6;window.parent.postMessage({type:'resize',source:'rivers-goal-strategy-system',height:h},'*')}
+function sendHeight(){var wrap=document.getElementById('wrap');if(!wrap||!window.parent){return}var h=Math.ceil(wrap.getBoundingClientRect().height)+2;window.parent.postMessage({type:'resize',source:'rivers-goal-strategy-system',height:h},'*')}
 function queueHeight(){requestAnimationFrame(function(){requestAnimationFrame(sendHeight)})}
 setMode('mastery');selectNode('mastery');window.addEventListener('load',queueHeight);window.addEventListener('resize',queueHeight);if('ResizeObserver' in window){new ResizeObserver(queueHeight).observe(document.getElementById('wrap'))}queueHeight();
 </script>
