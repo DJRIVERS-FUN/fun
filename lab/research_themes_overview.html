@@ -9,15 +9,19 @@
 <title>Research Themes Overview</title>
 <style>
 :root{--p:#520671;--m:#6e6c66;--s:#f3f3f3;--l:#e6e2de;--ink:#262323}
-html,body{margin:0;padding:0;background:#fff;font-family:'Roboto',sans-serif;color:var(--ink);overflow:hidden}
-.themes{max-width:1000px;margin:0 auto;padding:4px 0 4px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.theme{position:relative;display:flex;flex-direction:column;justify-content:center;text-align:left;text-decoration:none;color:inherit;border:1px solid var(--l);border-radius:8px;background:#fff;padding:18px 16px;min-height:178px;box-sizing:border-box;overflow:hidden;transition:all .18s ease;font-family:'Roboto',sans-serif}
+html,body{margin:0;padding:0;background:#fff;font-family:'Roboto',sans-serif;color:var(--ink);overflow:hidden;width:100%}
+.themes{width:100%;max-width:none;margin:0;padding:4px 0;box-sizing:border-box}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%;box-sizing:border-box}
+.theme{position:relative;display:flex;flex-direction:column;justify-content:center;text-align:left;text-decoration:none;color:inherit;border:1px solid var(--l);border-radius:8px;background:#fff;padding:20px 18px;min-height:178px;box-sizing:border-box;overflow:hidden;transition:all .18s ease;font-family:'Roboto',sans-serif;width:100%}
 .theme:before{content:'';position:absolute;left:0;top:0;width:3px;height:100%;background:var(--p);opacity:.65}
 .theme:hover{border-color:#d9d9d9;background:#f3f3f3;transform:translateY(-2px)}
 .num{font-family:'DM Mono','SFMono-Regular',Consolas,monospace;font-size:11px;letter-spacing:.08em;color:#9a9890;text-transform:uppercase;margin-bottom:10px}
 .title{font-family:'Roboto',sans-serif;font-size:17px;line-height:1.16;color:var(--p);font-weight:500;margin-bottom:10px}
 .desc{font-family:'Roboto',sans-serif;font-size:13.5px;line-height:1.45;color:var(--m)}
+@media (max-width:900px){
+.grid{grid-template-columns:1fr;gap:10px}
+.theme{min-height:auto}
+}
 </style>
 </head>
 <body>

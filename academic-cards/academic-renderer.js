@@ -82,6 +82,25 @@ function renderAcademic(containerId, data, options = {}) {
     return v.toLowerCase() === 'peer review' ? 'Peer-review' : v;
   }
 
+  function numericYear(item) {
+    const match = String(item.year || '').match(/\d{4}/);
+    return match ? Number(match[0]) : 0;
+  }
+
+  function numericMonth(item) {
+    if (item.month !== undefined && item.month !== null && item.month !== '') {
+      const month = Number(item.month);
+      return Number.isFinite(month) ? month : 0;
+    }
+
+    const monthNames = {
+      january: 1, february: 2, march: 3, april: 4, may: 5, june: 6,
+      july: 7, august: 8, september: 9, october: 10, november: 11, december: 12
+    };
+    const match = String(item.ref || '').match(/\((?:\d{4}),\s*([A-Za-z]+)\)/);
+    return match ? (monthNames[match[1].toLowerCase()] || 0) : 0;
+  }
+
   wrap.innerHTML = `
     <div class="rivers-academic-controls">
       <div class="rivers-academic-row">
@@ -100,8 +119,12 @@ function renderAcademic(containerId, data, options = {}) {
   const searchInput = wrap.querySelector('[data-search]');
 
   data.sort((a, b) => {
-    const yearDiff = Number((b.year || '').slice(0, 4)) - Number((a.year || '').slice(0, 4));
+    const yearDiff = numericYear(b) - numericYear(a);
     if (yearDiff !== 0) return yearDiff;
+
+    const monthDiff = numericMonth(b) - numericMonth(a);
+    if (monthDiff !== 0) return monthDiff;
+
     return (a.ref || '').localeCompare(b.ref || '');
   });
 
@@ -166,7 +189,8 @@ function renderAcademic(containerId, data, options = {}) {
       (award && award.toLowerCase().includes(q)) ||
       (domain && domain.toLowerCase().includes(q)) ||
       (item.type && item.type.toLowerCase().includes(q)) ||
-      (item.year && String(item.year).includes(q))
+      (item.year && String(item.year).includes(q)) ||
+      (item.month && String(item.month).includes(q))
     );
   }
 
