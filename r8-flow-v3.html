@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R8 Tokubetsu B03 Research System</title>
+<style>
+  :root{--ink:#111;--muted:#666;--line:#d7d7d7;--soft:#f7f7f7;--blue:#2563eb;--amber:#f59e0b;--green:#16a34a;--red:#dc2626;}
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:22px 14px 30px;background:#fff;}
+  .head{text-align:center;margin-bottom:12px;}
+  .head h1{margin:0;font-size:clamp(22px,4vw,34px);letter-spacing:.02em;font-weight:850;}
+  .head p{margin:7px auto 0;max-width:760px;color:var(--muted);font-size:14px;line-height:1.5;}
+  .stage{position:relative;width:100%;aspect-ratio:1.42/1;border:1px solid #e6e6e6;border-radius:24px;background:linear-gradient(180deg,#fff,#fbfbfb);overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.055);}
+  svg{width:100%;height:100%;display:block;}
+  .panel{fill:#fff;stroke:#d8d8d8;stroke-width:1.5;rx:18;filter:url(#shadow)}
+  .panelTitle{font-size:18px;font-weight:800;fill:#111;text-anchor:middle;}
+  .panelSub{font-size:12px;fill:#666;text-anchor:middle;}
+  .mini{font-size:11px;fill:#666;text-anchor:middle;}
+  .tag{fill:#f4f4f4;stroke:#dfdfdf;rx:12;}
+  .tagText{font-size:11px;fill:#333;text-anchor:middle;font-weight:650;}
+  .route{fill:none;stroke:#111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:8 12;opacity:.9;}
+  .routeGlow{fill:none;stroke:#2563eb;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;opacity:.08;}
+  .dataLine{stroke:#bdbdbd;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-dasharray:5 8;}
+  .packet{fill:#2563eb;filter:url(#glow)}
+  .shiftPacket{fill:#f59e0b;filter:url(#glowAmber)}
+  .modelPacket{fill:#16a34a;filter:url(#glowGreen)}
+  .bikeLine{stroke:#111;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .wheel{fill:none;stroke:#111;stroke-width:4;}
+  .spoke{stroke:#777;stroke-width:1.5;transform-origin:center;animation:spin 1.1s linear infinite;}
+  .trace{fill:none;stroke:#111;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:520;stroke-dashoffset:520;animation:drawTrace 5.2s ease-in-out infinite;}
+  .trace.blue{stroke:#2563eb;animation-delay:.2s}.trace.green{stroke:#16a34a;animation-delay:.8s}.trace.amber{stroke:#f59e0b;animation-delay:1.4s}
+  .bar{fill:#111;opacity:.9;transform-origin:bottom;animation:bounce 2.4s ease-in-out infinite;}
+  .bar.b2{animation-delay:.25s}.bar.b3{animation-delay:.5s}.bar.b4{animation-delay:.75s}.bar.b5{animation-delay:1s}
+  .dbRing{fill:none;stroke:#111;stroke-width:2.3;}
+  .dbFill{fill:#fafafa;stroke:#111;stroke-width:2.3;}
+  .rqBox{fill:#fff;stroke:#d6d6d6;stroke-width:1.5;rx:16;animation:rqPulse 7s ease-in-out infinite;}
+  .rqText{font-size:14px;font-weight:850;text-anchor:middle;fill:#111;}
+  .rqSub{font-size:11px;text-anchor:middle;fill:#666;}
+  .rq1{animation-delay:.4s}.rq2{animation-delay:1.8s}.rq3{animation-delay:3.2s}.rq4{animation-delay:4.6s}
+  .chain{stroke:#111;stroke-width:3;fill:none;stroke-dasharray:6 4;animation:chainMove 1s linear infinite;}
+  .gearTooth{fill:#fff;stroke:#111;stroke-width:2;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes drawTrace{0%{stroke-dashoffset:520;opacity:.25}38%{stroke-dashoffset:0;opacity:1}80%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:-520;opacity:.25}}
+  @keyframes bounce{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+  @keyframes rqPulse{0%,100%{stroke:#d6d6d6;filter:none}45%,58%{stroke:#111;filter:url(#shadow)}}
+  @keyframes chainMove{to{stroke-dashoffset:-20}}
+  .legend{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;font-size:12px;color:#555;}
+  .legend div{border:1px solid #eee;border-radius:14px;padding:9px 10px;background:#fff;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:#111}.dot.b{background:#2563eb}.dot.a{background:#f59e0b}.dot.g{background:#16a34a}
+  @media(max-width:760px){.stage{aspect-ratio:.72/1}.legend{grid-template-columns:1fr 1fr}.head p{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>R8 TOKUBETSU B03</h1>
+    <p>Animated snapshot of the cycling research system: field segments, drivetrain telemetry, external data sources, Python processing, database construction, and behavioural model outputs.</p>
+  </div>
+  <div class="stage">
+    <svg viewBox="0 0 1100 775" role="img" aria-label="Animated research flow visualization for R8 Tokubetsu B03">
+      <defs>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".09"/></filter>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glowAmber"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glowGreen"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <path id="coursePath" d="M95,310 C135,205 255,198 300,285 C352,386 470,332 492,230 C515,120 650,120 692,225 C738,340 850,285 885,375 C920,468 800,535 700,510 C580,480 505,600 390,565 C260,525 260,392 140,405 C82,410 70,360 95,310"/>
+        <path id="pipelinePath" d="M890,390 C812,410 780,470 735,515 C690,560 620,568 560,575"/>
+        <path id="modelPath" d="M560,575 C420,580 300,615 188,675 M560,575 C495,635 458,655 438,675 M560,575 C625,635 662,655 682,675 M560,575 C700,590 832,625 912,675"/>
+      </defs>
+
+      <rect x="28" y="92" width="520" height="440" class="panel"/>
+      <text x="288" y="125" class="panelTitle">Ecological Field Course</text>
+      <text x="288" y="145" class="panelSub">7 repeatable Strava segments as a natural laboratory</text>
+      <use href="#coursePath" class="routeGlow"/>
+      <use href="#coursePath" class="route"/>
+      <g>
+        <circle cx="145" cy="240" r="14" class="tag"/><text x="145" y="244" class="tagText">S1</text>
+        <circle cx="305" cy="286" r="14" class="tag"/><text x="305" y="290" class="tagText">S2</text>
+        <circle cx="492" cy="230" r="14" class="tag"/><text x="492" y="234" class="tagText">S3</text>
+        <circle cx="690" cy="223" r="14" class="tag"/><text x="690" y="227" class="tagText">S4</text>
+        <circle cx="884" cy="374" r="14" class="tag"/><text x="884" y="378" class="tagText">S5</text>
+        <circle cx="700" cy="510" r="14" class="tag"/><text x="700" y="514" class="tagText">S6</text>
+        <circle cx="390" cy="565" r="14" class="tag"/><text x="390" y="569" class="tagText">S7</text>
+      </g>
+
+      <g transform="translate(0 0)">
+        <circle class="packet" r="9"><animateMotion dur="10s" repeatCount="indefinite"><mpath href="#coursePath"/></animateMotion></circle>
+        <circle class="shiftPacket" r="6"><animateMotion dur="10s" begin="1.3s" repeatCount="indefinite"><mpath href="#coursePath"/></animateMotion></circle>
+        <circle class="packet" r="5"><animateMotion dur="10s" begin="2.6s" repeatCount="indefinite"><mpath href="#coursePath"/></animateMotion></circle>
+      </g>
+
+      <g transform="translate(128 355)">
+        <circle class="wheel" cx="0" cy="0" r="35"/><circle class="wheel" cx="118" cy="0" r="35"/>
+        <line class="spoke" x1="-30" y1="0" x2="30" y2="0"/><line class="spoke" x1="0" y1="-30" x2="0" y2="30"/>
+        <line class="spoke" x1="88" y1="0" x2="148" y2="0"/><line class="spoke" x1="118" y1="-30" x2="118" y2="30"/>
+        <path class="bikeLine" d="M0,0 L45,-55 L80,0 L118,0 L70,-55 L45,-55 M70,-55 L92,-82 M45,-55 L35,-82"/>
+        <circle class="gearTooth" cx="78" cy="0" r="14"/><path class="chain" d="M78,0 L118,0"/>
+      </g>
+
+      <rect x="612" y="92" width="450" height="180" class="panel"/>
+      <text x="837" y="126" class="panelTitle">Drivetrain + Sensor Layer</text>
+      <text x="837" y="146" class="panelSub">Power, cadence, heart rate, GPS, gear shifts</text>
+      <path class="trace blue" d="M650,220 C680,170 710,245 740,195 C770,150 800,250 830,205 C860,160 895,240 930,190 C960,155 990,225 1025,180"/>
+      <path class="trace green" d="M650,245 C685,235 705,190 740,215 C775,250 800,185 832,210 C862,235 900,200 930,225 C960,250 995,205 1025,235"/>
+      <path class="trace amber" d="M650,195 C690,198 700,198 720,198 C725,165 735,165 740,198 C780,198 810,198 832,198 C836,160 848,160 852,198 C900,198 940,198 970,198 C974,165 986,165 990,198 C1005,198 1015,198 1025,198"/>
+      <text x="675" y="172" class="mini">cadence</text><text x="755" y="172" class="mini">power</text><text x="910" y="172" class="mini">shift packets</text>
+
+      <rect x="612" y="304" width="450" height="175" class="panel"/>
+      <text x="837" y="337" class="panelTitle">External Data Inputs</text>
+      <text x="837" y="357" class="panelSub">Sources joined after each ride</text>
+      <rect x="645" y="389" width="86" height="44" class="tag"/><text x="688" y="416" class="tagText">Strava API</text>
+      <rect x="748" y="389" width="70" height="44" class="tag"/><text x="783" y="416" class="tagText">FIT</text>
+      <rect x="835" y="389" width="70" height="44" class="tag"/><text x="870" y="416" class="tagText">GPX</text>
+      <rect x="922" y="389" width="100" height="44" class="tag"/><text x="972" y="416" class="tagText">Di2Stats</text>
+      <circle class="packet" r="7"><animateMotion dur="4.2s" repeatCount="indefinite" path="M688,433 C705,460 738,478 790,492 C840,505 852,525 862,550"/></circle>
+      <circle class="packet" r="7"><animateMotion dur="4.2s" begin=".9s" repeatCount="indefinite" path="M783,433 C795,460 805,482 828,505 C845,522 855,538 862,550"/></circle>
+      <circle class="packet" r="7"><animateMotion dur="4.2s" begin="1.8s" repeatCount="indefinite" path="M870,433 C868,468 866,508 862,550"/></circle>
+      <circle class="shiftPacket" r="7"><animateMotion dur="4.2s" begin="2.7s" repeatCount="indefinite" path="M972,433 C950,475 902,510 862,550"/></circle>
+
+      <rect x="372" y="540" width="376" height="92" class="panel"/>
+      <text x="560" y="574" class="panelTitle">Python Processing Engine</text>
+      <text x="560" y="594" class="panelSub">cleaning, alignment, feature extraction, modelling</text>
+      <rect x="424" y="610" width="20" height="16" class="bar"/><rect x="454" y="610" width="20" height="16" class="bar b2"/><rect x="484" y="610" width="20" height="16" class="bar b3"/><rect x="514" y="610" width="20" height="16" class="bar b4"/><rect x="544" y="610" width="20" height="16" class="bar b5"/>
+      <text x="650" y="619" class="mini">segment x ride x gear-event table</text>
+
+      <g transform="translate(862 555)">
+        <ellipse class="dbFill" cx="0" cy="0" rx="72" ry="22"/>
+        <path class="dbRing" d="M-72,0 L-72,62 C-72,92 72,92 72,62 L72,0"/>
+        <ellipse class="dbRing" cx="0" cy="62" rx="72" ry="22"/>
+        <text x="0" y="8" class="label" font-size="15" text-anchor="middle" font-weight="800">Database</text>
+        <text x="0" y="70" class="mini">ride records</text>
+      </g>
+
+      <path class="dataLine" d="M548,312 C610,330 675,335 760,304"/>
+      <path class="dataLine" d="M837,479 C812,505 790,528 748,564"/>
+      <path class="dataLine" d="M748,586 C778,574 805,562 790,555"/>
+      <path class="dataLine" d="M748,586 C782,590 813,596 862,617"/>
+      <circle class="packet" r="7"><animateMotion dur="5s" repeatCount="indefinite" path="M548,312 C610,330 675,335 760,304"/></circle>
+      <circle class="modelPacket" r="8"><animateMotion dur="4.8s" repeatCount="indefinite" path="M748,586 C782,590 813,596 862,617"/></circle>
+
+      <rect x="66" y="664" width="195" height="72" class="rqBox rq1"/><text x="164" y="693" class="rqText">RQ1</text><text x="164" y="717" class="rqSub">cadence regulation</text>
+      <rect x="312" y="664" width="195" height="72" class="rqBox rq2"/><text x="410" y="693" class="rqText">RQ2</text><text x="410" y="717" class="rqSub">shift behaviour</text>
+      <rect x="558" y="664" width="195" height="72" class="rqBox rq3"/><text x="656" y="693" class="rqText">RQ3</text><text x="656" y="717" class="rqSub">gearing and effort</text>
+      <rect x="804" y="664" width="195" height="72" class="rqBox rq4"/><text x="902" y="693" class="rqText">RQ4</text><text x="902" y="717" class="rqSub">behavioural models</text>
+
+      <path class="dataLine" d="M560,632 C460,645 320,655 164,664"/>
+      <path class="dataLine" d="M560,632 C500,642 450,654 410,664"/>
+      <path class="dataLine" d="M560,632 C600,642 636,654 656,664"/>
+      <path class="dataLine" d="M560,632 C670,642 788,655 902,664"/>
+      <circle class="modelPacket" r="7"><animateMotion dur="5.5s" repeatCount="indefinite" path="M560,632 C460,645 320,655 164,664"/></circle>
+      <circle class="modelPacket" r="7"><animateMotion dur="5.5s" begin="1.2s" repeatCount="indefinite" path="M560,632 C500,642 450,654 410,664"/></circle>
+      <circle class="modelPacket" r="7"><animateMotion dur="5.5s" begin="2.4s" repeatCount="indefinite" path="M560,632 C600,642 636,654 656,664"/></circle>
+      <circle class="modelPacket" r="7"><animateMotion dur="5.5s" begin="3.6s" repeatCount="indefinite" path="M560,632 C670,642 788,655 902,664"/></circle>
+    </svg>
+  </div>
+  <div class="legend">
+    <div><span class="dot"></span> ecological riding system</div>
+    <div><span class="dot b"></span> continuous telemetry</div>
+    <div><span class="dot a"></span> discrete gear-shift events</div>
+    <div><span class="dot g"></span> model-ready research outputs</div>
+  </div>
+</div>
+</body>
+</html>
