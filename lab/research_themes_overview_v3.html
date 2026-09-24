@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<title>Rivers Lab Research Themes</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>Rivers Lab Research Themes / 研究テーマ</title>
+
 <style>
 :root{
   --purple:#520671;
@@ -16,52 +17,59 @@
   --soft:#faf9fb;
   --accent:#d97706;
 }
+
 *{box-sizing:border-box}
+
 html,body{
   margin:0;
   padding:0;
   width:100%;
-  background:#fff;
+  background:#ffffff;
   color:var(--text);
   font-family:'Roboto',Arial,sans-serif;
   overflow:hidden;
 }
+
 .themes{
   width:100%;
   padding:2px 0;
 }
+
 .stack{
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:8px;
   width:100%;
 }
+
 .theme{
   position:relative;
   width:100%;
-  min-height:104px;
+  height:138px;
   display:grid;
-  grid-template-columns:170px minmax(220px,290px) 1fr 74px;
+  grid-template-columns:145px minmax(0,1fr) minmax(0,1fr) 60px;
   align-items:center;
   gap:22px;
-  padding:18px 20px 18px 24px;
+  padding:17px 18px 17px 24px;
   color:inherit;
   text-decoration:none;
-  background:#fff;
+  background:#ffffff;
   border:1px solid var(--line);
   border-radius:10px;
   overflow:hidden;
   transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
 }
+
 .theme::before{
   content:"";
   position:absolute;
-  left:0;
   top:0;
+  left:0;
   width:4px;
   height:100%;
   background:var(--purple);
 }
+
 .theme:hover,
 .theme:focus-visible{
   background:var(--soft);
@@ -70,27 +78,71 @@ html,body{
   transform:translateX(2px);
   outline:none;
 }
+
+.meta{
+  align-self:center;
+}
+
 .num{
   font-family:'DM Mono','SFMono-Regular',Consolas,monospace;
   font-size:10.5px;
   font-weight:500;
-  line-height:1.3;
-  letter-spacing:.075em;
+  line-height:1.35;
+  letter-spacing:.07em;
   text-transform:uppercase;
   color:var(--accent);
 }
-.title{
+
+.meta-ja{
+  margin-top:7px;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:12px;
+  font-weight:500;
+  line-height:1.5;
+  color:#9b929d;
+}
+
+.en,
+.ja{
+  min-width:0;
+}
+
+.en-title{
+  margin:0 0 8px 0;
   color:var(--purple);
-  font-size:18px;
+  font-size:17px;
   font-weight:500;
   line-height:1.2;
 }
-.desc{
+
+.en-desc{
   margin:0;
   color:var(--muted);
-  font-size:13.5px;
-  line-height:1.45;
+  font-size:13px;
+  line-height:1.42;
 }
+
+.ja{
+  padding-left:22px;
+  border-left:1px solid #eee9f0;
+  font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
+}
+
+.ja-title{
+  margin:0 0 7px 0;
+  color:var(--purple);
+  font-size:16px;
+  font-weight:500;
+  line-height:1.5;
+}
+
+.ja-desc{
+  margin:0;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.5;
+}
+
 .arrow{
   justify-self:end;
   color:#9b929d;
@@ -98,75 +150,154 @@ html,body{
   font-size:11px;
   white-space:nowrap;
 }
+
 .theme:hover .arrow,
 .theme:focus-visible .arrow{
   color:var(--purple);
 }
-@media (max-width:900px){
+
+@media (max-width:1000px){
   .theme{
-    grid-template-columns:130px 220px 1fr 34px;
+    grid-template-columns:120px minmax(0,.9fr) minmax(0,1.1fr) 28px;
     gap:14px;
-    padding:16px 16px 16px 20px;
+    padding:15px 14px 15px 20px;
   }
-  .title{font-size:16px}
-  .desc{font-size:12.75px}
-  .arrow{font-size:0}
-  .arrow::after{content:"→";font-size:14px}
+
+  .en-title{font-size:15.5px}
+  .en-desc{font-size:12px}
+  .ja{padding-left:14px}
+  .ja-title,.ja-desc{font-size:16px;line-height:1.5}
+
+  .arrow{
+    font-size:0;
+  }
+
+  .arrow::after{
+    content:"→";
+    font-size:14px;
+  }
 }
-@media (max-width:640px){
-  html,body{overflow:auto}
-  .stack{gap:8px}
+
+@media (max-width:720px){
+  html,body{
+    overflow:auto;
+  }
+
+  .stack{
+    gap:8px;
+  }
+
   .theme{
-    min-height:auto;
+    height:auto;
+    min-height:0;
     grid-template-columns:1fr 28px;
-    gap:4px 12px;
-    padding:14px 14px 14px 18px;
+    gap:6px 12px;
+    padding:15px 14px 16px 18px;
   }
-  .num{
+
+  .meta{
     grid-column:1;
-    font-size:9.5px;
-    margin-bottom:2px;
   }
-  .title{
-    grid-column:1;
-    font-size:15.5px;
+
+  .meta-ja{
+    display:none;
   }
-  .desc{
+
+  .en{
     grid-column:1 / -1;
-    margin-top:5px;
-    font-size:12.5px;
-    line-height:1.38;
   }
+
+  .ja{
+    grid-column:1 / -1;
+    padding:10px 0 0 0;
+    margin-top:3px;
+    border-left:0;
+    border-top:1px solid #eee9f0;
+  }
+
+  .en-title{
+    font-size:15.5px;
+    margin-bottom:6px;
+  }
+
+  .en-desc{
+    font-size:12.5px;
+    line-height:1.45;
+  }
+
+  .ja-title,
+  .ja-desc{
+    font-size:16px;
+    line-height:1.5;
+  }
+
   .arrow{
     grid-column:2;
-    grid-row:1 / 3;
+    grid-row:1;
     align-self:center;
   }
 }
 </style>
 </head>
+
 <body>
 <div class="themes">
   <div class="stack">
 
-    <a class="theme" href="https://www.damianriverslab.com/lab/learning-system/" target="_top" aria-label="Learning and Metacognition research theme">
-      <div class="num">01 · Learning Systems</div>
-      <div class="title">Learning &amp; Metacognition</div>
-      <p class="desc">How learners regulate cognition, effort and behaviour within educational systems, including metacognition, self-regulation, academic self-management and educational technology.</p>
+    <a class="theme" href="https://www.damianriverslab.com/lab/learning-system/" target="_top" aria-label="Learning and Metacognition / 学習とメタ認知">
+      <div class="meta">
+        <div class="num">01 · Learning Systems</div>
+        <div class="meta-ja">学習システム</div>
+      </div>
+
+      <div class="en">
+        <div class="en-title">Learning &amp; Metacognition</div>
+        <p class="en-desc">How learners regulate cognition, effort and behaviour within educational systems, including metacognition, self-regulation, academic self-management and educational technology.</p>
+      </div>
+
+      <div class="ja" lang="ja">
+        <div class="ja-title">学習とメタ認知</div>
+        <p class="ja-desc">教育環境の中で、学習者が認知・努力・行動をどのように調整するのかを研究します。メタ認知、自己調整学習、学業自己管理、教育テクノロジーなどを扱います。</p>
+      </div>
+
       <div class="arrow" aria-hidden="true">Explore →</div>
     </a>
 
-    <a class="theme" href="https://www.damianriverslab.com/lab/language-system/" target="_top" aria-label="Digital Discourse and Platform Culture research theme">
-      <div class="num">02 · Digital Culture</div>
-      <div class="title">Digital Discourse &amp; Platform Culture</div>
-      <p class="desc">How identities, behaviours and participation are represented, evaluated and contested through discourse, social media, platform governance, legitimacy and authenticity.</p>
+    <a class="theme" href="https://www.damianriverslab.com/lab/language-system/" target="_top" aria-label="Digital Discourse and Platform Culture / デジタル談話とプラットフォーム文化">
+      <div class="meta">
+        <div class="num">02 · Digital Culture</div>
+        <div class="meta-ja">デジタル文化</div>
+      </div>
+
+      <div class="en">
+        <div class="en-title">Digital Discourse &amp; Platform Culture</div>
+        <p class="en-desc">How identities, behaviours and participation are represented, evaluated and contested through discourse, social media, platform governance, legitimacy and authenticity.</p>
+      </div>
+
+      <div class="ja" lang="ja">
+        <div class="ja-title">デジタル談話とプラットフォーム文化</div>
+        <p class="ja-desc">SNSやデジタルメディアの中で、アイデンティティ、行動、参加のあり方がどのように表現され、評価され、議論されるのかを研究します。</p>
+      </div>
+
       <div class="arrow" aria-hidden="true">Explore →</div>
     </a>
 
-    <a class="theme" href="https://www.damianriverslab.com/lab/machine-system/" target="_top" aria-label="Human Technology Interaction research theme">
-      <div class="num">03 · Human–Technology</div>
-      <div class="title">Human–Technology Interaction</div>
-      <p class="desc">How digital and technological systems reshape human action, performance and agency across virtual environments, embodied activity and mediated interaction.</p>
+    <a class="theme" href="https://www.damianriverslab.com/lab/machine-system/" target="_top" aria-label="Human Technology Interaction / 人間とテクノロジーの相互作用">
+      <div class="meta">
+        <div class="num">03 · Human–Technology</div>
+        <div class="meta-ja">人間とテクノロジー</div>
+      </div>
+
+      <div class="en">
+        <div class="en-title">Human–Technology Interaction</div>
+        <p class="en-desc">How digital and technological systems reshape human action, performance and agency across virtual environments, embodied activity and mediated interaction.</p>
+      </div>
+
+      <div class="ja" lang="ja">
+        <div class="ja-title">人間–テクノロジー相互作用</div>
+        <p class="ja-desc">デジタル技術や各種システムが、人の行動、パフォーマンス、主体性をどのように変えるのかを研究します。仮想環境、身体活動、テクノロジーを介した相互作用などを扱います。</p>
+      </div>
+
       <div class="arrow" aria-hidden="true">Explore →</div>
     </a>
 
