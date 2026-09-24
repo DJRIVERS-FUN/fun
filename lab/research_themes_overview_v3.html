@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Rivers Lab Research Themes</title>
+<style>
+:root{
+  --purple:#520671;
+  --text:#2f2c30;
+  --muted:#6e6c66;
+  --line:#e7e2e9;
+  --soft:#faf9fb;
+  --accent:#d97706;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  background:#fff;
+  color:var(--text);
+  font-family:'Roboto',Arial,sans-serif;
+  overflow:hidden;
+}
+.themes{
+  width:100%;
+  padding:2px 0;
+}
+.stack{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+}
+.theme{
+  position:relative;
+  width:100%;
+  min-height:104px;
+  display:grid;
+  grid-template-columns:170px minmax(220px,290px) 1fr 74px;
+  align-items:center;
+  gap:22px;
+  padding:18px 20px 18px 24px;
+  color:inherit;
+  text-decoration:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow:hidden;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.theme::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:4px;
+  height:100%;
+  background:var(--purple);
+}
+.theme:hover,
+.theme:focus-visible{
+  background:var(--soft);
+  border-color:#d6cbd9;
+  box-shadow:0 6px 18px rgba(82,6,113,.06);
+  transform:translateX(2px);
+  outline:none;
+}
+.num{
+  font-family:'DM Mono','SFMono-Regular',Consolas,monospace;
+  font-size:10.5px;
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+.title{
+  color:var(--purple);
+  font-size:18px;
+  font-weight:500;
+  line-height:1.2;
+}
+.desc{
+  margin:0;
+  color:var(--muted);
+  font-size:13.5px;
+  line-height:1.45;
+}
+.arrow{
+  justify-self:end;
+  color:#9b929d;
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  white-space:nowrap;
+}
+.theme:hover .arrow,
+.theme:focus-visible .arrow{
+  color:var(--purple);
+}
+@media (max-width:900px){
+  .theme{
+    grid-template-columns:130px 220px 1fr 34px;
+    gap:14px;
+    padding:16px 16px 16px 20px;
+  }
+  .title{font-size:16px}
+  .desc{font-size:12.75px}
+  .arrow{font-size:0}
+  .arrow::after{content:"→";font-size:14px}
+}
+@media (max-width:640px){
+  html,body{overflow:auto}
+  .stack{gap:8px}
+  .theme{
+    min-height:auto;
+    grid-template-columns:1fr 28px;
+    gap:4px 12px;
+    padding:14px 14px 14px 18px;
+  }
+  .num{
+    grid-column:1;
+    font-size:9.5px;
+    margin-bottom:2px;
+  }
+  .title{
+    grid-column:1;
+    font-size:15.5px;
+  }
+  .desc{
+    grid-column:1 / -1;
+    margin-top:5px;
+    font-size:12.5px;
+    line-height:1.38;
+  }
+  .arrow{
+    grid-column:2;
+    grid-row:1 / 3;
+    align-self:center;
+  }
+}
+</style>
+</head>
+<body>
+<div class="themes">
+  <div class="stack">
+
+    <a class="theme" href="https://www.damianriverslab.com/lab/learning-system/" target="_top" aria-label="Learning and Metacognition research theme">
+      <div class="num">01 · Learning Systems</div>
+      <div class="title">Learning &amp; Metacognition</div>
+      <p class="desc">How learners regulate cognition, effort and behaviour within educational systems, including metacognition, self-regulation, academic self-management and educational technology.</p>
+      <div class="arrow" aria-hidden="true">Explore →</div>
+    </a>
+
+    <a class="theme" href="https://www.damianriverslab.com/lab/language-system/" target="_top" aria-label="Digital Discourse and Platform Culture research theme">
+      <div class="num">02 · Digital Culture</div>
+      <div class="title">Digital Discourse &amp; Platform Culture</div>
+      <p class="desc">How identities, behaviours and participation are represented, evaluated and contested through discourse, social media, platform governance, legitimacy and authenticity.</p>
+      <div class="arrow" aria-hidden="true">Explore →</div>
+    </a>
+
+    <a class="theme" href="https://www.damianriverslab.com/lab/machine-system/" target="_top" aria-label="Human Technology Interaction research theme">
+      <div class="num">03 · Human–Technology</div>
+      <div class="title">Human–Technology Interaction</div>
+      <p class="desc">How digital and technological systems reshape human action, performance and agency across virtual environments, embodied activity and mediated interaction.</p>
+      <div class="arrow" aria-hidden="true">Explore →</div>
+    </a>
+
+  </div>
+</div>
+</body>
+</html>
