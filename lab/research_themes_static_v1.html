@@ -14,7 +14,6 @@
   --accent:#d97706;
   --text:#2f2c30;
   --muted:#6e6c66;
-  --meta:#938a95;
   --line:#e7e2e9;
   --divider:#eee9f0;
   --white:#ffffff;
@@ -56,10 +55,8 @@ body{
   width:100%;
   height:138px;
   display:grid;
-  grid-template-columns:138px minmax(0,.96fr) minmax(0,1.04fr);
-  align-items:center;
-  column-gap:24px;
-  padding:17px 22px 17px 24px;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:stretch;
   background:var(--white);
   border:1px solid var(--line);
   border-radius:12px;
@@ -75,14 +72,28 @@ body{
   background:var(--purple);
 }
 
-.meta{
+.en,
+.ja{
   min-width:0;
-  align-self:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.en{
+  padding:17px 28px 17px 28px;
+}
+
+.ja{
+  padding:17px 28px;
+  border-left:1px solid var(--divider);
+  font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
 }
 
 .num{
+  margin:0 0 5px 0;
   font-family:'DM Mono','SFMono-Regular',Consolas,monospace;
-  font-size:10.5px;
+  font-size:10px;
   font-weight:500;
   line-height:1.35;
   letter-spacing:.07em;
@@ -90,26 +101,12 @@ body{
   color:var(--accent);
 }
 
-.meta-ja{
-  margin-top:7px;
-  font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
-  font-size:11.5px;
-  font-weight:500;
-  line-height:1.45;
-  color:var(--meta);
-}
-
-.en,
-.ja{
-  min-width:0;
-}
-
 .en-title{
-  margin:0 0 8px 0;
+  margin:0 0 7px 0;
   color:var(--purple);
   font-size:17px;
   font-weight:500;
-  line-height:1.25;
+  line-height:1.22;
 }
 
 .en-desc{
@@ -117,15 +114,6 @@ body{
   color:var(--muted);
   font-size:13px;
   line-height:1.45;
-}
-
-.ja{
-  height:100%;
-  display:flex;
-  align-items:center;
-  padding-left:22px;
-  border-left:1px solid var(--divider);
-  font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
 }
 
 .ja-desc{
@@ -137,18 +125,16 @@ body{
 }
 
 @media (max-width:1000px){
-  .theme{
-    grid-template-columns:116px minmax(0,.92fr) minmax(0,1.08fr);
-    column-gap:16px;
-    padding:15px 16px 15px 20px;
+  .en{
+    padding:15px 20px 15px 22px;
+  }
+
+  .ja{
+    padding:15px 20px;
   }
 
   .num{
-    font-size:9.8px;
-  }
-
-  .meta-ja{
-    font-size:11px;
+    font-size:9.5px;
   }
 
   .en-title{
@@ -159,8 +145,8 @@ body{
     font-size:12px;
   }
 
-  .ja{
-    padding-left:16px;
+  .ja-desc{
+    font-size:13.5px;
   }
 }
 
@@ -173,16 +159,16 @@ body{
   .theme{
     height:auto;
     grid-template-columns:1fr;
-    row-gap:8px;
-    padding:15px 15px 16px 18px;
   }
 
-  .meta{
-    padding-bottom:1px;
+  .en{
+    padding:15px 18px 12px 18px;
   }
 
-  .meta-ja{
-    display:none;
+  .ja{
+    padding:12px 18px 15px 18px;
+    border-left:0;
+    border-top:1px solid var(--divider);
   }
 
   .en-title{
@@ -193,14 +179,6 @@ body{
   .en-desc{
     font-size:12.5px;
     line-height:1.45;
-  }
-
-  .ja{
-    height:auto;
-    margin-top:2px;
-    padding:10px 0 0 0;
-    border-left:0;
-    border-top:1px solid var(--divider);
   }
 
   .ja-desc{
@@ -216,12 +194,8 @@ body{
   <div class="stack" role="list">
 
     <section class="theme" role="listitem" aria-labelledby="theme-learning">
-      <div class="meta">
-        <div class="num">01 · Learning Systems</div>
-        <div class="meta-ja" lang="ja">学習システム</div>
-      </div>
-
       <div class="en">
+        <div class="num">01 · Learning Systems</div>
         <div class="en-title" id="theme-learning">Learning &amp; Metacognition</div>
         <p class="en-desc">How learners regulate cognition, effort and behaviour within educational systems, including metacognition, self-regulation, academic self-management and educational technology.</p>
       </div>
@@ -232,12 +206,8 @@ body{
     </section>
 
     <section class="theme" role="listitem" aria-labelledby="theme-digital">
-      <div class="meta">
-        <div class="num">02 · Digital Culture</div>
-        <div class="meta-ja" lang="ja">デジタル文化</div>
-      </div>
-
       <div class="en">
+        <div class="num">02 · Digital Culture</div>
         <div class="en-title" id="theme-digital">Digital Discourse &amp; Platform Culture</div>
         <p class="en-desc">How identities, behaviours and participation are represented, evaluated and contested through discourse, social media, platform governance, legitimacy and authenticity.</p>
       </div>
@@ -248,12 +218,8 @@ body{
     </section>
 
     <section class="theme" role="listitem" aria-labelledby="theme-technology">
-      <div class="meta">
-        <div class="num">03 · Human–Technology</div>
-        <div class="meta-ja" lang="ja">人間とテクノロジー</div>
-      </div>
-
       <div class="en">
+        <div class="num">03 · Human–Technology</div>
         <div class="en-title" id="theme-technology">Human–Technology Interaction</div>
         <p class="en-desc">How digital and technological systems reshape human action, performance and agency across virtual environments, embodied activity and mediated interaction.</p>
       </div>
