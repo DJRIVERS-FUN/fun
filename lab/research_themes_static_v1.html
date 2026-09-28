@@ -19,9 +19,7 @@
   --white:#ffffff;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 html,
 body{
@@ -34,9 +32,7 @@ body{
   overflow:hidden;
 }
 
-body{
-  cursor:default;
-}
+body{cursor:default;}
 
 .themes{
   width:100%;
@@ -81,17 +77,17 @@ body{
 }
 
 .en{
-  padding:17px 28px 17px 28px;
+  padding:16px 30px 16px 30px;
 }
 
 .ja{
-  padding:17px 28px;
+  padding:16px 30px;
   border-left:1px solid var(--divider);
   font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
 }
 
 .num{
-  margin:0 0 5px 0;
+  margin:0 0 4px 0;
   font-family:'DM Mono','SFMono-Regular',Consolas,monospace;
   font-size:10px;
   font-weight:500;
@@ -101,36 +97,47 @@ body{
   color:var(--accent);
 }
 
-.en-title{
-  margin:0 0 7px 0;
+.en-title,
+.ja-title{
+  margin:0 0 6px 0;
   color:var(--purple);
-  font-size:17px;
   font-weight:500;
+}
+
+.en-title{
+  font-size:17px;
   line-height:1.22;
 }
 
-.en-desc{
+.ja-title{
+  font-size:15px;
+  line-height:1.35;
+}
+
+.en-desc,
+.ja-desc{
   margin:0;
   color:var(--muted);
+  font-weight:400;
+}
+
+.en-desc{
   font-size:13px;
   line-height:1.45;
 }
 
 .ja-desc{
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
-  font-weight:400;
-  line-height:1.4;
+  font-size:13.5px;
+  line-height:1.45;
 }
 
 @media (max-width:1000px){
   .en{
-    padding:15px 20px 15px 22px;
+    padding:15px 22px 15px 24px;
   }
 
   .ja{
-    padding:15px 20px;
+    padding:15px 22px;
   }
 
   .num{
@@ -141,12 +148,16 @@ body{
     font-size:15.5px;
   }
 
+  .ja-title{
+    font-size:14px;
+  }
+
   .en-desc{
     font-size:12px;
   }
 
   .ja-desc{
-    font-size:13.5px;
+    font-size:13px;
   }
 }
 
@@ -176,6 +187,11 @@ body{
     font-size:15.5px;
   }
 
+  .ja-title{
+    margin-bottom:5px;
+    font-size:14px;
+  }
+
   .en-desc{
     font-size:12.5px;
     line-height:1.45;
@@ -183,7 +199,7 @@ body{
 
   .ja-desc{
     font-size:14px;
-    line-height:1.4;
+    line-height:1.45;
   }
 }
 </style>
@@ -197,11 +213,12 @@ body{
       <div class="en">
         <div class="num">01 · Learning Systems</div>
         <div class="en-title" id="theme-learning">Learning &amp; Metacognition</div>
-        <p class="en-desc">How learners regulate cognition, effort and behaviour within educational systems, including metacognition, self-regulation, academic self-management and educational technology.</p>
+        <p class="en-desc">How people learn to understand and manage their own learning — including metacognition, self-regulation, academic self-management, and the role of educational technology in turning knowledge into effective action.</p>
       </div>
 
       <div class="ja" lang="ja">
-        <p class="ja-desc">教育環境の中で、学習者が認知・努力・行動をどのように調整するのかを研究します。メタ認知、自己調整学習、学業自己管理、教育テクノロジーなどを扱います。</p>
+        <div class="ja-title">学習・メタ認知</div>
+        <p class="ja-desc">人が自分自身の学びをどのように理解し、調整していくのかを研究します。メタ認知、自己調整学習、学業自己管理、教育テクノロジー、そして知識を実際の行動へつなげる過程を扱います。</p>
       </div>
     </section>
 
@@ -209,11 +226,12 @@ body{
       <div class="en">
         <div class="num">02 · Digital Culture</div>
         <div class="en-title" id="theme-digital">Digital Discourse &amp; Platform Culture</div>
-        <p class="en-desc">How identities, behaviours and participation are represented, evaluated and contested through discourse, social media, platform governance, legitimacy and authenticity.</p>
+        <p class="en-desc">How people present themselves, participate, and make judgements in digital spaces — and how platforms shape discourse, visibility, identity, legitimacy, authenticity, and the boundaries of acceptable participation.</p>
       </div>
 
       <div class="ja" lang="ja">
-        <p class="ja-desc">SNSやデジタルメディアの中で、アイデンティティ、行動、参加のあり方がどのように表現され、評価され、議論されるのかを研究します。</p>
+        <div class="ja-title">デジタル談話・プラットフォーム文化</div>
+        <p class="ja-desc">デジタル空間で人がどのように自己を表現し、参加し、他者や行動を評価するのかを研究します。談話、可視性、アイデンティティ、正当性、本物らしさ、参加の基準がプラットフォームによってどう形づくられるのかを考えます。</p>
       </div>
     </section>
 
@@ -221,11 +239,12 @@ body{
       <div class="en">
         <div class="num">03 · Human–Technology</div>
         <div class="en-title" id="theme-technology">Human–Technology Interaction</div>
-        <p class="en-desc">How digital and technological systems reshape human action, performance and agency across virtual environments, embodied activity and mediated interaction.</p>
+        <p class="en-desc">How technologies reshape what people can do and how they understand their own actions — from performance and embodied activity to mediated interaction, human agency, and the changing boundary between human judgement and technological support.</p>
       </div>
 
       <div class="ja" lang="ja">
-        <p class="ja-desc">デジタル技術や各種システムが、人の行動、パフォーマンス、主体性をどのように変えるのかを研究します。仮想環境、身体活動、テクノロジーを介した相互作用などを扱います。</p>
+        <div class="ja-title">人間–テクノロジー相互作用</div>
+        <p class="ja-desc">テクノロジーが、人に何を可能にし、自分の行動をどう理解させるのかを研究します。パフォーマンス、身体活動、媒介された相互作用、主体性、人間の判断と技術的支援との境界などを扱います。</p>
       </div>
     </section>
 
