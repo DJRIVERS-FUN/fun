@@ -108,7 +108,7 @@ function renderAcademic(containerId, data, options = {}) {
       </div>
       <div class="rivers-academic-row"><span class="rivers-academic-count" data-count></span></div>
       <div class="rivers-academic-row" data-filter="decade"><span class="rivers-academic-label">Decade</span></div>
-      <div class="rivers-academic-row" data-filter="type"><span class="rivers-academic-label">Type</span></div>
+      <div class="rivers-academic-row" data-filter="type"><span class="rivers-academic-label">${fundingLayout ? 'Funding Type' : 'Type'}</span></div>
       <div class="rivers-academic-row" data-filter="domain"><span class="rivers-academic-label">${serviceLayout ? 'Service Category' : 'Domain'}</span></div>
     </div>
     <div class="rivers-academic-grid" data-grid></div>
