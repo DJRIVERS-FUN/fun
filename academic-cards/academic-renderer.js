@@ -79,7 +79,7 @@ function renderAcademic(containerId, data, options = {}) {
 
   function normalizeDomain(v) {
     if (!v) return v;
-    return v.toLowerCase() === 'peer review' ? 'Peer-review' : v;
+    return v.toLowerCase() === 'peer review' ? (serviceLayout ? 'Peer Review' : 'Peer-review') : v;
   }
 
   function numericYear(item) {
@@ -109,7 +109,7 @@ function renderAcademic(containerId, data, options = {}) {
       <div class="rivers-academic-row"><span class="rivers-academic-count" data-count></span></div>
       <div class="rivers-academic-row" data-filter="decade"><span class="rivers-academic-label">Decade</span></div>
       <div class="rivers-academic-row" data-filter="type"><span class="rivers-academic-label">Type</span></div>
-      <div class="rivers-academic-row" data-filter="domain"><span class="rivers-academic-label">Domain</span></div>
+      <div class="rivers-academic-row" data-filter="domain"><span class="rivers-academic-label">${serviceLayout ? 'Service Category' : 'Domain'}</span></div>
     </div>
     <div class="rivers-academic-grid" data-grid></div>
   `;
