@@ -108,7 +108,7 @@ function renderAcademic(containerId, data, options = {}) {
       </div>
       <div class="rivers-academic-row"><span class="rivers-academic-count" data-count></span></div>
       <div class="rivers-academic-row" data-filter="decade"><span class="rivers-academic-label">Decade</span></div>
-      <div class="rivers-academic-row" data-filter="type"><span class="rivers-academic-label">${fundingLayout ? 'Funding Type' : 'Type'}</span></div>
+      ${serviceLayout ? '' : `<div class="rivers-academic-row" data-filter="type"><span class="rivers-academic-label">${fundingLayout ? 'Funding Type' : 'Type'}</span></div>`}
       <div class="rivers-academic-row" data-filter="domain"><span class="rivers-academic-label">${serviceLayout ? 'Service Category' : 'Domain'}</span></div>
     </div>
     <div class="rivers-academic-grid" data-grid></div>
@@ -204,7 +204,7 @@ function renderAcademic(containerId, data, options = {}) {
   }
 
   function renderFilters() {
-    ['decade', 'type', 'domain'].forEach(key => {
+    (serviceLayout ? ['decade', 'domain'] : ['decade', 'type', 'domain']).forEach(key => {
       const row = wrap.querySelector(`[data-filter="${key}"]`);
       row.querySelectorAll('button').forEach(button => button.remove());
       valuesFor(key).forEach(value => {
