@@ -252,6 +252,15 @@ function renderAcademic(containerId, data, options = {}) {
     });
   }
 
+  function renderCitation(ref) {
+    const text = stripPrefix(ref);
+    if (!options.linkDoi) return highlight(text);
+    const match = text.match(/https:\/\/doi\.org\/10\.\d{4,9}\/[^\s]+$/);
+    if (!match) return highlight(text);
+    return highlight(text.slice(0, match.index)) +
+      `<a href="${escapeHtml(match[0])}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;overflow-wrap:anywhere">${highlight(match[0])}</a>`;
+  }
+
   function renderRef(display) {
     if (bookLayout) {
       const book = parseBookRef(display.ref);
@@ -270,7 +279,7 @@ function renderAcademic(containerId, data, options = {}) {
     }
 
     if (!fundingLayout) {
-      return `<p class="rivers-academic-ref">${highlight(stripPrefix(display.ref))}</p>`;
+      return `<p class="rivers-academic-ref">${renderCitation(display.ref)}</p>`;
     }
 
     const parsed = parseFundingRef(display.ref);
