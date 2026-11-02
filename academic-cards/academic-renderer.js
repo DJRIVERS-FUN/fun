@@ -189,6 +189,7 @@ function renderAcademic(containerId, data, options = {}) {
       (award && award.toLowerCase().includes(q)) ||
       (domain && domain.toLowerCase().includes(q)) ||
       (item.type && item.type.toLowerCase().includes(q)) ||
+      (item.doi && item.doi.toLowerCase().includes(q)) ||
       (item.year && String(item.year).includes(q)) ||
       (item.month && String(item.month).includes(q))
     );
@@ -224,6 +225,7 @@ function renderAcademic(containerId, data, options = {}) {
   function renderBadges(item, role = '') {
     const award = extractAward(item).award;
     const domain = normalizeDomain(item.domain);
+    const doi = options.doiIndicators && /^10\.\d{4,9}\/\S+$/.test(item.doi || '') ? item.doi : '';
     return `
       <div class="rivers-academic-badges">
         <span class="rivers-academic-badge">${highlight(item.year)}</span>
@@ -231,6 +233,7 @@ function renderAcademic(containerId, data, options = {}) {
         <span class="rivers-academic-badge">${highlight(domain)}</span>
         ${award ? `<span class="rivers-academic-badge rivers-academic-award">${highlight(award)}</span>` : ''}
         ${role ? `<span class="rivers-academic-badge rivers-academic-role">${highlight(role)}</span>` : ''}
+        ${doi ? `<a class="rivers-academic-badge rivers-academic-doi" href="https://doi.org/${escapeHtml(doi)}" target="_blank" rel="noopener noreferrer" aria-label="DOI: ${escapeHtml(doi)}" title="${escapeHtml(doi)}">DOI ↗</a>` : ''}
       </div>
     `;
   }
@@ -254,6 +257,7 @@ function renderAcademic(containerId, data, options = {}) {
 
   function renderCitation(ref) {
     const text = stripPrefix(ref);
+    if (options.doiIndicators) return highlight(text.replace(/\s*https:\/\/doi\.org\/10\.\d{4,9}\/[^\s]+$/, ''));
     if (!options.linkDoi) return highlight(text);
     const match = text.match(/https:\/\/doi\.org\/10\.\d{4,9}\/[^\s]+$/);
     if (!match) return highlight(text);

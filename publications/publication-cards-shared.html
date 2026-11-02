@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../academic-cards/academic-cards.css">
-<script src="../academic-cards/academic-renderer.js?v=20261103-datasets"></script>
+<script src="../academic-cards/academic-renderer.js?v=20261103-doi-indicators"></script>
 <style>
 html,body{width:100%;margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{color:#333333}
@@ -17,12 +17,14 @@ body{color:#333333}
 #app .rivers-academic-ref,
 #app .rivers-academic-button:not(.active):not(:hover){color:#333333}
 #app .rivers-academic-search::placeholder{color:#333333}
+#app .rivers-academic-doi{text-decoration:none}
+#app .rivers-academic-doi:hover,#app .rivers-academic-doi:focus-visible{background:#520671;color:#ffffff;border-color:#520671}
 </style>
 </head>
 <body>
 <div id="app" class="rivers-academic-wrap"></div>
 <script>
-fetch('../data/publications.json?v=20261103-datasets')
+fetch('../data/publications.json?v=20261103-doi-indicators')
   .then(function(r){ return r.json(); })
   .then(function(data){
     renderAcademic('app', data, {
@@ -31,7 +33,8 @@ fetch('../data/publications.json?v=20261103-datasets')
       itemLabelPlural: 'publications',
       searchLabel: 'publications',
       stripAuthorPrefix: false,
-      linkDoi: true
+      linkDoi: true,
+      doiIndicators: true
     });
   });
 </script>
