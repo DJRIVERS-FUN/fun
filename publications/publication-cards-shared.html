@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../academic-cards/academic-cards.css">
-<script src="../academic-cards/academic-renderer.js?v=20261103-doi-indicators"></script>
+<script src="../academic-cards/academic-renderer.js?v=20261103-book-dois"></script>
 <style>
 html,body{width:100%;margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{color:#333333}
@@ -24,7 +24,7 @@ body{color:#333333}
 <body>
 <div id="app" class="rivers-academic-wrap"></div>
 <script>
-fetch('../data/publications.json?v=20261103-doi-indicators')
+fetch('../data/publications.json?v=20261103-book-dois')
   .then(function(r){ return r.json(); })
   .then(function(data){
     renderAcademic('app', data, {
