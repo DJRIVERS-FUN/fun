@@ -193,6 +193,7 @@ function renderAcademic(containerId, data, options = {}) {
       (item.bookDetails && item.bookDetails.toLowerCase().includes(q)) ||
       (item.chapterDetails && item.chapterDetails.toLowerCase().includes(q)) ||
       (item.fundingRole && item.fundingRole.toLowerCase().includes(q)) ||
+      (fundingLayout && item.fundingTeamDetails && item.fundingTeamDetails.toLowerCase().includes(q)) ||
       (item.bookDoi && item.bookDoi.toLowerCase().includes(q)) ||
       (item.year && String(item.year).includes(q)) ||
       (item.month && String(item.month).includes(q))
@@ -292,6 +293,11 @@ function renderAcademic(containerId, data, options = {}) {
           '" target="_blank" rel="noopener noreferrer">' + label + '</a>'
         : label;
       details += '<p class="rivers-citation-detail">' + contribution + '</p>';
+    }
+    if (fundingLayout && item.fundingTeamDetails) {
+      details += '<p class="rivers-citation-detail rivers-funding-team">' +
+        item.fundingTeamDetails.split('\n').map(line => highlight(line)).join('<br>') +
+        '</p>';
     }
     return '<p class="rivers-academic-ref rivers-apa-ref">' + citation + '</p>' + details;
   }
