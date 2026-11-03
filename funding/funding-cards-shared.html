@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../academic-cards/academic-cards.css">
-<script src="../academic-cards/academic-renderer.js?v=20261030-funding"></script>
+<link rel="stylesheet" href="../academic-cards/academic-cards.css?v=20261103-apa7">
+<script src="../academic-cards/academic-renderer.js?v=20261103-apa7"></script>
 <style>
 html,body{width:100%;margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{color:#333333}
@@ -27,7 +27,11 @@ body{color:#333333}
 <body>
 <div id="app" class="rivers-academic-wrap"></div>
 <script>
-function extractYenAmount(ref) {
+function extractYenAmount(item) {
+  if (item && typeof item === 'object' && Number.isFinite(item.awardAmount)) {
+    return item.awardAmount;
+  }
+  var ref = item && typeof item === 'object' ? item.ref : item;
   var text = String(ref || '');
   var marker = text.indexOf('Award: ¥');
   if (marker < 0) return 0;
@@ -36,8 +40,8 @@ function extractYenAmount(ref) {
 }
 
 function computeFundingTotals(data) {
-  var external = data.filter(function(item) { return item.type === 'External'; }).reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
-  var internal = data.filter(function(item) { return item.type === 'Internal'; }).reduce(function(sum, item) { return sum + extractYenAmount(item.ref); }, 0);
+  var external = data.filter(function(item) { return item.type === 'External'; }).reduce(function(sum, item) { return sum + extractYenAmount(item); }, 0);
+  var internal = data.filter(function(item) { return item.type === 'Internal'; }).reduce(function(sum, item) { return sum + extractYenAmount(item); }, 0);
   var total = external + internal;
 
   parent.postMessage({
@@ -49,7 +53,7 @@ function computeFundingTotals(data) {
   }, '*');
 }
 
-fetch('../data/funding.json?v=20261030-domains')
+fetch('../data/funding.json?v=20261103-apa7')
   .then(function(response) { return response.json(); })
   .then(function(data) {
     computeFundingTotals(data);

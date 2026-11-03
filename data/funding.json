@@ -1,14 +1,342 @@
 [
-{"year":"2026–2027","type":"Internal","domain":"Physical Activity & Technology","ref":"Rivers, D. J. (PI). Regulation Behaviour in Discretized Human–Machine Systems. Future University Hakodate (Special Research Funding, B03). Award: ¥460,000."},
-{"year":"2022–2025","type":"External","domain":"Discourse, Media and Communication","ref":"Rivers, D. J. (PI). SARS-CoV-2 Attitudes and Behaviours Among Japanese Youth: Personality, National Identity, and the Communication of Public Health Discourse. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (23K22178). Award: ¥6,500,000."},
-{"year":"2019–2022","type":"External","domain":"Learning & Educational Psychology","ref":"Rivers, D. J. (PI). Measuring L2 Communication Anxiety and Task Performance: A Physiological Approach. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (19K00765). Award: ¥4,420,000."},
-{"year":"2014–2018","type":"External","domain":"Identity & Intergroup Relations","ref":"Rivers, D. J. (PI). Representational Parameters of the Native Speaker in Japanese Higher Education. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (26770193). Award: ¥2,600,000."},
-{"year":"2012–2015","type":"External","domain":"Identity & Intergroup Relations","ref":"Rivers, D. J. (Co-I). Beyond Belief in the Native Speaker. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (24520627). Award: ¥3,120,000."},
-{"year":"2025–2026","type":"Internal","domain":"Learning & Educational Psychology","ref":"Rivers, D. J. (PI). Cognitive Predictors of GPA: Executive Functioning and Metacognition. Future University Hakodate (Special Research Funding, B03). Award: ¥680,000."},
-{"year":"2024–2025","type":"Internal","domain":"Physical Activity & Technology","ref":"Rivers, D. J. (PI). Cycling Information Infrastructure Design in the Oshima Region. Future University Hakodate (Special Research Funding, B03). Award: ¥730,000."},
-{"year":"2024–2025","type":"Internal","domain":"Discourse, Media and Communication","ref":"Rivers, D. J. (Co-I). Extrasomatic Communication and NPC Interactions in Virtual Reality. Future University Hakodate (Special Research Funding, B02). Award: ¥790,000."},
-{"year":"2023–2024","type":"Internal","domain":"Discourse, Media and Communication","ref":"Rivers, D. J. (PI). ZWIFT as Technological, Social, and Cultural Practice in the Post-COVID Society. Future University Hakodate (Special Research Funding, B09). Award: ¥517,000."},
-{"year":"2020–2021","type":"Internal","domain":"Learning & Educational Psychology","ref":"Rivers, D. J. (PI). 300-item Five-Factor Measure of Personality in Predicting Academic Achievement. Future University Hakodate (Special Research Funding, E06). Award: ¥632,000."},
-{"year":"2019–2020","type":"Internal","domain":"Learning & Educational Psychology","ref":"Rivers, D. J. (PI). Expectancy-Value Orientation and Meta-Learning Strategies. Future University Hakodate (Special Research Funding, B03). Award: ¥297,000."},
-{"year":"2018–2019","type":"Internal","domain":"Learning & Educational Psychology","ref":"Rivers, D. J. (PI). Cognitive and Social Antecedents of Academic Success. Future University Hakodate (Special Research Funding, B03). Award: ¥525,000."}
+  {
+    "year": "2026–2027",
+    "type": "Internal",
+    "domain": "Physical Activity & Technology",
+    "ref": "Rivers, D. J. (2026–2027). Regulation behaviour in discretized human–machine systems (Special Research Funding, B03) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (PI). Regulation Behaviour in Discretized Human–Machine Systems. Future University Hakodate (Special Research Funding, B03). Award: ¥460,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2026–2027). "
+      },
+      {
+        "text": "Regulation behaviour in discretized human–machine systems",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, B03) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 460000,
+    "award": "¥460,000",
+    "grantNumber": "B03",
+    "funder": "Future University Hakodate",
+    "grantTitle": "Regulation behaviour in discretized human–machine systems",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2022–2025",
+    "type": "External",
+    "domain": "Discourse, Media and Communication",
+    "ref": "Rivers, D. J. (2022–2025). SARS-CoV-2 attitudes and behaviours among Japanese youth: Personality, national identity, and the communication of public health discourse (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 23K22178) [Research grant]. Japan Society for the Promotion of Science. https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-23K22178/",
+    "originalRef": "Rivers, D. J. (PI). SARS-CoV-2 Attitudes and Behaviours Among Japanese Youth: Personality, National Identity, and the Communication of Public Health Discourse. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (23K22178). Award: ¥6,500,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2022–2025). "
+      },
+      {
+        "text": "SARS-CoV-2 attitudes and behaviours among Japanese youth: Personality, national identity, and the communication of public health discourse",
+        "italic": true
+      },
+      {
+        "text": " (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 23K22178) [Research grant]. Japan Society for the Promotion of Science."
+      },
+      {
+        "text": " "
+      },
+      {
+        "text": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-23K22178/",
+        "href": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-23K22178/"
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 6500000,
+    "award": "¥6,500,000",
+    "grantNumber": "23K22178",
+    "funder": "Japan Society for the Promotion of Science",
+    "grantTitle": "SARS-CoV-2 attitudes and behaviours among Japanese youth: Personality, national identity, and the communication of public health discourse",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2019–2022",
+    "type": "External",
+    "domain": "Learning & Educational Psychology",
+    "ref": "Rivers, D. J. (2019–2022). Measuring L2 communication anxiety and task performance: A physiological approach (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 19K00765) [Research grant]. Japan Society for the Promotion of Science. https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-19K00765/",
+    "originalRef": "Rivers, D. J. (PI). Measuring L2 Communication Anxiety and Task Performance: A Physiological Approach. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (19K00765). Award: ¥4,420,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2019–2022). "
+      },
+      {
+        "text": "Measuring L2 communication anxiety and task performance: A physiological approach",
+        "italic": true
+      },
+      {
+        "text": " (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 19K00765) [Research grant]. Japan Society for the Promotion of Science."
+      },
+      {
+        "text": " "
+      },
+      {
+        "text": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-19K00765/",
+        "href": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-19K00765/"
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 4420000,
+    "award": "¥4,420,000",
+    "grantNumber": "19K00765",
+    "funder": "Japan Society for the Promotion of Science",
+    "grantTitle": "Measuring L2 communication anxiety and task performance: A physiological approach",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2014–2018",
+    "type": "External",
+    "domain": "Identity & Intergroup Relations",
+    "ref": "Rivers, D. J. (2014–2018). Representational parameters of the native speaker in Japanese higher education (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 26770193) [Research grant]. Japan Society for the Promotion of Science. https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-26770193/",
+    "originalRef": "Rivers, D. J. (PI). Representational Parameters of the Native Speaker in Japanese Higher Education. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (26770193). Award: ¥2,600,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2014–2018). "
+      },
+      {
+        "text": "Representational parameters of the native speaker in Japanese higher education",
+        "italic": true
+      },
+      {
+        "text": " (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 26770193) [Research grant]. Japan Society for the Promotion of Science."
+      },
+      {
+        "text": " "
+      },
+      {
+        "text": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-26770193/",
+        "href": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-26770193/"
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 2600000,
+    "award": "¥2,600,000",
+    "grantNumber": "26770193",
+    "funder": "Japan Society for the Promotion of Science",
+    "grantTitle": "Representational parameters of the native speaker in Japanese higher education",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2012–2015",
+    "type": "External",
+    "domain": "Identity & Intergroup Relations",
+    "ref": "Rivers, D. J. (2012–2015). Beyond belief in the native speaker (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 24520627) [Research grant]. Japan Society for the Promotion of Science. https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-24520627/",
+    "originalRef": "Rivers, D. J. (Co-I). Beyond Belief in the Native Speaker. Japan Society for the Promotion of Science (KAKENHI), Grant-in-Aid for Scientific Research (24520627). Award: ¥3,120,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2012–2015). "
+      },
+      {
+        "text": "Beyond belief in the native speaker",
+        "italic": true
+      },
+      {
+        "text": " (KAKENHI Grant-in-Aid for Scientific Research, Grant No. 24520627) [Research grant]. Japan Society for the Promotion of Science."
+      },
+      {
+        "text": " "
+      },
+      {
+        "text": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-24520627/",
+        "href": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-24520627/"
+      }
+    ],
+    "fundingRole": "Co-Investigator",
+    "awardAmount": 3120000,
+    "award": "¥3,120,000",
+    "grantNumber": "24520627",
+    "funder": "Japan Society for the Promotion of Science",
+    "grantTitle": "Beyond belief in the native speaker",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2025–2026",
+    "type": "Internal",
+    "domain": "Learning & Educational Psychology",
+    "ref": "Rivers, D. J. (2025–2026). Cognitive predictors of GPA: Executive functioning and metacognition (Special Research Funding, B03) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (PI). Cognitive Predictors of GPA: Executive Functioning and Metacognition. Future University Hakodate (Special Research Funding, B03). Award: ¥680,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2025–2026). "
+      },
+      {
+        "text": "Cognitive predictors of GPA: Executive functioning and metacognition",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, B03) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 680000,
+    "award": "¥680,000",
+    "grantNumber": "B03",
+    "funder": "Future University Hakodate",
+    "grantTitle": "Cognitive predictors of GPA: Executive functioning and metacognition",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2024–2025",
+    "type": "Internal",
+    "domain": "Physical Activity & Technology",
+    "ref": "Rivers, D. J. (2024–2025). Cycling information infrastructure design in the Oshima region (Special Research Funding, B03) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (PI). Cycling Information Infrastructure Design in the Oshima Region. Future University Hakodate (Special Research Funding, B03). Award: ¥730,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2024–2025). "
+      },
+      {
+        "text": "Cycling information infrastructure design in the Oshima region",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, B03) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 730000,
+    "award": "¥730,000",
+    "grantNumber": "B03",
+    "funder": "Future University Hakodate",
+    "grantTitle": "Cycling information infrastructure design in the Oshima region",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2024–2025",
+    "type": "Internal",
+    "domain": "Discourse, Media and Communication",
+    "ref": "Rivers, D. J. (2024–2025). Extrasomatic communication and NPC interactions in virtual reality (Special Research Funding, B02) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (Co-I). Extrasomatic Communication and NPC Interactions in Virtual Reality. Future University Hakodate (Special Research Funding, B02). Award: ¥790,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2024–2025). "
+      },
+      {
+        "text": "Extrasomatic communication and NPC interactions in virtual reality",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, B02) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Co-Investigator",
+    "awardAmount": 790000,
+    "award": "¥790,000",
+    "grantNumber": "B02",
+    "funder": "Future University Hakodate",
+    "grantTitle": "Extrasomatic communication and NPC interactions in virtual reality",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2023–2024",
+    "type": "Internal",
+    "domain": "Discourse, Media and Communication",
+    "ref": "Rivers, D. J. (2023–2024). ZWIFT as technological, social, and cultural practice in the post-COVID society (Special Research Funding, B09) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (PI). ZWIFT as Technological, Social, and Cultural Practice in the Post-COVID Society. Future University Hakodate (Special Research Funding, B09). Award: ¥517,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2023–2024). "
+      },
+      {
+        "text": "ZWIFT as technological, social, and cultural practice in the post-COVID society",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, B09) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 517000,
+    "award": "¥517,000",
+    "grantNumber": "B09",
+    "funder": "Future University Hakodate",
+    "grantTitle": "ZWIFT as technological, social, and cultural practice in the post-COVID society",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2020–2021",
+    "type": "Internal",
+    "domain": "Learning & Educational Psychology",
+    "ref": "Rivers, D. J. (2020–2021). 300-item five-factor measure of personality in predicting academic achievement (Special Research Funding, E06) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (PI). 300-item Five-Factor Measure of Personality in Predicting Academic Achievement. Future University Hakodate (Special Research Funding, E06). Award: ¥632,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2020–2021). "
+      },
+      {
+        "text": "300-item five-factor measure of personality in predicting academic achievement",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, E06) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 632000,
+    "award": "¥632,000",
+    "grantNumber": "E06",
+    "funder": "Future University Hakodate",
+    "grantTitle": "300-item five-factor measure of personality in predicting academic achievement",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2019–2020",
+    "type": "Internal",
+    "domain": "Learning & Educational Psychology",
+    "ref": "Rivers, D. J. (2019–2020). Expectancy-value orientation and meta-learning strategies (Special Research Funding, B03) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (PI). Expectancy-Value Orientation and Meta-Learning Strategies. Future University Hakodate (Special Research Funding, B03). Award: ¥297,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2019–2020). "
+      },
+      {
+        "text": "Expectancy-value orientation and meta-learning strategies",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, B03) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 297000,
+    "award": "¥297,000",
+    "grantNumber": "B03",
+    "funder": "Future University Hakodate",
+    "grantTitle": "Expectancy-value orientation and meta-learning strategies",
+    "citationStyle": "APA-based grant entry"
+  },
+  {
+    "year": "2018–2019",
+    "type": "Internal",
+    "domain": "Learning & Educational Psychology",
+    "ref": "Rivers, D. J. (2018–2019). Cognitive and social antecedents of academic success (Special Research Funding, B03) [Research grant]. Future University Hakodate.",
+    "originalRef": "Rivers, D. J. (PI). Cognitive and Social Antecedents of Academic Success. Future University Hakodate (Special Research Funding, B03). Award: ¥525,000.",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (2018–2019). "
+      },
+      {
+        "text": "Cognitive and social antecedents of academic success",
+        "italic": true
+      },
+      {
+        "text": " (Special Research Funding, B03) [Research grant]. Future University Hakodate."
+      }
+    ],
+    "fundingRole": "Principal Investigator",
+    "awardAmount": 525000,
+    "award": "¥525,000",
+    "grantNumber": "B03",
+    "funder": "Future University Hakodate",
+    "grantTitle": "Cognitive and social antecedents of academic success",
+    "citationStyle": "APA-based grant entry"
+  }
 ]

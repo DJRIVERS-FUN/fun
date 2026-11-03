@@ -181,7 +181,7 @@ function renderAcademic(containerId, data, options = {}) {
     const q = state.query.toLowerCase();
     const display = extractAward(item);
     const parsed = fundingLayout ? parseFundingRef(display.ref) : null;
-    const searchableRef = fundingLayout ? `${parsed.title} ${parsed.funder} ${parsed.role}` : (serviceLayout ? parseServiceRef(item.ref) : item.ref);
+    const searchableRef = Array.isArray(item.citation) ? item.ref : fundingLayout ? `${parsed.title} ${parsed.funder} ${parsed.role}` : (serviceLayout ? parseServiceRef(item.ref) : item.ref);
     const award = display.award;
     const domain = normalizeDomain(item.domain);
     return (
@@ -190,6 +190,9 @@ function renderAcademic(containerId, data, options = {}) {
       (domain && domain.toLowerCase().includes(q)) ||
       (item.type && item.type.toLowerCase().includes(q)) ||
       (item.doi && item.doi.toLowerCase().includes(q)) ||
+      (item.bookDetails && item.bookDetails.toLowerCase().includes(q)) ||
+      (item.chapterDetails && item.chapterDetails.toLowerCase().includes(q)) ||
+      (item.fundingRole && item.fundingRole.toLowerCase().includes(q)) ||
       (item.bookDoi && item.bookDoi.toLowerCase().includes(q)) ||
       (item.year && String(item.year).includes(q)) ||
       (item.month && String(item.month).includes(q))
@@ -269,7 +272,32 @@ function renderAcademic(containerId, data, options = {}) {
       `<a href="${escapeHtml(match[0])}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;overflow-wrap:anywhere">${highlight(match[0])}</a>`;
   }
 
-  function renderRef(display) {
+  function renderApaRef(item) {
+    const citation = item.citation.map(part => {
+      let value = highlight(part.text);
+      if (part.italic === true) value = '<em>' + value + '</em>';
+      if (part.href && /^https?:\/\//i.test(part.href)) {
+        value = '<a class="rivers-apa-link" href="' + escapeHtml(part.href) +
+          '" target="_blank" rel="noopener noreferrer">' + value + '</a>';
+      }
+      return value;
+    }).join('');
+    let details = bookLayout && item.bookDetails
+      ? '<p class="rivers-book-extra">' + highlight(item.bookDetails) + '</p>'
+      : '';
+    if (item.chapterDetails) {
+      const label = highlight(item.chapterDetails);
+      const contribution = item.chapterUrl && /^https?:\/\//i.test(item.chapterUrl)
+        ? '<a class="rivers-apa-link" href="' + escapeHtml(item.chapterUrl) +
+          '" target="_blank" rel="noopener noreferrer">' + label + '</a>'
+        : label;
+      details += '<p class="rivers-citation-detail">' + contribution + '</p>';
+    }
+    return '<p class="rivers-academic-ref rivers-apa-ref">' + citation + '</p>' + details;
+  }
+
+  function renderRef(display, item) {
+    if (Array.isArray(item.citation)) return renderApaRef(item);
     if (bookLayout) {
       const book = parseBookRef(display.ref);
       return `
@@ -309,17 +337,17 @@ function renderAcademic(containerId, data, options = {}) {
       const card = document.createElement('article');
       card.className = `rivers-academic-card ${hasImage ? 'has-image' : ''}`;
       const display = extractAward(item);
-      const parsed = fundingLayout ? parseFundingRef(display.ref) : { role: '' };
+      const parsed = fundingLayout ? { role: item.fundingRole || parseFundingRef(display.ref).role } : { role: '' };
 
       card.innerHTML = hasImage ? `
         <img src="${escapeHtml(item.image)}" data-fallback="${escapeHtml(item.fallbackImage || '')}" class="rivers-academic-cover" alt="Book cover" />
         <div class="rivers-academic-content">
           ${renderBadges(item, parsed.role)}
-          ${renderRef(display)}
+          ${renderRef(display, item)}
         </div>
       ` : `
         ${renderBadges(item, parsed.role)}
-        ${renderRef(display)}
+        ${renderRef(display, item)}
       `;
 
       grid.appendChild(card);

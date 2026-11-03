@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../academic-cards/academic-cards.css">
-<script src="../academic-cards/academic-renderer.js?v=20261103-book-layout"></script>
+<link rel="stylesheet" href="../academic-cards/academic-cards.css?v=20261103-apa7">
+<script src="../academic-cards/academic-renderer.js?v=20261103-apa7"></script>
 <style>
 html,body{width:100%;margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{color:#333333}
@@ -24,12 +24,18 @@ body{color:#333333}
 #app .rivers-book-date,
 #app .rivers-academic-button:not(.active):not(:hover){color:#333333}
 #app .rivers-academic-search::placeholder{color:#333333}
+#app .rivers-academic-card.has-image{grid-template-columns:86px 1fr}
+#app .rivers-academic-cover{width:86px;height:auto}
+@media(max-width:560px){
+  #app .rivers-academic-card.has-image{grid-template-columns:68px 1fr}
+  #app .rivers-academic-cover{width:68px}
+}
 </style>
 </head>
 <body>
 <div id="app" class="rivers-academic-wrap"></div>
 <script>
-fetch('../data/books.json?v=20261103-book-layout')
+fetch('../data/books.json?v=20261103-apa7')
   .then(r=>r.json())
   .then(data=>renderAcademic('app',data,{
     source:'rivers-books',

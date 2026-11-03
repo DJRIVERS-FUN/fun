@@ -1,9 +1,205 @@
 [
-{"year":"2018","type":"Book","domain":"Discourse, Media and Communication","image":"https://books.google.com/books/content?vid=ISBN9781138578753&printsec=frontcover&img=1&zoom=1&source=gbs_api","ref":"Discourses of (De)Legitimization: Participatory Culture in Digital Contexts\nAuthor: Ross, A.S. and Rivers, D.J. (Eds.)\nISBN: 9781138578753 | 378 pages\nRoutledge, New York (2018)","peerReviewed":true},
-{"year":"2018","type":"Book","domain":"Identity & Intergroup Relations","image":"https://books.google.com/books/content?vid=ISBN9781138186798&printsec=frontcover&img=1&zoom=1&source=gbs_api","ref":"Beyond Native-Speakerism: Current Explorations and Future Visions\nAuthor: Houghton, S.A., Rivers, D.J., Hashimoto, K.\nISBN: 9781138186798 | 270 pages\nRoutledge, New York (2018)","peerReviewed":true},
-{"year":"2018","type":"Book","domain":"Discourse, Media and Communication","image":"https://books.google.com/books/content?vid=ISBN9783319592435&printsec=frontcover&img=1&zoom=1&source=gbs_api","ref":"The Sociolinguistics of Hip-Hop as Critical Conscience: Dissatisfaction and Dissent\nAuthor: Ross, A.S. and Rivers, D.J. (Eds.)\nISBN: 9783319592435 | 271 pages\nPalgrave Macmillan, London (2018)","peerReviewed":true},
-{"year":"2017","type":"Book","domain":"Identity & Intergroup Relations","image":"https://books.google.com/books/content?vid=ISBN9781501510823&printsec=frontcover&img=1&zoom=1&source=gbs_api","ref":"Isms in Language Education: Oppression, Intersectionality and Emancipation\nAuthor: Rivers, D.J. and Zotzmann, K. (Eds.)\nISBN: 9781501510823 | 282 pages\nDe Gruyter Mouton, Berlin (2017)","peerReviewed":true},
-{"year":"2014","type":"Book","domain":"Identity & Intergroup Relations","image":"https://books.google.com/books/content?vid=ISBN9781137345189&printsec=frontcover&img=1&zoom=1&source=gbs_api","ref":"Resistance to the Known: Counter-Conduct in Education\nAuthor: Rivers, D.J. (Ed.)\nISBN: 9781137345189 | 243 pages\nPalgrave Macmillan, London (2014)","peerReviewed":true},
-{"year":"2013","type":"Book","domain":"Identity & Intergroup Relations","image":"https://books.google.com/books/content?vid=ISBN9781441101150&printsec=frontcover&img=1&zoom=1&source=gbs_api","ref":"Social Identities and Multiple Selves in Foreign Language Education\nAuthor: Rivers, D.J. and Houghton, S.A. (Eds.)\nISBN: 9781441101150 | 256 pages\nBloomsbury, New York (2013)","peerReviewed":true},
-{"year":"2013","type":"Book","domain":"Identity & Intergroup Relations","image":"https://books.google.com/books/content?vid=ISBN9781847698681&printsec=frontcover&img=1&zoom=1&source=gbs_api","ref":"Native-Speakerism in Japan: Intergroup Dynamics in Foreign Language Education\nAuthor: Houghton, S.A. and Rivers, D.J. (Eds.)\nISBN: 9781847698681 | 296 pages\nMultilingual Matters, Bristol (2013)","peerReviewed":true}
+  {
+    "year": "2019",
+    "type": "Book",
+    "domain": "Discourse, Media and Communication",
+    "image": "https://books.google.com/books/content?vid=ISBN9781138578753&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "ref": "Ross, A. S., & Rivers, D. J. (Eds.). (2019). Discourses of (de)legitimization: Participatory culture in digital contexts. Routledge. https://doi.org/10.4324/9781351263887",
+    "peerReviewed": true,
+    "originalRef": "Discourses of (De)Legitimization: Participatory Culture in Digital Contexts\nAuthor: Ross, A.S. and Rivers, D.J. (Eds.)\nISBN: 9781138578753 | 378 pages\nRoutledge, New York (2018)",
+    "citation": [
+      {
+        "text": "Ross, A. S., & Rivers, D. J. (Eds.). (2019). "
+      },
+      {
+        "text": "Discourses of (de)legitimization: Participatory culture in digital contexts",
+        "italic": true
+      },
+      {
+        "text": ". Routledge. "
+      },
+      {
+        "text": "https://doi.org/10.4324/9781351263887",
+        "href": "https://doi.org/10.4324/9781351263887"
+      }
+    ],
+    "doi": "10.4324/9781351263887",
+    "isbn": "9781138578753",
+    "pageCount": 378,
+    "bookDetails": "ISBN: 9781138578753 | 378 pages"
+  },
+  {
+    "year": "2018",
+    "type": "Book",
+    "domain": "Identity & Intergroup Relations",
+    "image": "https://books.google.com/books/content?vid=ISBN9781138186798&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "ref": "Houghton, S. A., Rivers, D. J., & Hashimoto, K. (2018). Beyond native-speakerism: Current explorations and future visions. Routledge. https://doi.org/10.4324/9781315643601",
+    "peerReviewed": true,
+    "originalRef": "Beyond Native-Speakerism: Current Explorations and Future Visions\nAuthor: Houghton, S.A., Rivers, D.J., Hashimoto, K.\nISBN: 9781138186798 | 270 pages\nRoutledge, New York (2018)",
+    "citation": [
+      {
+        "text": "Houghton, S. A., Rivers, D. J., & Hashimoto, K. (2018). "
+      },
+      {
+        "text": "Beyond native-speakerism: Current explorations and future visions",
+        "italic": true
+      },
+      {
+        "text": ". Routledge. "
+      },
+      {
+        "text": "https://doi.org/10.4324/9781315643601",
+        "href": "https://doi.org/10.4324/9781315643601"
+      }
+    ],
+    "doi": "10.4324/9781315643601",
+    "isbn": "9781138186798",
+    "pageCount": 270,
+    "bookDetails": "ISBN: 9781138186798 | 270 pages"
+  },
+  {
+    "year": "2018",
+    "type": "Book",
+    "domain": "Discourse, Media and Communication",
+    "image": "https://books.google.com/books/content?vid=ISBN9783319592435&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "ref": "Ross, A. S., & Rivers, D. J. (Eds.). (2018). The sociolinguistics of hip-hop as critical conscience: Dissatisfaction and dissent. Palgrave Macmillan. https://doi.org/10.1007/978-3-319-59244-2",
+    "peerReviewed": true,
+    "originalRef": "The Sociolinguistics of Hip-Hop as Critical Conscience: Dissatisfaction and Dissent\nAuthor: Ross, A.S. and Rivers, D.J. (Eds.)\nISBN: 9783319592435 | 271 pages\nPalgrave Macmillan, London (2018)",
+    "citation": [
+      {
+        "text": "Ross, A. S., & Rivers, D. J. (Eds.). (2018). "
+      },
+      {
+        "text": "The sociolinguistics of hip-hop as critical conscience: Dissatisfaction and dissent",
+        "italic": true
+      },
+      {
+        "text": ". Palgrave Macmillan. "
+      },
+      {
+        "text": "https://doi.org/10.1007/978-3-319-59244-2",
+        "href": "https://doi.org/10.1007/978-3-319-59244-2"
+      }
+    ],
+    "doi": "10.1007/978-3-319-59244-2",
+    "isbn": "9783319592435",
+    "pageCount": 271,
+    "bookDetails": "ISBN: 9783319592435 | 271 pages"
+  },
+  {
+    "year": "2017",
+    "type": "Book",
+    "domain": "Identity & Intergroup Relations",
+    "image": "https://books.google.com/books/content?vid=ISBN9781501510823&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "ref": "Rivers, D. J., & Zotzmann, K. (Eds.). (2017). Isms in language education: Oppression, intersectionality and emancipation. De Gruyter Mouton. https://doi.org/10.1515/9781501503085",
+    "peerReviewed": true,
+    "originalRef": "Isms in Language Education: Oppression, Intersectionality and Emancipation\nAuthor: Rivers, D.J. and Zotzmann, K. (Eds.)\nISBN: 9781501510823 | 282 pages\nDe Gruyter Mouton, Berlin (2017)",
+    "citation": [
+      {
+        "text": "Rivers, D. J., & Zotzmann, K. (Eds.). (2017). "
+      },
+      {
+        "text": "Isms in language education: Oppression, intersectionality and emancipation",
+        "italic": true
+      },
+      {
+        "text": ". De Gruyter Mouton. "
+      },
+      {
+        "text": "https://doi.org/10.1515/9781501503085",
+        "href": "https://doi.org/10.1515/9781501503085"
+      }
+    ],
+    "doi": "10.1515/9781501503085",
+    "isbn": "9781501510823",
+    "pageCount": 282,
+    "bookDetails": "ISBN: 9781501510823 | 282 pages"
+  },
+  {
+    "year": "2015",
+    "type": "Book",
+    "domain": "Identity & Intergroup Relations",
+    "image": "https://books.google.com/books/content?vid=ISBN9781137345189&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "ref": "Rivers, D. J. (Ed.). (2015). Resistance to the known: Counter-conduct in language education. Palgrave Macmillan. https://doi.org/10.1057/9781137345196",
+    "peerReviewed": true,
+    "originalRef": "Resistance to the Known: Counter-Conduct in Education\nAuthor: Rivers, D.J. (Ed.)\nISBN: 9781137345189 | 243 pages\nPalgrave Macmillan, London (2014)",
+    "citation": [
+      {
+        "text": "Rivers, D. J. (Ed.). (2015). "
+      },
+      {
+        "text": "Resistance to the known: Counter-conduct in language education",
+        "italic": true
+      },
+      {
+        "text": ". Palgrave Macmillan. "
+      },
+      {
+        "text": "https://doi.org/10.1057/9781137345196",
+        "href": "https://doi.org/10.1057/9781137345196"
+      }
+    ],
+    "doi": "10.1057/9781137345196",
+    "isbn": "9781137345189",
+    "pageCount": 243,
+    "bookDetails": "ISBN: 9781137345189 | 243 pages"
+  },
+  {
+    "year": "2013",
+    "type": "Book",
+    "domain": "Identity & Intergroup Relations",
+    "image": "https://books.google.com/books/content?vid=ISBN9781441101150&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "ref": "Rivers, D. J., & Houghton, S. A. (Eds.). (2013). Social identities and multiple selves in foreign language education. Bloomsbury Academic. https://doi.org/10.5040/9781472542045",
+    "peerReviewed": true,
+    "originalRef": "Social Identities and Multiple Selves in Foreign Language Education\nAuthor: Rivers, D.J. and Houghton, S.A. (Eds.)\nISBN: 9781441101150 | 256 pages\nBloomsbury, New York (2013)",
+    "citation": [
+      {
+        "text": "Rivers, D. J., & Houghton, S. A. (Eds.). (2013). "
+      },
+      {
+        "text": "Social identities and multiple selves in foreign language education",
+        "italic": true
+      },
+      {
+        "text": ". Bloomsbury Academic. "
+      },
+      {
+        "text": "https://doi.org/10.5040/9781472542045",
+        "href": "https://doi.org/10.5040/9781472542045"
+      }
+    ],
+    "doi": "10.5040/9781472542045",
+    "isbn": "9781441101150",
+    "pageCount": 256,
+    "bookDetails": "ISBN: 9781441101150 | 256 pages"
+  },
+  {
+    "year": "2013",
+    "type": "Book",
+    "domain": "Identity & Intergroup Relations",
+    "image": "https://books.google.com/books/content?vid=ISBN9781847698681&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "ref": "Houghton, S. A., & Rivers, D. J. (Eds.). (2013). Native-speakerism in Japan: Intergroup dynamics in foreign language education. Multilingual Matters. https://doi.org/10.21832/9781847698704",
+    "peerReviewed": true,
+    "originalRef": "Native-Speakerism in Japan: Intergroup Dynamics in Foreign Language Education\nAuthor: Houghton, S.A. and Rivers, D.J. (Eds.)\nISBN: 9781847698681 | 296 pages\nMultilingual Matters, Bristol (2013)",
+    "citation": [
+      {
+        "text": "Houghton, S. A., & Rivers, D. J. (Eds.). (2013). "
+      },
+      {
+        "text": "Native-speakerism in Japan: Intergroup dynamics in foreign language education",
+        "italic": true
+      },
+      {
+        "text": ". Multilingual Matters. "
+      },
+      {
+        "text": "https://doi.org/10.21832/9781847698704",
+        "href": "https://doi.org/10.21832/9781847698704"
+      }
+    ],
+    "doi": "10.21832/9781847698704",
+    "isbn": "9781847698681",
+    "pageCount": 296,
+    "bookDetails": "ISBN: 9781847698681 | 296 pages"
+  }
 ]
