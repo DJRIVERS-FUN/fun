@@ -4,13 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../academic-cards/academic-cards.css">
-<script src="../academic-cards/academic-renderer.js"></script>
+<script src="../academic-cards/academic-renderer.js?v=20261103-book-layout"></script>
 <style>
 html,body{width:100%;margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{color:#333333}
 #app.rivers-academic-wrap{width:100%;max-width:none;margin:0;padding:0}
-#app .rivers-academic-ref{max-width:none}
-#app .rivers-academic-card{border-radius:10px}
+#app .rivers-academic-ref{max-width:none;font-size:18px;line-height:26px}
+#app .rivers-academic-card{border-radius:10px;padding:18px 20px}
+#app .rivers-academic-badge{font-size:11px;max-width:100%;white-space:normal;line-height:1.2}
+#app .rivers-academic-button,
+#app .rivers-academic-search{font-size:13px}
 #app .rivers-academic-count,
 #app .rivers-academic-label,
 #app .rivers-academic-search,
@@ -26,7 +29,7 @@ body{color:#333333}
 <body>
 <div id="app" class="rivers-academic-wrap"></div>
 <script>
-fetch('../data/books.json')
+fetch('../data/books.json?v=20261103-book-layout')
   .then(r=>r.json())
   .then(data=>renderAcademic('app',data,{
     source:'rivers-books',
@@ -34,7 +37,8 @@ fetch('../data/books.json')
     itemLabelPlural:'books',
     searchLabel:'books',
     stripAuthorPrefix:false,
-    bookLayout:true
+    bookLayout:true,
+    peerReviewIndicators:true
   }));
 </script>
 </body>
