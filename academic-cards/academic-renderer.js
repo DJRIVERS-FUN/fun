@@ -236,6 +236,7 @@ function renderAcademic(containerId, data, options = {}) {
         <span class="rivers-academic-badge">${highlight(domain)}</span>
         ${award ? `<span class="rivers-academic-badge rivers-academic-award">${highlight(award)}</span>` : ''}
         ${role ? `<span class="rivers-academic-badge rivers-academic-role">${highlight(role)}</span>` : ''}
+        ${options.peerReviewIndicators && item.peerReviewed === true ? `<span class="rivers-academic-badge rivers-academic-peer-reviewed">Peer-Reviewed</span>` : ''}
         ${doi ? `<a class="rivers-academic-badge rivers-academic-doi" href="https://doi.org/${escapeHtml(doi)}" target="_blank" rel="noopener noreferrer" aria-label="${doiLabel}: ${escapeHtml(doi)}" title="${escapeHtml(doi)}">${doiLabel} ↗</a>` : ''}
       </div>
     `;
