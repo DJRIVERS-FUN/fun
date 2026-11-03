@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../academic-cards/academic-cards.css?v=20261103-apa7">
-<script src="../academic-cards/academic-renderer.js?v=20261103-funding-teams"></script>
+<script src="../academic-cards/academic-renderer.js?v=20261103-funding-citations-only"></script>
 <style>
 html,body{width:100%;margin:0;padding:0;background:#ffffff;overflow:hidden}
 body{color:#333333}
@@ -53,7 +53,7 @@ function computeFundingTotals(data) {
   }, '*');
 }
 
-fetch('../data/funding.json?v=20261103-funding-teams-clean')
+fetch('../data/funding.json?v=20261103-funding-citations-only')
   .then(function(response) { return response.json(); })
   .then(function(data) {
     computeFundingTotals(data);
